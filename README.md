@@ -20,5 +20,5 @@ The translator tool works only in the Geogebra Applet version and could be tampe
 In this case you will receive a message when you submit too many translations and need to retry the process from a computer with a different IP or later on next days. Some other problems might come from security limitations of the browser. You can circumvent it by running the Geogebra applet in Chrome with the option ```--disable-site-isolation-trials --disable-web-security``` 
 e.g. in Windows ```"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-site-isolation-trials --disable-web-security --user-data-dir="I:\temp"```
 
-##Configuration
+## Configuration
 To do...
