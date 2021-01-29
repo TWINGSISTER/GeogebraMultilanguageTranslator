@@ -9,7 +9,8 @@ The first language in the given string (e.g. in ```fr,it,en```) will be assumed 
 If you save the file with the result of your work you will have a version of your activity that will preserve the translation you worked out. This .ggb it is ready to receive more translations. If you modify the logic of the activity and ask for an already worked out translation the existing translations are not recomputed and only newly introduced  untranslated objects are updated.  
 If you delete a translation string ```ZZ000enBoutonOui```  the relative oobject will be considered as untranslated and generated again the first time you ask for an ```en``` translation.
 
-So far this machinery can assist you in producing multilanguage version of your Geogebra activities.
+So far this machinery can assist you in producing multilanguage version of your Geogebra activities. You can save your multilanguage document without the translate tool and reload it in a Geogebra applet where you installed the ```multilanguage.ggt``` and you will have the option to switch language in a multilanguage environment. If no tool at all is loaded the activity will retain the language in use at the time of ggt file saving. In this .ggt you can safely delete all 
+the ```ZZ000<languageXX><originalObjectName>``` strings in the Algebra view if you are not interested in language "XX".  
 
 The translator tool works only in the Geogebra Applet version and could be tampered by the limitations of the online translator.
 In this case you will receive a message when you submit too many translations and need to retry the process from a computer with a different IP or later on next days. Some other problems might come from security limitations of the browser. You can circumvent it by running the Geogebra applet in Chrome with the option ```--disable-site-isolation-trials --disable-web-security``` 
