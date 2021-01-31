@@ -1,3 +1,4 @@
+alert("hello");
 function hideString(name) {
 	ggbApplet.setVisible(name, false);
 	ggbApplet.setAuxiliary(name, true );
@@ -203,7 +204,7 @@ function deLatex(origText, cmd) {
 	return origText.replace(
 		RegExp('\\\\' + cmd + '\\{[^\\}]*\\}', 'g'),
 		function(match) {
-			return  hash + cmd + "IN!" + (match.slice(2 + cmdlen, -1))+"¿XYZ"+hash+cmd
+			return  hash + cmd + "IN!" + (match.slice(2 + cmdlen, -1))+"ï¿½XYZ"+hash+cmd
 		}
 	);
 }
@@ -211,7 +212,7 @@ function deLatex(origText, cmd) {
 function inLatex(translated,origText, cmd) {
 	var hashcmd = globlod("hash") + cmd;
 	translated = translated.replace(RegExp(hashcmd+"IN\\s*!",'g'),"\\"+cmd+"{");
-	return translated.replace(RegExp("¿\\s*XYZ"+hashcmd,'g'),"}");
+	return translated.replace(RegExp("ï¿½\\s*XYZ"+hashcmd,'g'),"}");
 }
 
 function LatexTranslate(origText, origLang, targetLang) {
@@ -737,7 +738,7 @@ function unstringfyTripleSet(S) {
 	// turns a set of strings into an array  of triples 
 	var stringifiedTriples = [];
 	for (let Triple of S) {
-		stringifiedTriples.push(Triple.split("£"));
+		stringifiedTriples.push(Triple.split("ï¿½"));
 	}
 	return stringifiedTriples;
 }
@@ -746,7 +747,7 @@ function stringfyTripleSet(S) {
 	// turns an array  of triples into a set of strings
 	var stringifiedTriples = [];
 	for (let Triple of S) {
-		stringifiedTriples.push(Triple.join("£"));
+		stringifiedTriples.push(Triple.join("ï¿½"));
 	}
 	return new Set(stringifiedTriples);
 }
@@ -827,9 +828,9 @@ function TranslationSetUp(Languages) {
 	globsto("magic", "ZZ000");
 	globsto("hash", "ZWXY");
 	//list here strings for whick a faulty translation is known. Be specific.
-	//no £ or , in these strings
+	//no ï¿½ or , in these strings
 	updateFalsePair("fr","it",[["Donner","Fornisce","Dare"],
-		["Nouvel énoncé","Nuova dichiarazione","Nuova operazione"],
+		["Nouvel ï¿½noncï¿½","Nuova dichiarazione","Nuova operazione"],
 		["Score","Punto","Punteggio"],
 		["Le plan","L'aereo","Il piano"]]);
 	//list here strings that need no translation
