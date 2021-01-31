@@ -627,7 +627,7 @@ function getStoredFormulaTranslation(translName) {
 //	if (transIt(objName)) {
 //		var objType = ggbApplet.getObjectType(objName) + "";
 //		if (isTranslation(objName)) {
-			return;
+//			return;
 //		} // leave aux objects
 //		if (isGlob(objName)) {
 //			return;
