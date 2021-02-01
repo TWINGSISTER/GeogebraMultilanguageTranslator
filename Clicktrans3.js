@@ -1,4 +1,3 @@
-alert("hello");
 function hideString(name) {
 	ggbApplet.setVisible(name, false);
 	ggbApplet.setAuxiliary(name, true );
