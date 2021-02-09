@@ -998,7 +998,7 @@ function TranslationSetUp(Languages) {
 	//no � or , in these strings
 	updateFalsePair("fr","en",[["Juste","Fair","Correct"],
 		["Dernier exercice","Last year","Last Exercise"],
-		["forme ®)","® form)","form ®)"]
+		["forme ®\\)","® form\\)","form ®\\)"]
 		]);
 	updateFalsePair("fr","it",[["Donner","Fornisce","Dare"],
 		["Nouvel �nonc�","Nuova dichiarazione","Nuova operazione"],
