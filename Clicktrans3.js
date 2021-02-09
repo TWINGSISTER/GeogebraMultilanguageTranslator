@@ -1,26 +1,65 @@
-function hideString(name) {
+//-----------------------------------------------------------------------
+//a layer for global persistent  variables in a ggb document
+// they all use a Text Geogebra object whose name starts with ZZVAR
+// if you introduce variable Foo you will creaate an hiddend auxiliary 
+// text object named ZZVARFoo or ZZVARFooJSON
+//If the stored object is non trivial JSON encoding is used 
+// in this case the used Text object ends with JSON
+//-----------------------------------------------------------------------
+function hideObject(name) {
 	ggbApplet.setVisible(name, false);
 	ggbApplet.setAuxiliary(name, true );
 }
-//// sto("a","xxx") create a Geogebra hidden string "a" and store "xxx" 
+
+function base64EncodeUnicode(str) {
+    // First we escape the string using encodeURIComponent to get the UTF-8 encoding of the characters, 
+    // then we convert the percent encodings into raw bytes, and finally feed it to btoa() function.
+    utf8Bytes = encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+            return String.fromCharCode('0x' + p1);
+    });
+
+    return btoa(utf8Bytes);
+}
+
+function base64DecodeUnicode(str) {
+    // Convert Base64 encoded bytes to percent-encoding, and then get the original string.
+    percentEncodedStr = atob(str).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join('');
+return decodeURIComponent(percentEncodedStr);
+}
+
+function noCommandStringify(value) {
+	 return base64EncodeUnicode(JSON.stringify(value));
+}
+function unCommandStringify(str) {
+	return JSON.parse(base64DecodeUnicode(str));
+}
+//// sto("a","xxx") create a Geogebra hidden object "a" and store "xxx" 
 function sto(name, value) {
 	switch (typeof value) {
 		case 'string':
 			ggbApplet.evalCommand(name + "=" + "\"" + value + "\"");
-			hideString(name);
+			hideObject(name);
 			break;
 		case 'boolean':
 		case 'number':
 			ggbApplet.evalCommand(name + "=" + value.toString());
-			hideString(name);
+			hideObject(name);
 			break;
 		case 'undefined':
 		default:
+			ggbApplet.evalCommand(name+"JSON" + "=" + "\"" +noCommandStringify(value) + "\"");
+		    hideObject(name+"JSON");
+
 	}
 }
 // returns the GeoGebra value string that must be translated in object name, 
 // or a scalar value if any
 function lod(name) {
+	if (ggbApplet.exists(name+"JSON"))
+	  {var ret=ggbApplet.getValueString(name+"JSON" , false) + "";
+		return unCommandStringify(ret) ;}
 	var objType = ggbApplet.getObjectType(name) + "";
 	switch (objType) {
 		case "text":
@@ -42,7 +81,15 @@ function lod(name) {
 	}
 }
 
+function loddel(name) {
+	if (ggbApplet.exists(name+"JSON")) {ggbApplet.deleteObject(name+"JSON");return }
+	if (ggbApplet.exists(name)) {ggbApplet.deleteObject(name);return }
+}
 // Global variables
+function globdel(name) {
+	loddel("ZZVAR" + name);
+}
+
 function globlod(name) {
 	return lod("ZZVAR" + name);
 }
@@ -58,6 +105,9 @@ function globExists(objName) {
 function isGlob(objName) {
 	return objName.startsWith("ZZVAR");
 }
+//-----------------------------------------------------------------------
+// END of a layer for global persistent  variables in a ggb document
+//-----------------------------------------------------------------------
 
 // Things to be translated are captions and strings.
 // Captions can be strings or latex formulas between dollars.
@@ -75,6 +125,10 @@ function isGlob(objName) {
 //
 //
 
+//-----------------------------------------------------------------------
+// A remainder ... complete editing of Geogebra object properties can be achieved
+// using these two.
+//-----------------------------------------------------------------------
 // XML access to object
 function readXML(obj) 
 {
@@ -87,11 +141,35 @@ function writeXML(xml){
 	ggbApplet.evalXML(xml); 
 }
 
+function deleteButton(name){
+            ggbApplet.deleteObject(name);
+}
+
 function createButton(name,caption){
 	// create button name with caption 
 	var storecmd = name + " = Button(\"" + caption + "\")";
 	ggbApplet.evalCommand(storecmd);
 }
+//-----------------------------------------------------------------------
+// various machinery for reading/writing the ggb document textual features  
+//-----------------------------------------------------------------------
+function getformula(objName) {
+	var definition = ggbApplet.getDefinitionString(objName) + "";
+	var command = ggbApplet.getCommandString(objName, false) + "";
+	if (definition.length != 0) {
+		return definition;
+	}
+	if (command.length != 0) {
+		return command;
+	}
+}
+
+function simpleText(objName) {
+	var definition = ggbApplet.getDefinitionString(objName) + "";
+	var command = ggbApplet.getCommandString(objName, false) + "";
+	return ((command.length == 0) && (definition.length == 0));
+}
+
 // set the string that must be translated in object name, 
 function stotrans(name, transvar) {
 	var objType = ggbApplet.getObjectType(name) + "";
@@ -153,9 +231,17 @@ function transIt(name) {
 	}
 }
 
+//-----------------------------------------------------------------------
+// data structure to hold the translation
+//-----------------------------------------------------------------------
 
-// name the object that holds the translation
-function translName(objName, lang) {
+function getLangFromName(objName) {
+    if (!isTranslation(objName)) { return ""; }
+		var start=globlod("magic").length ;
+	return objName.slice(start,start+2);
+}
+	// name the object that holds the translation
+	function translName(objName, lang) {
 	return globlod("magic") + lang + objName;
 }
 // test if the named object is an auxiliary string for translation
@@ -163,6 +249,7 @@ function isTranslation(objName) {
 	return objName.startsWith(globlod("magic"));
 }
 // test if a translation exist for this command
+// if so the program links this with FormulaText(somestring... i.e.<translName(objName, lang)>)
 function isTranslatedCmd(objName, lang) {
 	var objName = translName(objName, lang)
 	return ggbApplet.exists(objName) &&
@@ -174,11 +261,14 @@ function isTranslated(objName, lang) {
 		translation(objName, lang) != "";
 }
 
-// test if a translation exist for this object
+// get  a translation for this object
 function translation(objName, lang) {
 	return lod(translName(objName, lang));
 }
 
+//-----------------------------------------------------------------------
+// pre/post processing making/unmaking some keyword a mess that cannot be translated 
+//-----------------------------------------------------------------------
 
 function unhashtr(origText, listToken) {
 	var hash = globlod("hash");
@@ -196,24 +286,50 @@ function hashtr(origText, listToken) {
 	return origText;
 }
 
+//-----------------------------------------------------------------------
+// pre/post processing making/unmaking some Latex keyword a mess that cannot be translated 
+//-----------------------------------------------------------------------
+function LatexHandle(dict) {
+	//debugger;
+	 globsto("Latexmerge",dict);
+}
 function deLatex(origText, cmd) {
-	var hash = globlod("hash");
+	var dict = globlod("Latexmerge");
 	//debugger;
 	var cmdlen = cmd.length;
+	if(!dict[cmd]) {return origText;}
+	var tuple=dict[cmd];
+	
 	return origText.replace(
 		RegExp('\\\\' + cmd + '\\{[^\\}]*\\}', 'g'),
 		function(match) {
-			return  hash + cmd + "IN!" + (match.slice(2 + cmdlen, -1))+"�XYZ"+hash+cmd
+			//debugger;
+			return  tuple[0] + (match.slice(2 + cmdlen, -1))+ tuple[2];
 		}
 	);
 }
 
 function inLatex(translated,origText, cmd) {
-	var hashcmd = globlod("hash") + cmd;
-	translated = translated.replace(RegExp(hashcmd+"IN\\s*!",'g'),"\\"+cmd+"{");
-	return translated.replace(RegExp("�\\s*XYZ"+hashcmd,'g'),"}");
+	//var hashcmd = globlod("hash") + cmd;
+	var dict = globlod("Latexmerge");
+	//debugger;
+	if(!dict[cmd]) {return translated;}
+	var tuple=dict[cmd];
+	translated = translated.replace(
+			RegExp(tuple[1]+".*?"+tuple[3],'g'),
+				function(match) {
+					var res;
+					//debugger;
+					res=match.replace(RegExp("^"+tuple[1]),"\\"+cmd+"{");
+					return  res.replace(RegExp(tuple[3]+"$"),"}");
+				}
+			);
+	return translated;
 }
 
+//-----------------------------------------------------------------------
+//  translation access for Latex code
+//-----------------------------------------------------------------------
 function LatexTranslate(origText, origLang, targetLang) {
 	// we assume that in Latex code the only thing to translate is within \text
 	//debugger;
@@ -225,6 +341,9 @@ function LatexTranslate(origText, origLang, targetLang) {
 	);
 }
 
+//-----------------------------------------------------------------------
+//  translation access for Geogebra textual commands
+//-----------------------------------------------------------------------
 function cmdTrans(command, origLang, targetLang) {
 	// In commands things to translate are sought in "strings". 
 	// inlined commands between the + + are left unchanged but still in
@@ -251,23 +370,9 @@ function cmdTrans(command, origLang, targetLang) {
 	);
 }
 
-function getformula(objName) {
-	var definition = ggbApplet.getDefinitionString(objName) + "";
-	var command = ggbApplet.getCommandString(objName, false) + "";
-	if (definition.length != 0) {
-		return definition;
-	}
-	if (command.length != 0) {
-		return command;
-	}
-}
-
-function simpleText(objName) {
-	var definition = ggbApplet.getDefinitionString(objName) + "";
-	var command = ggbApplet.getCommandString(objName, false) + "";
-	return ((command.length == 0) && (definition.length == 0));
-}
-
+//-----------------------------------------------------------------------
+//HTTP  translation wrapper  i.e. preprocessing +  HTTP call + postprocessing
+//-----------------------------------------------------------------------
 // returns translated string 
 function tr(objName, objType, origLang, targetLang) {
 	//debugger;
@@ -291,7 +396,7 @@ function tr(objName, objType, origLang, targetLang) {
 					return inLatex(translated,origText, "text");
 					// a bare string no command no latex definition. Actually one can see \text in it, too.
 				} else {
-					if (!isTranslatedCmd(objName, lang)) {
+					if (!isTranslatedCmd(objName, origLang)) {
 						command = getformula(objName);
 					} else {
 						command = getStoredFormulaTranslation(translName(objName, origLang));
@@ -335,6 +440,9 @@ function tr(objName, objType, origLang, targetLang) {
 	}
 }
 
+//-----------------------------------------------------------------------
+// postprocessing blanks
+//-----------------------------------------------------------------------
 
 function filterBlanks(inStrbb, outStr) {
 	//debugger;
@@ -416,6 +524,9 @@ function filterAddedBlanks(inStr, outStr) {
 
 
 
+//-----------------------------------------------------------------------
+// HTTP  access to Google Translate Service takes a string returns a string
+//-----------------------------------------------------------------------
 
 
 function sleep(ms) {
@@ -426,13 +537,15 @@ async function applyTimeout() {
 	await sleep(globlod("httpTimeout"));
 }
 
-// bare access to Google Translate Service takes a string returns a string
 function strTrans(text, sl, tl) {
 	//debugger;
 	if (sl == tl) {
 		return text;
 	}
 	if (text == "" || text == '"') {
+		return text;
+	}
+	if (text.match(RegExp('^>..$', 'g'))) {// the two letter string for the language button must not translate 
 		return text;
 	}
 	if (dictionary().has(text)) {
@@ -490,13 +603,36 @@ function strTrans(text, sl, tl) {
 	for (Item of returnArray) {
 		returnString=returnString+Item[0];
 	}
-	console.log(">"+text+"->"+returnString);
+	logmessage(">"+text+">-->"+returnString+"<");
 	returnString = filterBlanks(text, returnString);
 	returnString = filterFalsePair(sl,tl,text,returnString);
 	return returnString; 
 	// now compensate added blank spaces
 }
+//-----------------------------------------------------------------------
+// HTTP  access to Google Translate Service takes a string returns a string
+//-----------------------------------------------------------------------
 
+//-----------------------------------------------------------------------
+// some spaces are lost when storing commands adding \text
+//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------
+function usingStrings(translation) {
+	return translation.match(RegExp('"[^"]*"', 'g'));
+}
+
+function isLatex(translation) {
+	//globsto("latexcmds","frac|dfrac|right|left|phantom|ovalbox");
+	//globsto("simplelatexcmds","br|cr|times"); they do not need curly
+	return translation.match(RegExp("\\\\["+globlod("latexcmds")+"]\\s*{"))||
+		translation.match(RegExp("\\\\["+globlod("simplelatexcmds")+"]"));;
+}
+
+//-----------------------------------------------------------------------
+// Geogebra preprocessing. Parenthesis cause error in string entering
+// TODO try to use JSON encoding in more contexts
+//-----------------------------------------------------------------------
 function escapeUnicode(s, u) {
 	if (s == "" || s == '""') {
 		return s;
@@ -522,6 +658,9 @@ function escapeUnicodes(s, unicodes) {
 	sout = sout.replace(RegExp('_UnicodeToLetterOut_', 'g'), ')+"');
 	return sout;
 }
+//-----------------------------------------------------------------------
+// Geogebra do not visualize strings correctly, adding \text is sometimes necessary
+//-----------------------------------------------------------------------
 
 function protectedSpacesInString(str) {
 	// \text{something}
@@ -538,16 +677,6 @@ function protect(str) {
 	}
 }
 
-function usingStrings(translation) {
-	return translation.match(RegExp('"[^"]*"', 'g'));
-}
-
-function isLatex(translation) {
-	//globsto("latexcmds","frac|dfrac|right|left|phantom|ovalbox");
-	//globsto("simplelatexcmds","br|cr|times"); they do not need curly
-	return translation.match(RegExp("\\\\["+globlod("latexcmds")+"]\\s*{"))||
-		translation.match(RegExp("\\\\["+globlod("simplelatexcmds")+"]"));;
-}
 
 function protectSpacesInCommands(objName, translation) { // another Geogebra good idea
 	if (usingStrings(translation)) {
@@ -564,7 +693,9 @@ function protectSpacesInCommands(objName, translation) { // another Geogebra goo
 		return translation;
 	}
 }
-
+//-----------------------------------------------------------------------
+//store/ load an existing  translation for this object
+//-----------------------------------------------------------------------
 function copyFreeObject(objName, tostringName) {
 	var storecmd = tostringName + " = CopyFreeObject(" + objName + ")";
 	ggbApplet.evalCommand(storecmd);
@@ -611,7 +742,7 @@ function stostring(objName, lang, translation) {
 	storecmd = tostringName + " = " + storecmdprefix + translation + storecmdsuffix;
 	// set the parenthesis to UnicodeToLetter(40)
 	ggbApplet.evalCommand(storecmd);
-	hideString(tostringName);
+	hideObject(tostringName);
 	ggbApplet.setLayer(tostringName, 0);
 	ggbApplet.setFixed(tostringName, true, false);
 	// auxiliary not to clutter the Algebra view ggbApplet.setAuxiliary(tostringName, true)
@@ -637,6 +768,9 @@ function getStoredFormulaTranslation(translName) {
 //	}
 //}
 
+//-----------------------------------------------------------------------
+// load a translation if not existing create one or update part of  it
+//-----------------------------------------------------------------------
 
 function TransObject(objName) {
 	//debugger;
@@ -653,11 +787,14 @@ function TransObject(objName) {
 	if (isTranslated(objName, lang))
 	{
 		stotrans(objName, (translName(objName, lang)));
-	} else if (isTranslated(objName, origLang)) {
+	} else if (isTranslated(objName, origLang)||origLang==lang) {
 		// we need to translate this object into lang
-		// fetch the original string
+		// or we do not have a translation neither in lang nor in 
+		// origLang and therefore we assume that what is in is 
+		// to be taken as best original and be translated. 
+		// In tr(..) below we  fetch the original stringa in origLang
 		//origText = translation(objName, origLang);
-		// translate and store it 
+		// translate it and store it for lang 
 		stostring(objName, lang, tr(objName, objType, origLang, lang));
 		// set the current value to that language
 		stotrans(objName, (translName(objName, lang)));
@@ -681,10 +818,15 @@ function loadtrans(lang) {
 	//debugger;
 	var alltr = ggbApplet.getAllObjectNames();
 	globsto("targetLang", lang);
+	//startAdv("Translated",1,alltr.length)
 	for (name of alltr) {
 		TransObject(name);
+		//updAdv("Translated");
 	}
 }
+//-----------------------------------------------------------------------
+// set as strings
+//-----------------------------------------------------------------------
 
 function sSet(str) {
 	if (str == "") {
@@ -705,6 +847,9 @@ function union(setA, setB) {
 	return _union;
 }
 
+//-----------------------------------------------------------------------
+// postprocessing Correct known trimmed characters
+//-----------------------------------------------------------------------
 function updateTrimmedSch(UpdArr) {
 	//debugger;
 	var dictStr = "";
@@ -718,6 +863,9 @@ function updateTrimmedSch(UpdArr) {
 function TrimmedSch() {
 	return sSet(globlod("TrimmedSch"));
 }
+//-----------------------------------------------------------------------
+// postprocessing Correct known introduce blanks 
+//-----------------------------------------------------------------------
 
 function updateBlankPattern(UpdArr) {
 	//debugger;
@@ -733,6 +881,9 @@ function blankPattern() {
 	return sSet(globlod("BlankPattern"));
 }
 
+//-----------------------------------------------------------------------
+//postprocessing  Correct known false translations
+//-----------------------------------------------------------------------
 function unstringfyTripleSet(S) {
 	// turns a set of strings into an array  of triples 
 	var stringifiedTriples = [];
@@ -779,9 +930,11 @@ function filterFalsePair(sl,tl,text,returnString){
 	}
 	return res;
 }
-//  Add clicktrigger("xx") to the onclick code for button to translate to "xx"
 
 
+//-----------------------------------------------------------------------
+// a dictionary 
+//-----------------------------------------------------------------------
 function updateDictionary(UpdArr) {
 	//debugger;
 	var dictStr = "";
@@ -796,6 +949,9 @@ function dictionary() {
 	return sSet(globlod("dictionary"));
 }
 
+//-----------------------------------------------------------------------
+// set up the machinery for translation and translate
+//-----------------------------------------------------------------------
 function ClickggbOnInit() {
 	// this is the code specific to the application
 	ggbApplet.enableShiftDragZoom(false);
@@ -808,7 +964,9 @@ function ClickggbOnInit() {
 	// If  not no translation overhead occurs and the app need not browser support
 	// comment out this line after translation and save your .ggb  
 	//globsto("firstTime", true);
-	var languages=globlod("LANGUAGES").replaceAll(" ","").split(',');
+	var languages;
+	 if(globExists("LANGUAGES_{1}"))  {languages=globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
+	 if(globExists("LANGUAGES"))  {languages=globlod("LANGUAGES").replaceAll(" ","").split(',');}
 	// put the list of languages, the first is the original.
 	TranslationSetUp(languages) //(["fr","it"])
 }
@@ -823,20 +981,35 @@ function TranslationSetUp(Languages) {
 	//			return;
 	//}
 
-	//debugger;
+	debugger;
 	globsto("magic", "ZZ000");
 	globsto("hash", "ZWXY");
+	var dict = {
+			// this disctionary can contain as values an array of  four or two strings
+			// if entry with key xx comes with four strings the first and the third are used for \xx{ and for   } 
+			// before translation. The  second and the fourth are used in a RegExp call to match what needs to be translated back to
+			//  \xx{ and   }  we suggest to stuff parenthesis with & © ® § ȼ £ ¥ ¼ ½ ¾ 1 2 
+			// Two strings are experimental for operators like \times 
+			  "text":["(© ",  "\\(\\s*©\\s*",   " ®)",  "\\s*®\\s*\\)"],
+			  "exper":["(© ...","\\(\\s*©\\s*\\.\\.\\."]
+			};
+	LatexHandle(dict);
 	//list here strings for whick a faulty translation is known. Be specific.
 	//no � or , in these strings
+	updateFalsePair("fr","en",[["Juste","Fair","Correct"],
+		["Dernier exercice","Last year","Last Exercise"],
+		["forme ®)","® form)","form ®)"]
+		]);
 	updateFalsePair("fr","it",[["Donner","Fornisce","Dare"],
 		["Nouvel �nonc�","Nuova dichiarazione","Nuova operazione"],
 		["Score","Punto","Punteggio"],
+		["Dernier exercice","L'anno scorso","Ultimo esercizio"],
 		["Le plan","L'aereo","Il piano"]]);
 	//list here strings that need no translation
 	//They will remain as they are if they are EXACLTY occurring as strings
 	//if you put "XYZ" here also \text{XYZ} will pass untranslated.
 	updateDictionary(["\\text{", "}", ">it",">en", ">fr", "", " ", " ; ", " / ",
-		"\\times","\\times ",
+		"\\times","\\times ","A",
 		"\\right" ]);
 	// if one of  these command is detected  in a string a surrounding  \texts is  not placed 
 	// to protect spaces within
@@ -860,64 +1033,147 @@ function TranslationSetUp(Languages) {
 	// say which is the languge of the application
 	globsto("origLang", Languages[0]);
 	//loadOrigLang();RegButtonHandl(Languages[0]);
+	var logwin=startLogging();
 	for (l of Languages) {
+		logmessage("Translating into "+l+". Dialog with online translator follows.");
+		logmessage("Tags > , >--> and  < are delimiters for exchanged strings  ...");
 		loadtrans(l);RegButtonHandl(l);
+		logmessage("Translation into "+l+ " completed.") 
 	}
+	endLogging(logwin);
 }
 //Add clicktrigger("xx") to the onclick code for button to translate to "xx"
-function OrigButtonHandl() {
-	var origlang =globlod("origLang")
-	loadtrans(origlang);
-}
+//function OrigButtonHandl() {
+//	var origlang =globlod("origLang")
+//	loadtrans(origlang);
+//}
 
+//-----------------------------------------------------------------------
+//  Advancemet as a caption in a button
+//-----------------------------------------------------------------------
 function updAdv(name){ 
-	var advcbutton ="ZZVAR"+name;
-	 if(cur+1>=len){ 
-		if(ggbApplet.exists(advcbutton)){ggbApplet.deleteObject(advcbutton);}	
-		return;
-	}
+	var advbutton ="ZZVAR"+name;
 	var len=globlod(advbutton+"len");
 	var cur=globlod(advbutton+"cur");
+	 if(cur+1>=len){ 
+		if(ggbApplet.exists(advbutton)){ggbApplet.deleteObject(advbutton);}	
+		return;
+	}
+	
+	
 	globsto(advbutton+"cur",cur+1);
-	ggbApplet.setCaption(advcbutton,((cur+1)*100/len).toFixed(2) + '%');
+	ggbApplet.setCaption(advbutton,((cur+1)*100/len).toFixed(0) + '%');
 }
 
 function startAdv(name,start,end) {
-	var advcbutton ="ZZVAR"+name;
+	var advbutton ="ZZVAR"+name;
 	globsto(advbutton+"len",end-start+1);
 	globsto(advbutton+"cur",start);
-	createButton(advcbutton,"0%");
+	createButton(advbutton,"0%");
 }
-
-function RegButtonHandl(lang) {
-	var langbutton ="ZZVAR"+lang;
-	createButton(langbutton,">"+lang);
-	ggbApplet.registerObjectClickListener(langbutton, "button2handl");
-}
+//-----------------------------------------------------------------------
 // minimal core for multilanguage version must contain this
-function linkLangButtons(Languages) {
-	for (l of Languages ){
-	var langbutton ="ZZVAR"+l;
-	ggbApplet.registerObjectClickListener(langbutton, "button2handl");
+//-----------------------------------------------------------------------
+// buttons to switch languages
+//-----------------------------------------------------------------------
+function RegButtons(){
+	var alltr = ggbApplet.getAllObjectNames();
+	for (obj of alltr) {
+		if( isLangButton(obj))  { ggbApplet.registerObjectClickListener(obj, "button2handl");}
 	}
 }
-function button2handl(langbutton) {
-	debugger;
-	loadtrans(langbutton.slice(-9));
+function deRegButtonHandl(lang) {
+	deleteButton(langbutton(lang));
+	ggbApplet.unregisterObjectClickListener(langbutton(lang), "button2handl");
 }
-//function autoPopup() {
-//var style = "top=10, left=10, width=400, height=250, status=no, menubar=no, toolbar=no scrollbars=no";
-//var testo = window.open("", "",style);
-//testo.document.write("<html>n");
-//testo.document.write(" <head>n");
-//testo.document.write(" <title>Wait</title>n");
-//testo.document.write(" <basefont size=2 face=Tahoma>n");
-//testo.document.write(" <style> #myProgress { width: 100%; background-color: #ddd; }");
-//testo.document.write(" #myBar { width: 1%; height: 30px; background-color: #4CAF50; } </style>");
-//testo.document.write(" </head>n");
-//testo.document.write("<body topmargin=50>n")
-//testo.document.write("<div id="myProgress"> <div id="myBar"></div> </div>n");
-//testo.document.write("</body>n");
-//testo.document.write("</html>");
-//}
-ClickggbOnInit();
+function RegButtonHandl(lang) {
+	createButton(langbutton(lang),">"+lang);
+	ggbApplet.registerObjectClickListener(langbutton(lang), "button2handl");
+}
+function langbutton(l) {
+	return translName("ButtonSelection", l);
+}
+function isLangButton(objName) {
+	return isTranslation(objName) &&
+	 objName==translName("ButtonSelection",getLangFromName(objName));
+}
+function buttonToLang(b) {
+	return getLangFromName(b);
+}
+function linkLangButtons(Languages) {
+	for (l of Languages ){
+		ggbApplet.registerObjectClickListener(langbutton(l), "button2handl");
+	}
+}
+function button2handl(newlangbutton){
+	//debugger;
+	var l =buttonToLang(newlangbutton)
+	loadtrans(l);
+	// this is the language in use
+	if(globExists("currentLanguage")){
+		ggbApplet.setColor(langbutton(globlod("currentLanguage")),0, 0, 0)
+		}
+			ggbApplet.setColor(newlangbutton,255, 0, 0);
+		globsto("currentLanguage",l);
+}
+//----------------------------------------------------------------------
+// Delete all elements for the current language
+//-----------------------------------------------------------------------
+function delCurrentLang(){
+	var alltr = ggbApplet.getAllObjectNames();
+	var currentLang =	globlod("currentLanguage")
+	if (!confirm("Are you sure you want to delete support for language <"+l+">")) {return ; };
+	for (obj of alltr) {
+		if(getLangFromName(obj) ==currentLang)  { ggbApplet.deleteObject(obj);}
+	}
+}
+//----------------------------------------------------------------------
+// logging facility in a separate window
+//-----------------------------------------------------------------------
+function logmessage(message) {
+	var i=globlod("loglineno");
+	globsto("logline"+i.toString(),message);
+	globsto("loglineno",i+1);
+}
+function startLogging() {
+	var style = "top=10, left=10, width=400, height=250, status=no, menubar=yes, toolbar=yes scrollbars=yes";
+	var testo = window.open("", "",style);
+	testo.document.write("<html>\n");
+	testo.document.write(" <head>\n");
+	testo.document.write(" <title>Translation log" + "</title>\n");
+	testo.document.write(" <basefont size=2 face=Tahoma>\n");
+	//testo.document.write(" <style> #myProgress { width: 100%; background-color: #ddd; }\n");
+	//testo.document.write(" #myBar { width: 1%; height: 30px; background-color: #4CAF50; } </style>\n");
+	testo.document.write(" </head>\n");
+	testo.document.write("<body>\n")
+	//testo.document.write("<body topmargin=50>\n")
+	//testo.document.write("<div id='myProgress'> <div id='myBar'></div> </div>\n");
+	//testo.document.write("</div> </div>\n");
+	testo.document.write("<div id='myLog'> </div>\n");
+	testo.document.write("</body>\n");
+	testo.document.write("</html>\n");
+	globsto("loglineno",1)
+	return testo;
+}
+function endLogging(win) {
+	//debugger;
+	var doc = win.document;
+	var theDiv = doc.getElementById("myLog")
+	var fin=globlod("loglineno");
+	for (let i = 1; i < fin; i++){
+		var linetext ="logline"+i.toString();
+		if (globExists(linetext)){
+			theDiv.appendChild(doc.createTextNode(globlod(linetext)));
+			theDiv.appendChild(doc.createElement('BR'));
+			globdel(linetext);
+		}
+	}
+	globdel("loglineno");
+}
+//-----------------------------------------------------------------------
+// known languages set
+//-----------------------------------------------------------------------
+
+
+//----------------------------------------------------------------------
+
