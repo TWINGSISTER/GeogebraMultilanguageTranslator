@@ -447,6 +447,7 @@ function copyFreeObject(objName, tostringName) {
 	ggbApplet.evalCommand(storecmd);
 }
 function copyDetailedObject(objName, tostringName) {
+	debugger;
 	var storeXML = 
 		ggbApplet.getXML(objName).replaceAll(objName,tostringName);
 	ggbApplet.evalXML(storeXML);
