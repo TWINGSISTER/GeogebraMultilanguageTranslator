@@ -474,7 +474,10 @@ function renameCurrent(copy) {
 			 	else{ ggbApplet.renameObject(obj,zzobjtext); }
 		}
 	}
-	 if(! (copy==="copy")){ deRegButtonHandl(from) ; }
+	 if(copy==="copy"){  
+	   ggbApplet.unregisterObjectClickListener(langbutton(from), "button2handl");
+	   }
+	 else { deRegButtonHandl(from) ; }
 RegButtonHandl(to) ;
 }
 
