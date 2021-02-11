@@ -447,7 +447,7 @@ function copyFreeObject(objName, tostringName) {
 	ggbApplet.evalCommand(storecmd);
 }
 function copyDetailedObject(objName, tostringName) {
-	debugger;
+	//debugger;
 	var storeXML = 
 		ggbApplet.getXML(objName).replaceAll(objName,tostringName);
 	ggbApplet.evalXML(storeXML);
@@ -474,7 +474,7 @@ function renameCurrent(copy) {
 			 	else{ ggbApplet.renameObject(obj,zzobjtext); }
 		}
 	}
-deRegButtonHandl(from) ;
+	 if(! (copy==="copy")){ deRegButtonHandl(from) ; }
 RegButtonHandl(to) ;
 }
 
