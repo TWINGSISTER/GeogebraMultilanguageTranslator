@@ -463,7 +463,7 @@ function renameCurrent(copy) {
 		 obj = alltr[i];
 		 var objmatch =obj.match(RegExp("^"+prefix+from+".*$"));
 		 if (objmatch){ 
-			 	var zzobjtext=objrematch[0].replace(from,to);
+					 var zzobjtext=objmatch[0].replace(from,to);
 			 	if (copy=="copy"){ copyFreeObject(from, to); }
 			 	else{ ggbApplet.renameObject(obj,zzobjtext); }
 		}
