@@ -472,6 +472,7 @@ function copyDetailedObject(objName, tostringName) {
 //-----------------------------------------------------------------------
 function renameCurrent(copy) {
 	// copy="copy" or "rename"
+	 debugger;
     var from=globlod("currentLanguage");
 	var languages;
 	 if(globExists("LANGUAGES_{1}"))  {languages=globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
