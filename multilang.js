@@ -447,7 +447,24 @@ function copyFreeObject(objName, tostringName) {
 	ggbApplet.evalCommand(storecmd);
 }
 function copyDetailedObject(objName, tostringName) {
-	//debugger;
+	//debugger
+    var objType = ggbApplet.getObjectType(objName) + "";
+    switch (objType) {
+        case "button":
+        	//copyFreeObject(objName, tostringName)
+        	break;
+        case "text":
+        case "slider":
+        case "checkbox":
+        case "inputbox":
+        case "textfield":
+        case "point":
+        case 'boolean':
+        case "number":
+        case "numeric":
+        case "undefined":
+        default:
+    }
 	var storeXML = 
 		ggbApplet.getXML(objName).replaceAll(objName,tostringName);
 	ggbApplet.evalXML(storeXML);
@@ -465,6 +482,7 @@ function renameCurrent(copy) {
         return;
     }
 	 var alltr = ggbApplet.getAllObjectNames();
+	deRegButtonHandl(from) ;
 	 for (i = 0; i < alltr.length ; i++) {
 		 obj = alltr[i];
 		 var objmatch =obj.match(RegExp("^"+prefix+from+".*$"));
@@ -473,11 +491,8 @@ function renameCurrent(copy) {
 			 	if (copy==="copy"){ copyDetailedObject(obj,zzobjtext); }
 			 	else{ ggbApplet.renameObject(obj,zzobjtext); }
 		}
-	}
-	 if(copy==="copy"){  
-	   ggbApplet.unregisterObjectClickListener(langbutton(from), "button2handl");
 	   }
-	 else { deRegButtonHandl(from) ; }
+if(copy==="copy") { RegButtonHandl(from) ; }
 RegButtonHandl(to) ;
 }
 
