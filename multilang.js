@@ -448,23 +448,23 @@ function copyFreeObject(objName, tostringName) {
 }
 function copyDetailedObject(objName, tostringName) {
 	//debugger
-    var objType = ggbApplet.getObjectType(objName) + "";
-    switch (objType) {
-        case "button":
-        	//copyFreeObject(objName, tostringName)
-        	break;
-        case "text":
-        case "slider":
-        case "checkbox":
-        case "inputbox":
-        case "textfield":
-        case "point":
-        case 'boolean':
-        case "number":
-        case "numeric":
-        case "undefined":
-        default:
-    }
+////    var objType = ggbApplet.getObjectType(objName) + "";
+    //switch (objType) {
+        //case "button":
+        	////copyFreeObject(objName, tostringName)
+        	//break;
+        //case "text":
+        //case "slider":
+        //case "checkbox":
+        //case "inputbox":
+        //case "textfield":
+        //case "point":
+        //case 'boolean':
+        //case "number":
+        //case "numeric":
+        //case "undefined":
+        //default:
+    //}
 	var storeXML = 
 		ggbApplet.getXML(objName).replaceAll(objName,tostringName);
 	ggbApplet.evalXML(storeXML);
@@ -492,6 +492,7 @@ function renameCurrent(copy) {
 			 	else{ ggbApplet.renameObject(obj,zzobjtext); }
 		}
 	   }
+	 debugger;
 if(copy==="copy") { RegButtonHandl(from) ; }
 RegButtonHandl(to) ;
 }
