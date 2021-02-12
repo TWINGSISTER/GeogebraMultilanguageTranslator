@@ -411,9 +411,13 @@ ggbApplet.registerObjectClickListener(langbutton(currentLang), "button2handl");
 // Delete all elements for the current language
 //-----------------------------------------------------------------------
 function delCurrentLang() {
+	 if(globExists("LANGUAGES_{1}"))  {languages=globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
+	 if(globExists("LANGUAGES"))  {languages=globlod("LANGUAGES").replaceAll(" ","").split(',');}
+	 var todelete=languages[0]
     var alltr = ggbApplet.getAllObjectNames();
-    var currentLang = globlod("currentLanguage")
-    if (!confirm("Are you sure you want to delete support for language <" + currentLang + ">")) {
+    var currentLang = globlod("currentLanguage");
+    if (currentLang===todelete)) { alert("Cannot delete language in use ");return; }
+    if (!confirm("Are you sure you want to delete support for language <" + todelete + ">")) {
         return;
     }
     var obj;
@@ -447,24 +451,6 @@ function copyFreeObject(objName, tostringName) {
 	ggbApplet.evalCommand(storecmd);
 }
 function copyDetailedObject(objName, tostringName) {
-	//debugger
-////    var objType = ggbApplet.getObjectType(objName) + "";
-    //switch (objType) {
-        //case "button":
-        	////copyFreeObject(objName, tostringName)
-        	//break;
-        //case "text":
-        //case "slider":
-        //case "checkbox":
-        //case "inputbox":
-        //case "textfield":
-        //case "point":
-        //case 'boolean':
-        //case "number":
-        //case "numeric":
-        //case "undefined":
-        //default:
-    //}
 	var storeXML = 
 		ggbApplet.getXML(objName).replaceAll(objName,tostringName);
 	ggbApplet.evalXML(storeXML);
@@ -472,7 +458,7 @@ function copyDetailedObject(objName, tostringName) {
 //-----------------------------------------------------------------------
 function renameCurrent(copy) {
 	// copy="copy" or "rename"
-	 debugger;
+	 //debugger;
     var from=globlod("currentLanguage");
 	var languages;
 	 if(globExists("LANGUAGES_{1}"))  {languages=globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
@@ -493,7 +479,7 @@ function renameCurrent(copy) {
 			 	else{ ggbApplet.renameObject(obj,zzobjtext); }
 		}
 	   }
-	 debugger;
+	 //debugger;
 if(copy==="copy") { RegButtonHandl(from) ; }
 RegButtonHandl(to) ;
 }
