@@ -416,7 +416,7 @@ function delCurrentLang() {
 	 var todelete=languages[0]
     var alltr = ggbApplet.getAllObjectNames();
     var currentLang = globlod("currentLanguage");
-    if (currentLang===todelete)) { alert("Cannot delete language in use ");return; }
+    if (currentLang===todelete) { alert("Cannot delete language in use ");return; }
     if (!confirm("Are you sure you want to delete support for language <" + todelete + ">")) {
         return;
     }
