@@ -1,7 +1,8 @@
 # Geogebra (GGB) Multi-language Translator
 A Geogebra javascript package to create a multilanguage version of your ggb activities.
 ## Intro
-This tool tries to generate automatically a translation using online translation.The ggb document is scanned translating Text objects and captions. Object names and labels are left alone.
+This tool tries to generate automatically a translation using online translation.
+The ggb document is scanned translating Text objects and captions. Object names and labels are left alone.
 
 
 Using this toolset  the user can edit these  translations and merge them to obtain a multilanguage ggb. 
@@ -11,11 +12,17 @@ On the other hand, having slightly changed the logic of an activity, the user ha
 ## Installation 
 Copy the whole file hierarchy in this repository (i.e. .ggt, .html, .bat and .js files) in your workspace. Start the appropriate version of Geogebra using the provided .bat(s) and read the ggb(s) into Geogebra (see next section on Operations for details).
 ## Operations
-The ggb names explain the intended Geogebra version to work with. 
+You simply have to insert in your ggb one of the ggb files distributed with this package. To do this use the insert ggb facility in GGB Classic 5   
+The names of the ggb in this package explain the intended Geogebra version to work with.
+ 
 The ```xxx-n-browser-online.ggb``` files require the Geogebra classic browser, version n (i.e. n=5 or n=6 or none for don't care), and when loaded they download from the repository the latest version of this tool. 
-The ```xxx-browser-local.ggb``` files require the Geogebra classic browser version and uses the local version (you have downloaded) of the Javascript files. 
-A version of this Geogebra classic browser version is packaged with this repository and the provided .bat files assume the Geogebra code to be in place. 
-If the ggb filename bears no ```-browser-online.ggb``` suffix, then the ggb should work also with the desktop version, too.  
+
+The ```xxx-browser-local.ggb``` files require the Geogebra classic browser version and uses the GGB local version  of the Javascript files in this package (you have downloaded). 
+
+A version of this Geogebra classic browser version is not packaged with this repository and the provided .bat files assume the Geogebra code to be in a particular place. See the accompaining video for details. 
+
+If the ggb filename bears no ```-browser-online.ggb``` suffix, then the ggb should work also with the GGB desktop version, too. 
+ 
 Please note that the Geogebra desktop classic version 5 is necessary within the life cycle of a multilanguage activity when merging translations. The steps for maintaining multilanguage is what comes next.
 
 #Geogebra multilanguage activities life cycle
