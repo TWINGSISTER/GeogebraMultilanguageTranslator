@@ -12,20 +12,19 @@ On the other hand, having slightly changed the logic of an activity, the user ha
 ## Installation 
 Copy the whole file hierarchy in this repository (i.e. .ggt, .html, .bat and .js files) in your workspace. Start the appropriate version of Geogebra using the provided .bat(s) and read the ggb(s) into Geogebra (see next section on Operations for details).
 ## Operations
-You simply have to insert in your ggb one of the ggb files distributed with this package. To do this use the insert ggb facility in GGB Classic 5   
-The names of the ggb in this package explain the intended Geogebra version to work with.
+You simply have to insert in your ggb one of the ggb files distributed with this package. To do this use the insert ggb facility in GGB Classic 5.   The names of the ggb in this package explain the intended Geogebra version to work with.
  
 The ```xxx-n-browser-online.ggb``` files require the Geogebra classic browser, version n (i.e. n=5 or n=6 or none for don't care), and when loaded they download from the repository the latest version of this tool. 
 
-The ```xxx-browser-local.ggb``` files require the Geogebra classic browser version and uses the GGB local version  of the Javascript files in this package (you have downloaded). 
+The ```xxx-browser-local.ggb``` files require the Geogebra classic browser version and uses the local version  of the Javascript files in this package (you have downloaded). 
 
-A version of this Geogebra classic browser version is not packaged with this repository and the provided .bat files assume the Geogebra code to be in a particular place. See the accompaining video for details. 
+A version of this Geogebra classic browser version is not packaged with this repository and the provided .bat files assume the Geogebra code to be in a particular place. See the accompaining video for details about installing GGB for browser. 
 
 If the ggb filename bears no ```-browser-online.ggb``` suffix, then the ggb should work also with the GGB desktop version, too. 
  
-Please note that the Geogebra desktop classic version 5 is necessary within the life cycle of a multilanguage activity when merging translations. The steps for maintaining multilanguage is what comes next.
+Please note that the Geogebra desktop classic version 5 is necessary, within the life cycle of a multilanguage activity, when merging translations. The steps for maintaining multilanguage is what comes next.
 
-#Geogebra multilanguage activities life cycle
+# Geogebra multilanguage activities life cycle
 In several repositories you can find a wealth of Geogebra activities. If they are served to students as they are, there could be the legitimate suspicion, the student will surely point out, that some lack in comprehension and poor student performance is due to the crystal clear fact that the activities are not in student's  native language. The ongoing result is a painful worldwide effort to translate activities into several languages. 
 In some framework (e.g. Moodle question banks), turning on  automatic translation within your browser can do the trick and present acceptable translation of school activities. 
 With Geogebra this will not work. Furthermore, in many occasions, translating  a Geogebra activity require to get some grasp upon the developer logic and very often, if you are not the developpe, to build a new activity from the scratch is easier than translating an existing one. 
