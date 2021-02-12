@@ -1,11 +1,15 @@
-# Geogebra Multi-language Translator
+# Geogebra (GGB) Multi-language Translator
 A Geogebra javascript package to create a multilanguage version of your ggb activities.
 ## Intro
-This tool tries to generate automatically a translation using online translator.The ggb document is scanned translating Text objects and captions. Object names and labels are left alone.
-Using this toolset  the user can edit these  translations and merge them to obtain a multilanguage ggb. This package handles  multilanguage ggb supporting several languages within a single ggb document. On the other hand, having slightly changed the logic of an activity, the user has the option to fix only strings in a particular language and ask for an update of the other translations. 
+This tool tries to generate automatically a translation using online translation.The ggb document is scanned translating Text objects and captions. Object names and labels are left alone.
+
+
+Using this toolset  the user can edit these  translations and merge them to obtain a multilanguage ggb. 
+This package handles  multilanguage ggb supporting several languages within a single ggb document.
+On the other hand, having slightly changed the logic of an activity, the user has the option to fix only strings in a particular language and ask for an update of  all the other translations. 
 
 ## Installation 
-Copy the whole file hierarchy in this repository (i.e. .ggt, .html, .bat and .js files) in your workspace, start the appropriate version of Geogebra using the provided .bat(s) and read the ggb(s) into Geogebra (see next section on Operations for details).
+Copy the whole file hierarchy in this repository (i.e. .ggt, .html, .bat and .js files) in your workspace. Start the appropriate version of Geogebra using the provided .bat(s) and read the ggb(s) into Geogebra (see next section on Operations for details).
 ## Operations
 The ggb names explain the intended Geogebra version to work with. 
 The ```xxx-n-browser-online.ggb``` files require the Geogebra classic browser, version n (i.e. n=5 or n=6 or none for don't care), and when loaded they download from the repository the latest version of this tool. 
