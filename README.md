@@ -1,5 +1,7 @@
 # Geogebra Multi-language Translator
-A Geogebra javascript package to create a multilanguage version of your ggb activities. This tool tries to generate automatically a translation using online translator.The ggb document is scanned translating Text objects and captions. Object names and labels are left alone.
+A Geogebra javascript package to create a multilanguage version of your ggb activities. 
+
+This tool tries to generate automatically a translation using online translator.The ggb document is scanned translating Text objects and captions. Object names and labels are left alone.
 Using this toolset  the user can edit these  translations and merge them to obtain a multilanguage ggb. This package handles  multilanguage ggb supporting several languages within a single ggb document. On the other hand, having slightly changed the logic of an activity, the user has the option to fix only strings in a particular language and ask for an update of the other translations. 
 
 ## Installation 
