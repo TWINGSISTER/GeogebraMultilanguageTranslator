@@ -22,7 +22,6 @@ In the following we will detail the steps to obtain this i.e. a multilanguage gg
 ## Translation
 To start the translation you are required to load the document to be translated into Geogebra classic 5. This old versio is used because the support for inserting files disappeared from version 6. Then, after consulting in the activity to be translated,  you have to "insert" one of the ```translate-browser-xxx.ggb``` files. So press Open  and in the filename selection dialog choose for ```Insert file```, then select one of the ```translate-browser-xxx.ggb``` files. This insertion loads all the Javascript code and can take some time. When inserting is over you will see a series of button, do not press them. Save this file with some name chosen from a standardized naming for your documents. I suggest ```my-activity-name-xxx-L1-L2-L3.ggb``` where xxx could be local or online and L1 is the (possibly ISO) code for the original language and L2 L3 the codes for the language of the translations. 
 Next step is to close Geogebra Classic 5 and start some browser version using one of the provided .bat.  Then load the saved document and put in the Languages input field a comma separated list of the ISO  languages codes. The first code must be the code of the language of the original document. 
-
 Then push translate. A translation is attempted. This is a lengthy step and several things can go wrong (see the tickets for advice). If you are lucky a window pop up (so window pop up must be enabled in the browser) and a log of the dialog with the online translator is produced. Probably is interesting to take a look at it to spot some troubles you can fix by hand by either configuring the translator (see the section on configuration)  or by editing the translation. If you are even more lucky the process terminates producing a valid multilanguage ggb without showing any pitfall in this permanent alpha version of this package. In the likely circumstance that this is not the case leave a ticket with the usual wealth of information (i.e. the ggb before and after). 
 If this is not the case you will see a stack of small button on the top left corner. Right click to place them where they will not disturb the activity. Save this ggb adding a -tra suffix (e.g. -fr-en-it-tra.ggb). 
 
@@ -32,20 +31,22 @@ This file will be the starting point either to revise the translations or  the a
 Users can upload into Geogebra Classic 6 desktop or browser versions the -tra file coming auto of the previous phase. Clicking on the Multilanguage button the language buttons are enabled and the user can switch from one language to another. To prepare the activity for an end-user one can hide or delete the  translate button and the other buttons, too. 
 
 ##Delete
-This button delete the support for the current language. If just one language remains all the buttons can be deleted and we obtain a single language activity.
+This button delete the support for the  language in the Languages field. If this is the current language the command aborts. If, after delete,  just one language remains all the buttons can be deleted and we obtain a single language activity.
 If even the last remaining language is deleted the document retains some strings but those using complex formulas. So the user may think this is going to work. Actually a document where all the languages has been deleted is doomed to fail. On the other hand, deleting all the language buttons, the document continues to work and is stuck at the last known language since no button remains to switch language. Deleting language button without deleting the language is, as well, a bad practice since the document will contain unnecessary data for other languages that might slow down the activity. If you want to show the user a single language document and keep a multilanguage document under the hood, probably a good option is to hide all the button objects. 
 ##Rename
-This command takes as input a list of two codes (e.g. xy,yz) separated by a comma that must be in the Languages field when the button is pressed. The first code must be the code for an existing translation (e.g. xy). This command assign the code yz to this translation.
+This command takes as input a code (e.g. xy) in the Languages field when the button is pressed. The code must not be the code for an existing translation (e.g. xy). This command assign the code xy to the current translation.
+##Copy
+This command takes as input a code (e.g. xy) in the Languages field when the button is pressed. The code must not be the code for an existing translation (e.g. xy). This command clone the current translation and assign  code xy to it.
 ##Seed 
 When this button is pressed all objects in the document are deleted but the strings of the current language (e.g. xx). Then, saving the activity as a 
 ```someactivity-xx-seed.ggb```, we have the option to insert this language translation in a multilanguage version of
 ```someactivity-xx-yy.ggb```. To do this we have to use Geogebra Classic 5 desktop version and insert file ```someactivity-xx-seed.ggb``` into the existing multilanguage version of ```someactivity-xx-seed.ggb```. To glue together the inserted "seed" one have to press the flatten button.
-##Flatten
-This button takes as input the two letter code (e.g. xx) of the language for which we have just inserted the seed file  
-```someactivity-xx-seed.ggb``` and link this translation to the resto of the document. Then you must press the Multilanguage button and will be able to select the added language xx.  
+##Plant
+This button works if you have just inserted the seed file  
+```someactivity-xx-seed.ggb```. In this case it  links this translation to the rest of the document. Then you must press the Multilanguage button and will be able to select the added language xx.  
 
 #Editing 
-When you press the "Translate" button. The underlying Javascript code will do its best to translate all the phrases in the original .ggb document usign a (customizable) online translator. In the pop up window you can find the translation used to build a multilanguage version of your activity. Probably, in some cases, you are not satisfied with the translation. 
+When you press the "Translate" button the underlying Javascript code will do its best to translate all the phrases in the original .ggb document usign a (customizable) online translator. In the pop up window you can find the translation used to build a multilanguage version of your activity. Probably, in some cases, you are not satisfied with the translation. 
 
 Now image that we have pressed Translate using string fr,it,en.
 The first language in the given string (e.g. in ```fr,it,en```) will be assumed the original language (i.e. French). The strings in the original document are assumed to be in French and are not feed to the translator. The other codes in the given string (e.g. ```it``` and ```en```) will generate appropriate translations (i.e. into Italian and into English). Some of them might require editing. The user can find the translated strings in the Algebra view as Geogebra Text objects with special names following the pattern ```ZZ000<languageCode><originalObjectName>``` therefore for instance if your .ggb contains a button named ```BoutonOui``` with caption "Oui" you will find in the Algebra View the strings
