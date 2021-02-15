@@ -423,7 +423,7 @@ function delCurrentLang() {
     var obj;
     for (i = 0; i < alltr.length; i++) {
         obj = alltr[i];
-        if (getLangFromName(obj) == currentLang) {
+        if (getLangFromName(obj) == todelete) {
             ggbApplet.deleteObject(obj);
         }
     }
