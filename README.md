@@ -7,7 +7,9 @@ In some framework (e.g. Moodle question banks), turning on  automatic translatio
 
 With Geogebra this will not work. Furthermore, in many occasions, translating  a Geogebra activity require to get some grasp upon the developer logic and very often, if you are not the developer, to build a new activity from the scratch is easier than translating an existing one. 
 
-This package tries to do its best to extract all textual elements from an activity, feed them through an online translator, record the translation and build some persistent machinery, in the Geogebra ggb document, to record the two (or more) linguistic versions of an activity within a single ggb file. This ggb, then  can be shipped as a standalone classrom activity. A proof of concept video is here [![Proof of concept](https://img.youtube.com/vi/A8KA8vFJ0YQ/0.jpg)](https://www.youtube.com/watch?v=A8KA8vFJ0YQ)
+This package tries to do its best to extract all textual elements from an activity, feed them through an online translator, record the translation and build some persistent machinery, in the Geogebra ggb document, to record the two (or more) linguistic versions of an activity within a single ggb file. This ggb, then  can be shipped as a standalone classrom activity. 
+
+A proof of concept video is [here](https://www.youtube.com/watch?v=A8KA8vFJ0YQ)
 
 This tool tries to generate automatically a translation using online translation.
 The ggb document is scanned translating Text objects and captions. Object names and labels are left alone. However, using this toolset,  the user can still edit these  translations and merge them to obtain a multilanguage ggb. 
