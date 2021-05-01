@@ -3,7 +3,7 @@ THIS README IS OUTDATED AND DOCUMENTATION IS MISSING
 As for every one man project the code is running somehow you can
 [try this here](https://twingsister.github.io/GeogebraMultilanguageTranslator/).
 A working release is planned for June 2021.
-Cheers.
+Cheerio.
 
 A Geogebra javascript package to create a multilanguage version of your ggb activities.
 ## Intro
