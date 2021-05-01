@@ -1,5 +1,7 @@
 /**
  * http://usejsdoc.org/
+ * @copyright TWINGSISTER 2021  (licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.) 
+ * @author TWINGSISTER (twingsister@gmail.com) 
  */
 // this function returns false if the string s does not contain a balanced sequence 
 // of lp rp (left parenthesis right parenthesis). E.g. s="foo(doo(foo)) ((("

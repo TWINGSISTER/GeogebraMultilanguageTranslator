@@ -1,5 +1,7 @@
 /**
- * 
+ * http://usejsdoc.org/
+ * @copyright TWINGSISTER 2021  (licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.) 
+ * @author TWINGSISTER (twingsister@gmail.com) 
  */
 //-----------------------------------------------------------------------
 // initialization with configuration
