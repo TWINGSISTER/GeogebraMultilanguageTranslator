@@ -1,4 +1,10 @@
 # Geogebra (GGB) Multi-language Translator
+THIS README IS OUTDATED AND DOCUMENTATION IS MISSING
+As for every one man project the code is running somehow you can
+[try this here](https://twingsister.github.io/GeogebraMultilanguageTranslator/).
+A working release is planned for June 2021.
+Cheers.
+
 A Geogebra javascript package to create a multilanguage version of your ggb activities.
 ## Intro
 In several repositories you can find a wealth of Geogebra activities. If they are served to students as they are, there could be the legitimate suspicion, the student will surely point out, that some lack in comprehension and poor student performance is due to the crystal clear fact that the activities are not in student's  native language.  The ongoing result is a painful worldwide effort to translate activities into several languages. 
