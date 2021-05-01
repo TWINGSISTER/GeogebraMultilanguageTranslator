@@ -98,7 +98,7 @@ function lod(name) {
 }
 
 // Global variables
-function globlod(name) {
+function RT_globlod(name) {
     return lod("ZZVAR" + name);
 }
 
@@ -210,16 +210,16 @@ function transIt(name) {
 
 function getLangFromName(objName) {
     if (!isTranslation(objName)) { return ""; }
-	var start = globlod("magic").length;
+	var start = RT_globlod("magic").length;
     return objName.slice(start, start + 2);
 }
 // name the object that holds the translation
 function translName(objName, lang) {
-    return globlod("magic") + lang + objName;
+    return RT_globlod("magic") + lang + objName;
 }
 // test if the named object is an auxiliary string for translation
 function isTranslation(objName) {
-    return objName.startsWith(globlod("magic"));
+    return objName.startsWith(RT_globlod("magic"));
 }
 
 function isTranslated(objName, lang) {
@@ -245,7 +245,7 @@ function usingStrings(translation) {
 function TransObject(objName) {
     //debugger;
     if (transIt(objName)) {
-        var lang = globlod("targetLang");
+        var lang = RT_globlod("targetLang");
         if (isTranslation(objName)) {
             return;
         } // leave aux objects
@@ -293,7 +293,7 @@ function button2handl(newlangbutton) {
     loadtrans(l);
     // this is the language in use
     if (globExists("currentLanguage")) {
-        ggbApplet.setColor(langbutton(globlod("currentLanguage")), 0, 0, 0)
+        ggbApplet.setColor(langbutton(RT_globlod("currentLanguage")), 0, 0, 0)
     }
     ggbApplet.setColor(newlangbutton, 255, 0, 0);
     globsto("currentLanguage", l);
@@ -325,11 +325,11 @@ function RegButtonHandl(lang) {
 //----------------------------------------------------------------------
 function        encodeFormula(obj){ 
          var formula=getformula(obj);
-         sto(obj,obj+globlod("magic")+base64EncodeUnicode(formula)); 
+         sto(obj,obj+RT_globlod("magic")+base64EncodeUnicode(formula)); 
  }
 function  decodeFormula(obj){ 
      var formula=lod(obj);
-     var prefix =(obj+globlod("magic"));
+     var prefix =(obj+RT_globlod("magic"));
      if (formula.startsWith(prefix)) {
          formula=base64DecodeUnicode(formula.slice(prefix.length)); 
          var storecmd = obj + " = " + "FormulaText(" + formula + ",false)";
@@ -341,7 +341,7 @@ function seedCurrentLang(){
 	// by inserting the construction
 	debugger;
  var alltr = ggbApplet.getAllObjectNames();
- var currentLang = globlod("currentLanguage")
+ var currentLang = RT_globlod("currentLanguage")
  if (!confirm("Extracting translation for <"+currentLang+">. All other data will be lost. Are you sure?" )) {
      return;
  }
@@ -375,7 +375,7 @@ function plantCurrentSeed() {
 	//( new window.DOMParser() ).parseFromString(allofitXML, "text/xml");
 	//allofit=JSON.parse(macros);
  var alltr = ggbApplet.getAllObjectNames();
-     var prefix=globlod("magic");
+     var prefix=RT_globlod("magic");
      var prefixlen=prefix.length;
      var obj;
      var objmatch;
@@ -411,11 +411,11 @@ ggbApplet.registerObjectClickListener(langbutton(currentLang), "button2handl");
 // Delete all elements for the current language
 //-----------------------------------------------------------------------
 function delCurrentLang() {
-	 if(globExists("LANGUAGES_{1}"))  {languages=globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
-	 if(globExists("LANGUAGES"))  {languages=globlod("LANGUAGES").replaceAll(" ","").split(',');}
+	 if(globExists("LANGUAGES_{1}"))  {languages=RT_globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
+	 if(globExists("LANGUAGES"))  {languages=RT_globlod("LANGUAGES").replaceAll(" ","").split(',');}
 	 var todelete=languages[0]
     var alltr = ggbApplet.getAllObjectNames();
-    var currentLang = globlod("currentLanguage");
+    var currentLang = RT_globlod("currentLanguage");
     if (currentLang===todelete) { alert("Cannot delete language in use ");return; }
     if (!confirm("Are you sure you want to delete support for language <" + todelete + ">")) {
         return;
@@ -459,12 +459,12 @@ function copyDetailedObject(objName, tostringName) {
 function renameCurrent(copy) {
 	// copy="copy" or "rename"
 	 //debugger;
-    var from=globlod("currentLanguage");
+    var from=RT_globlod("currentLanguage");
 	var languages;
-	 if(globExists("LANGUAGES_{1}"))  {languages=globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
-	 if(globExists("LANGUAGES"))  {languages=globlod("LANGUAGES").replaceAll(" ","").split(',');}
+	 if(globExists("LANGUAGES_{1}"))  {languages=RT_globlod("LANGUAGES_{1}").replaceAll(" ","").split(',');}
+	 if(globExists("LANGUAGES"))  {languages=RT_globlod("LANGUAGES").replaceAll(" ","").split(',');}
 	 var to=languages[0]
-     var prefix=globlod("magic");
+     var prefix=RT_globlod("magic");
     if (!confirm("Are you sure you want to "+copy+" language <" + from  + "> to <"+to+ ">")) {
         return;
     }

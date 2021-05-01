@@ -5,15 +5,16 @@
     <!--link rel="stylesheet" href="style.css"-->
 	<meta name=viewport content="width=device-width,initial-scale=1">  
 	<meta charset="utf-8"/>
-	<base href="./Geogebra/geogebra-math-apps-bundle-5-0-620-0/GeoGebra/" />
+	<!--  base href="./Geogebra/geogebra-math-apps-bundle-5-0-620-0/GeoGebra/" /-->
+	<base href="." />
   </head>
   <body>
-     <script src="./deployggb.js"></script>
+     <script src="./Geogebra/geogebra-math-apps-bundle-5-0-620-0/GeoGebra/deployggb.js"></script>
     <!-- page content -->
 	<div id="ggb-element"></div> 
 	<script>  
 			var ggbApp = new GGBApplet({"appName": "classic","useBrowserForJS": false,  "width": 1366,  "height": 768, //
-			"showToolBar": true, "showAlgebraInput": true, "showMenuBar": true, "borderColor": "#FF0000" }, true);
+			"showToolBar": true, "showAlgebraInput": true, "showMenuBar": true, "borderColor": "#FF0000", "filename":"translator.ggb" }, true);
     		window.addEventListener("load", function() { 
         	ggbApp.inject('ggb-element');
     });
