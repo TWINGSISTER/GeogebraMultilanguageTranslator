@@ -110,7 +110,7 @@ function divPlainText(id,t,fwd,html) {
 			  if (fwd)
 				return "<div id=\""+id+"\" data-title=\""+makeatextkey(t)+"\" class=\"noop\">"+makeatextdiv(t)+"</div>";
 				else {
-					debugger;
+					//debugger;
 					var oldDiv=html.getElementById(id);
 					var trans= makedivatext(oldDiv);
 					//var key =oldDiv.attributes["data-title"].nodeValue;
@@ -179,7 +179,7 @@ return text;
 }
 //-----------------------------------------------------------------------
 function makedivatext(div){
-	debugger;
+	//debugger;
 	// undo the above
 	// newDiv=html.getElementById(id);
 	//indiv=div.childNodes[0];
@@ -221,4 +221,7 @@ function makedivatext(div){
 	//text = div.innerHTML;
 	//text = text.replaceAll("<br>","\n"); // prev "\\\\n" prev /(\n)/gm
 	return dehtmlizeltgt(div.textContent);
+}
+function parseXML(xmlStr) {
+   return new window.DOMParser().parseFromString(xmlStr, "text/xml");
 }
