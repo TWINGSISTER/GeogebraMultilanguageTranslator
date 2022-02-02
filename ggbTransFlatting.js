@@ -89,6 +89,8 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 		var file=fileList[0];
 		var OtherFiles=fileList.slice(1);
 		var origlang=RT_lod("VARORIGLANGUAGE")
+		var doTrack=RT_lod("VARTRACK")
+		//var ctrlRandom=RT_lod("VARCTRLRANDOM")
 		ggbApplet.getBase64((oldscript)=>{
 			var globstatesave = packGlobs() ;
 			//ggbApplet.openFile(file.name);
@@ -98,25 +100,31 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 					//debugger;
 					flatten();
 					//debugger;
-					var wd=dumptrans(file.name.slice(0,-4),null); // .ggb off
-					// delete all globs, stay as close as possible to original document.
-					wipeGlobs();
-					// construction ready to be saved to file.name.slice(0,-4)+"-FL.ggb"
-					ggbApplet.getBase64((payload)=>
-			  			{saveGGB(file.name.slice(0,-4)+"-FL.ggb",payload,
-							()=>{
-			  					saveFileHtml(
-									file.name.slice(0,-4)+"-FL-"+origlang+".html",
-									[wd.documentElement.outerHTML],()=>{
-									ggbApplet.setBase64(oldscript,()=>{
-										unpackGlobs(globstatesave);flattenFile(OtherFiles);
+					//ggbApplet.getBase64((storeOrig)=>{
+			  			if(doTrack){addTrack();}
+						//ctrlRandomize(ctrlRandom,ggbtoprocess);//()=>
+						var wd=dumptrans(file.name.slice(0,-4),null); // .ggb off
+						// delete all globs, stay as close as possible to original document.
+						wipeGlobs();
+						// construction ready to be saved to file.name.slice(0,-4)+"-FL.ggb"
+						ggbApplet.getBase64((__payload)=>{
+						ggbApplet.getBase64((payload)=>
+			  				{saveGGB(file.name.slice(0,-4)+"-FL.ggb",payload,
+								()=>{
+			  						saveFileHtml(
+										file.name.slice(0,-4)+"-FL-"+origlang+".html",
+										[wd.documentElement.outerHTML],()=>{
+										ggbApplet.setBase64(oldscript,()=>{
+											unpackGlobs(globstatesave);flattenFile(OtherFiles);
+										});
 									});
 								});
+								// restore globals for further processing
 							});
-						// restore globals for further processing
+						});
 						});
 		// save to it
-				});
+					//});
 			});
 		});
 	}

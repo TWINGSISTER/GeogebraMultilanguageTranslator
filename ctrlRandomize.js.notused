@@ -1,0 +1,82 @@
+/**
+ * http://usejsdoc.org/
+ * @copyright TWINGSISTER 2021  (licensed under the Creative Commons Attribution-ShareAlike 3.0 Unported License.) 
+ * @author TWINGSISTER (twingsister@gmail.com) 
+ 
+ */
+//----------------------------------------------------------------------
+function randomsMap() {//cont) cont
+debugger;
+var retval=new Map();
+var all=parseXML(ggbApplet.getXML());
+var allJSON=ggbApplet.getFileJSON();
+var alltr = ggbApplet.getAllObjectNames();
+	for (objName of alltr) {
+		var objType = ggbApplet.getObjectType(objName) + "";
+		if (RT_isTranslation(objName)) { continue; } // leave aux objects
+		if (RT_isGlob(objName)) { continue; } // leave aux objects
+		ob=parseXML(ggbApplet.getXML(objName));
+		//ob.childNodes[0].childNodes
+		//children[0].childNodes[1].attributes[0].nodeValue
+		//children[0].childNodes[1].attributes[1].nodeValue
+		//children[0].childNodes[1]
+		
+		//ob.children[0].children[0].attributes["random"].value if true
+		//valore in ob.children[0].children[0].attributes["val"].nodeValue 
+		//retval.set(objName,Randomvalue)
+		switch (objType) {
+			case "text":
+  		}
+  	}
+}
+function randomsUnmap(map) {//cont) cont
+//if(map.has(key))(map.get(key))
+}
+//----------------------------------------------------------------------
+function ctrlRandomize(turns,cont) {//cont) {
+	//debugger;
+	turns=parseInt(turns);
+	if(turns==0){
+		ggbApplet.getBase64((payload)=>{cont(payload);});
+		return;
+	} else {	
+		ggbApplet.evalCommand("SetSeed(33)");
+		ggbApplet.getBase64((payload)=>{
+			//RT_globsto("TestInit",payload);
+			//var randomsMap =randomsMap();
+			RT_globsto("TestInit",randomsMap());
+			createButton(RT_langbutton("RST"),"RST");
+			ggbApplet.setVisible(RT_langbutton("RST"),true);
+			ggbApplet.getBase64((payload2)=>{ cont(payload2) });
+  		});
+	}
+	//var alltr = ggbApplet.getAllObjectNames();
+	//for (objName of alltr) {
+	//	var objType = ggbApplet.getObjectType(objName) + "";
+	//	if (RT_isTranslation(objName)) { continue; } // leave aux objects
+	//	if (RT_isGlob(objName)) { continue; } // leave aux objects
+	//	switch (objType) {
+	//		case "text":
+  	//	}
+  	////}
+  	//})
+}
+//----------------------------------------------------------------------
+function RT_initrst(){
+	//debugger;
+	if(RT_globExists("TestInit"))
+		ggbApplet.registerObjectClickListener(RT_langbutton("RST"),"RT_clickRst");
+}
+//----------------------------------------------------------------------
+
+function RT_clickRst(){
+	//debugger;
+	randomsUnmap(RT_globlod("TestInit"))
+	ggbApplet.evalCommand("SetSeed(33)");
+	//var ggbtoprocess=RT_globlod("TestInit");
+	//ggbApplet.setBase64(ggbtoprocess,()=>{
+	//	ggbApplet.evalCommand("SetSeed(33)");
+	RT_initmulti();
+	//});
+}
+//----------------------------------------------------------------------

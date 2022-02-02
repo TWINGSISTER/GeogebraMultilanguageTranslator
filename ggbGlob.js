@@ -19,7 +19,7 @@ function RT_hideObject(name) {
 	ggbApplet.setAuxiliary(name, true );
 }
 
-function base64EncodeUnicode(str) {
+function RT_base64EncodeUnicode(str) {
     // First we escape the string using encodeURIComponent to get the UTF-8 encoding of the characters, 
     // then we convert the percent encodings into raw bytes, and finally feed it to btoa() function.
     utf8Bytes = encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
@@ -37,14 +37,14 @@ function RT_base64DecodeUnicode(str) {
 return decodeURIComponent(percentEncodedStr);
 }
 
-function noCommandStringify(value) {
+function RT_noCommandStringify(value) {
 	if(value instanceof Set){
-			return  "ZZSET"+base64EncodeUnicode(JSON.stringify(Array.from(value.keys())));
+			return  "ZZSET"+RT_base64EncodeUnicode(JSON.stringify(Array.from(value.keys())));
 	}
 	if(value instanceof Map){
-			return  "ZZMAP"+base64EncodeUnicode(JSON.stringify(Array.from(value.entries())));
+			return  "ZZMAP"+RT_base64EncodeUnicode(JSON.stringify(Array.from(value.entries())));
 	}
-	return base64EncodeUnicode(JSON.stringify(value));
+	return RT_base64EncodeUnicode(JSON.stringify(value));
 }
 function RT_unCommandStringify(str) {
 	if(str.startsWith("ZZMAP")){
@@ -73,7 +73,7 @@ function RT_sto(name, value) {
 			// ggbApplet.evalCommand(name+"SJSON" + "=" + "\"" +setStringify(value) + "\"");
 		    //RT_hideObject(name+"SJSON");
 			//}else{
-			 ggbApplet.evalCommand(name+"JSON" + "=" + "\"" +noCommandStringify(value) + "\"");
+			 ggbApplet.evalCommand(name+"JSON" + "=" + "\"" +RT_noCommandStringify(value) + "\"");
 		    RT_hideObject(name+"JSON");
 			//}
 	}

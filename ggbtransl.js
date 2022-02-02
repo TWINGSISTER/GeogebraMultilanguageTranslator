@@ -353,7 +353,10 @@ function RT_simpleText(objName) {
 
 	
 //-----------------------------------------------------------------------
-function injectTranslationCode(){//(payload,cont)
+function injectNeededCode(handle,ggboninit,prefixPatterns){//(payload,cont)
+//handle could be "innerGgbOnInit()"
+//ggboninit could be "function ggbOnInit(){innerGgbOnInit();RT_initmulti();RT_initrst();}"
+// prefixPatterns could be ["RT_"]
 	//loadtostring([
 	//"./sset.js",
 	//"./Init.js",
@@ -372,7 +375,10 @@ function injectTranslationCode(){//(payload,cont)
 	//],
 	//(JScode)=>{
 	var funclist=Object.getOwnPropertyNames(window).filter(item =>
-	 (typeof window[item] === 'function' && item.startsWith("RT_")));
+	 (typeof window[item] === 'function' && 
+		prefixPatterns.some(pattern => item.startsWith(pattern))	
+	//item.startsWith(prefix)
+		));
 	var code = "";
 	for ( let i in funclist ) {
 		code=code+window[funclist[i]].toString();
@@ -385,9 +391,8 @@ function injectTranslationCode(){//(payload,cont)
 		{mount=j;break;}
 	}
 	var oldcode=JSONPayload.archive[mount].fileContent;
-	oldcode=oldcode.replace("ggbOnInit()","innerGgbOnInit()");
-	JSONPayload.archive[mount].fileContent=oldcode+code+
-	"function ggbOnInit(){innerGgbOnInit();RT_initmulti();}";
+	oldcode=oldcode.replace("ggbOnInit()", handle);
+	JSONPayload.archive[mount].fileContent=oldcode+code+ggboninit;
 	//debugger;
     //var ggbzip =getZippedBase64Sync(JSONPayload);
  	//var ggb64=JSON.parse(atob(payload));
@@ -432,15 +437,15 @@ function	translateAllGGB(globstatesave,GGbs,Html,cont){
 	};
 	var ggb=GGbs[0];
 	var OtherGGbs=GGbs.slice(1);
-	
+	var rnd = RT_lod("VARCTRLRANDOM")
 	var htmls=Html.filter(x => x.name.startsWith(ggb.name.slice(0,-4)));
 	var OtherHtmls=Html.filter(x => !(x.name.startsWith(ggb.name.slice(0,-4))));
 	var langs=htmls.map(v => v.name.slice(-7, -5)).join("-");//assume _EN.html
 	//unpackGlobs(globstatesave);
-	translateAGGB(globstatesave,ggb,htmls,langs,
+	translateAGGB(globstatesave,ggb,htmls,langs,rnd,
 		()=>translateAllGGB(globstatesave,OtherGGbs,OtherHtmls,cont));
 }
-function	translateAGGB(globstatesave,ggb,htmls,langs,cont){
+function	translateAGGB(globstatesave,ggb,htmls,langs,rnd,cont){
 readGGBBase64(ggb,(ggbtoprocess)=>{
 	//debugger;
 	ggbApplet.setBase64(ggbtoprocess,()=>{
@@ -453,14 +458,18 @@ readGGBBase64(ggb,(ggbtoprocess)=>{
 			//injectTranslationCode();
 			//injectTranslationCode(payload,(newpayload)=>{
 			//ggbApplet.getBase64((_payload)=>{
-				injectTranslationCode();//_payload,(dummypayload)=>{
+			injectNeededCode("innerGgbOnInit()",
+				"function ggbOnInit(){innerGgbOnInit();RT_initmulti();RT_initrst();}",
+				["RT_"]);//_payload,(dummypayload)=>{
+			// Went in the Moodle plugin ctrlRandomize(rnd,(___payload)=>{
 				ggbApplet.getBase64((__payload)=>{
 					ggbApplet.getBase64((payload)=>{
-				//debugger;
+				//debugger
+					//ctrlRandomize(rnd,payload);
 					saveGGB(ggb.name.slice(0,-4)+langs+".ggb",payload,cont);
 					});
 				});
-				//});
+			//});
 			//});
 		});
 	});

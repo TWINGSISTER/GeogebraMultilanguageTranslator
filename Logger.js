@@ -51,6 +51,6 @@ function endLogging(win) {
 
 function logmessage(message) {
 	var i=RT_globlod("loglineno");
-	RT_globsto("logline"+i.toString(),base64EncodeUnicode(message));
+	RT_globsto("logline"+i.toString(),RT_base64EncodeUnicode(message));
 	RT_globsto("loglineno",i+1);
 }

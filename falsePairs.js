@@ -10,7 +10,7 @@
 	
 
 	function updateFalsePair(LangTo,UpdTriples) {
-		debugger;
+		//debugger;
 		var globName = LangTo+"falsepair";
 		var addMap= new Map(UpdTriples);
 		var map  = new Map();
@@ -20,7 +20,7 @@
 		RT_globsto(globName,new Map([...map, ...addMap]) );
 	}
 	function filterdom(dom,LangTo){
-		debugger;
+		//debugger;
 		var globName = LangTo+"falsepair";
 		var map  = new Map();
 		if (RT_globExists(globName)) {
