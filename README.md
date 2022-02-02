@@ -1,8 +1,8 @@
 # Geogebra (GGB) Multi-language Translator
 THIS README IS OUTDATED AND DOCUMENTATION IS MISSING
 As for every one man project the code is running somehow you can
-[try original version here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-620.html).
-[try most recent version here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-620.html).
+[try original version here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-620.html) or 
+[try most recent version here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-686.html).
 A working release is planned for September 2021.
 Cheerio.
 
