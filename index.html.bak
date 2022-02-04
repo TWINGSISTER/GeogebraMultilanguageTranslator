@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Start Geogebra Translator</title>
+  </head>
+  <body>
+    <p>Click on one of these to start Geogebra Translator in Version 5.0</p>
+    <ul>
+      <li><a href="index-620.html">Build 620 GG original</a></li>
+      <li><a href="index-686.html">Build 686 GG original</a></li>
+      <li><a href="index-private-687.html">Build 687 generation by GitHub Action</a></li>
+    </ul>
+  </body>
+</html>
