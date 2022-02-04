@@ -2,8 +2,8 @@
 THIS README IS OUTDATED AND DOCUMENTATION IS MISSING
 As for every one man project the code is running somehow you can
 [try original version here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-620.html) or 
-[try most recent version here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-686.html).
-A working release is planned for September 2021.
+[try most recent version here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index.html).
+You can upgrade your installation to the last Geogebra 5.0 build that is found [here](https://download.geogebra.org/package/geogebra-math-apps-bundle). Download it and then unzip into the Geogebra folder so thet you have the file Geogebra\geogebra-math-apps-bundle-5-0-nnn-x\GeoGebra\deployggb.js. A working release is planned for September 2021.
 Cheerio.
 
 A Geogebra javascript package to create a multilanguage version of your ggb activities.
