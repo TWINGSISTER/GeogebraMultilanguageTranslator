@@ -1,18 +1,15 @@
 # Geogebra (GGB) Multi-language Translator
-THIS README IS OUTDATED AND DOCUMENTATION IS MISSING
-As for every one man project the code is running somehow you can
-[try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator).
+A Geogebra javascript package to create a multilanguage version of your ggb activities.
+[Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator).
+In the link you will find different demo systems based on different Geogebra 5.0 versions.
+You can set up your self hosted version of this Multi-language translator by copying the HTML in index-somestring.html in the root directory of this repo.
 You can upgrade your installation to the last Geogebra 5.0 build that is found [here](https://download.geogebra.org/package/geogebra-math-apps-bundle).
 I maintain a bundle [here](https://github.com/TWINGSISTER/Geogebra-Javascript-Bundle).
 Download it and then unzip into the Geogebra folder so that you have the file 
 Geogebra\geogebra-math-apps-bundle-5-0-nnn-x\GeoGebra\deployggb.js. 
-then point index.html in it.
-A working release is planned for September 2021.
-Cheerio.
-
-A Geogebra javascript package to create a multilanguage version of your ggb activities.
-## Intro
-In several repositories you can find a wealth of Geogebra activities. If they are served to students as they are, there could be the legitimate suspicion, the student will surely point out, that some lack in comprehension and poor student performance is due to the crystal clear fact that the activities are not in student's  native language.  The ongoing result is a painful worldwide effort to translate activities into several languages. 
+then point index.html to it. If you run into problems and you really need a personal copy of this fork this repo!
+THE REST OF THIS README IS OUTDATED
+The ongoing result is a painful worldwide effort to translate activities into several languages. 
 
 In some framework (e.g. Moodle question banks), turning on  automatic translation within your browser can do the trick and present acceptable translation of school activities. 
 
