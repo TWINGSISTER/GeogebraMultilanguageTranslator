@@ -1,8 +1,10 @@
 # Geogebra (GGB) Multi-language Translator
-A Geogebra javascript package to create a multilanguage version of your ggb activities.
-Here is a multilanguage version of a nice exercise form the wonderful collection 
-Matematiques at Valin.
-[Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator).
+This repo offers a couple of online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
+code to run these services.
+The main service provides a  Geogebra javascript package to create a multilanguage version of your ggb activities.
+[Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html).
+[Here is](https://twingsister.github.io/GeogebraMultilanguageTranslator/example.html). a multilanguage version of a nice exercise from. the wonderful collection 
+[Matematiques at Valin](http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html).
 
 In the link you will find different demo systems based on different Geogebra 5.0 versions.
 You can set up your self hosted version of this Multi-language translator by copying the HTML in index-somestring.html in the root directory of this repo.
