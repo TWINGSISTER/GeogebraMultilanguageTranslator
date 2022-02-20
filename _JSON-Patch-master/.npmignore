@@ -1,0 +1,38 @@
+Makefile
+doc/
+examples/
+test/
+.travis.yml
+!*.d.ts
+src/*
+tsconfig.json
+
+# Mac OS X
+.DS_Store
+
+# Node.js
+.npmignore
+node_modules/
+npm-debug.log
+CONTRIBUTING.md
+
+# Git
+.git*
+
+# bower
+bower.json
+
+# grunt
+gruntfile.js
+
+#vs-code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+

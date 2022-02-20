@@ -89,19 +89,19 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 		var file=fileList[0];
 		var OtherFiles=fileList.slice(1);
 		var origlang=RT_lod("VARORIGLANGUAGE")
-		var doTrack=RT_lod("VARTRACK")
+		//var doTrack=RT_lod("VARTRACK")
 		//var ctrlRandom=RT_lod("VARCTRLRANDOM")
 		ggbApplet.getBase64((oldscript)=>{
-			var globstatesave = packGlobs() ;
+			var globstatesave = RT_packGlobs() ;
 			//ggbApplet.openFile(file.name);
 			readGGBBase64(file,(ggbtoprocess)=>{
 				ggbApplet.setBase64(ggbtoprocess,()=>{
-					unpackGlobs(globstatesave);
+					RT_unpackGlobs(globstatesave);
 					//debugger;
 					flatten();
 					//debugger;
 					//ggbApplet.getBase64((storeOrig)=>{
-			  			if(doTrack){addTrack();}
+			  			//if(doTrack){addTrack();}
 						//ctrlRandomize(ctrlRandom,ggbtoprocess);//()=>
 						var wd=dumptrans(file.name.slice(0,-4),null); // .ggb off
 						// delete all globs, stay as close as possible to original document.
@@ -115,7 +115,7 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 										file.name.slice(0,-4)+"-FL-"+origlang+".html",
 										[wd.documentElement.outerHTML],()=>{
 										ggbApplet.setBase64(oldscript,()=>{
-											unpackGlobs(globstatesave);flattenFile(OtherFiles);
+											RT_unpackGlobs(globstatesave);flattenFile(OtherFiles);
 										});
 									});
 								});

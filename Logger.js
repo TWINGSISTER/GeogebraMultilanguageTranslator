@@ -39,10 +39,10 @@ function endLogging(win) {
 			var message=RT_base64DecodeUnicode(RT_globlod(linetext))
 			theDiv.appendChild(doc.createTextNode(message));
 			theDiv.appendChild(doc.createElement('BR'));
-			globdel(linetext);
+			RT_globdel(linetext);
 		}
 	}
-	globdel("loglineno");
+	RT_globdel("loglineno");
 	var toblob=doc.getElementsByTagName('html')[0].innerHTML;
 	debugger;
 	//wholefile=ggbApplet.getFileJSON()

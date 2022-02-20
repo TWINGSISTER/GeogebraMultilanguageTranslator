@@ -408,14 +408,14 @@ function injectNeededCode(handle,ggboninit,prefixPatterns){//(payload,cont)
 }
 //-----------------------------------------------------------------------
 function	secureSection(action){
-	var globstatesave = packGlobs();
+	var globstatesave = RT_packGlobs();
 	ggbApplet.getBase64((oldscript)=>{
 	//debugger;
 		action(globstatesave,()=>{
 			//debugger;
 			wipeGlobs();
 			ggbApplet.setBase64(oldscript,
-				()=>{unpackGlobs(globstatesave);});
+				()=>{RT_unpackGlobs(globstatesave);});
 		});
 	});
 }
@@ -449,7 +449,7 @@ function	translateAGGB(globstatesave,ggb,htmls,langs,rnd,cont){
 readGGBBase64(ggb,(ggbtoprocess)=>{
 	//debugger;
 	ggbApplet.setBase64(ggbtoprocess,()=>{
-		unpackGlobs(globstatesave);
+		RT_unpackGlobs(globstatesave);
 		RT_globsto("freeview",freeView());
 		multiLanguageButton();
 		applyTransl(htmls, ()=>{

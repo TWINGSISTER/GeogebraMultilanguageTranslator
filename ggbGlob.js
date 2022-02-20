@@ -14,7 +14,10 @@
 //  i.e. do not have the ZZVAR prefix use the functions lod and sto. 
 // Thes two will introduce the "JSON" suffix for JSONed values.  
 //-----------------------------------------------------------------------
+var RT_incore=false; // if true we are using JS global variables.
+var RT_incoreMap;//=new Map(); // incore storage
 function RT_hideObject(name) {
+	if(RT_incore) return;
 	ggbApplet.setVisible(name, false);
 	ggbApplet.setAuxiliary(name, true );
 }
@@ -57,6 +60,7 @@ function RT_unCommandStringify(str) {
 }
 //// sto("a","xxx") create a Geogebra hidden object "a" and store "xxx" 
 function RT_sto(name, value) {
+	if(RT_incore) {RT_incoreMap.set(name,value); return;}
 	switch (typeof value) {
 		case 'string':
 			ggbApplet.evalCommand(name + "=" + "\"" + value + "\"");
@@ -81,6 +85,7 @@ function RT_sto(name, value) {
 // returns the GeoGebra value string that must be translated in object name, 
 // or a scalar value if any
 function RT_lod(name) {
+	if(RT_incore) { return RT_incoreMap.get(name);}
 	//if (ggbApplet.exists(name+"SJSON"))
 	//  {var ret=ggbApplet.getValueString(name+"JSON" , false) + "";
 	//	return RT_unCommandStringify(ret) ;}
@@ -109,11 +114,12 @@ function RT_lod(name) {
 }
 
 function loddel(name) {
+	if(RT_incore) { RT_incoreMap.delete(name);return;}
 	if (ggbApplet.exists(name+"JSON")) {ggbApplet.deleteObject(name+"JSON");return }
 	if (ggbApplet.exists(name)) {ggbApplet.deleteObject(name);return }
 }
 // Global variables
-function globdel(name) {
+function RT_globdel(name) {
 	loddel("ZZVAR" + name);
 }
 
@@ -126,6 +132,7 @@ function RT_globsto(name, value) {
 }
 
 function RT_globExists(objName) {
+	if(RT_incore) { return RT_incoreMap.has(objName);}
 	return ggbApplet.exists("ZZVAR" + objName)||ggbApplet.exists("ZZVAR" + objName + "JSON");
 }
 
@@ -139,22 +146,38 @@ function wipeGlobs() {
 	var all = ggbApplet.getAllObjectNames();
 	for (zzvarname of all) { if (RT_isGlob(zzvarname)) {loddel(zzvarname);} }
 }
-function packGlobs() {
+function RT_packGlobs() {
 //-----------------------------------------------------------------------
 // returns a map with all global variables. 
 //-----------------------------------------------------------------------
 	var all = ggbApplet.getAllObjectNames();
 	var pack = new Map();
-	for (zzvarname of all) { if (RT_isGlob(zzvarname)) {pack.set(zzvarname,RT_lod(zzvarname));} }
+	for (zzvarname of all) {
+		 if (RT_isGlob(zzvarname)) {
+			if(zzvarname.endsWith("JSON")) zzvarname=zzvarname.slice(0,-4);
+			pack.set(zzvarname,RT_lod(zzvarname)); 
+		}
+	}
 	return pack;
 }
-function unpackGlobs(pack) {
+function RT_unpackGlobs(pack) {
 //-----------------------------------------------------------------------
 // add all the TEXT objects for the map in pack
 //-----------------------------------------------------------------------
 	for (const [zzvarname, value] of pack.entries()) {
 		RT_sto(zzvarname, value) ;
 	}
+}
+//-----------------------------------------------------------------------
+// Shifting glob out of GGB ojects
+//-----------------------------------------------------------------------
+
+function RT_incoreGlob() {
+	if(!RT_incore){RT_incoreMap=RT_packGlobs();wipeGlobs() ;RT_incore=true;}
+}
+
+function RT_outcoreGlob() {
+	if(RT_incore){RT_incore=false;RT_unpackGlobs(RT_incoreMap);RT_incoreMap=null;}
 }
 //-----------------------------------------------------------------------
 // END of a layer for global persistent  variables in a ggb document
