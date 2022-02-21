@@ -5,6 +5,7 @@
  */
 function RT_initmulti(){
 	//debugger;
+	RT_incore=false;
 	ggbApplet.registerObjectClickListener(RT_langbutton("XX"), "RT_clicklang");
 }
 function multiLanguageButton(){

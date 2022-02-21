@@ -374,12 +374,22 @@ function injectNeededCode(handle,ggboninit,prefixPatterns){//(payload,cont)
 	//"./RT.js"
 	//],
 	//(JScode)=>{
+		debugger;
+	var varlist=Object.getOwnPropertyNames(window).filter(item =>
+	 (typeof window[item] != 'function' && 
+		prefixPatterns.some(pattern => item.startsWith(pattern))	
+	//item.startsWith(prefix)
+		));
+	var code = "";
+	for ( let i in varlist ) {
+		code=code+"var "+varlist[i]+";"; //NO INIZIALIZATION IS POSSIBLE
+	}
 	var funclist=Object.getOwnPropertyNames(window).filter(item =>
 	 (typeof window[item] === 'function' && 
 		prefixPatterns.some(pattern => item.startsWith(pattern))	
 	//item.startsWith(prefix)
 		));
-	var code = "";
+
 	for ( let i in funclist ) {
 		code=code+window[funclist[i]].toString();
 	}
@@ -459,7 +469,7 @@ readGGBBase64(ggb,(ggbtoprocess)=>{
 			//injectTranslationCode(payload,(newpayload)=>{
 			//ggbApplet.getBase64((_payload)=>{
 			injectNeededCode("innerGgbOnInit()",
-				"function ggbOnInit(){innerGgbOnInit();RT_initmulti();RT_initrst();}",
+				"function ggbOnInit(){innerGgbOnInit();RT_initmulti();RT_incore=false;}",//RT_initrst(); lost
 				["RT_"]);//_payload,(dummypayload)=>{
 			// Went in the Moodle plugin ctrlRandomize(rnd,(___payload)=>{
 				ggbApplet.getBase64((__payload)=>{
