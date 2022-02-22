@@ -374,7 +374,7 @@ function injectNeededCode(handle,ggboninit,prefixPatterns){//(payload,cont)
 	//"./RT.js"
 	//],
 	//(JScode)=>{
-		debugger;
+		//debugger;
 	var varlist=Object.getOwnPropertyNames(window).filter(item =>
 	 (typeof window[item] != 'function' && 
 		prefixPatterns.some(pattern => item.startsWith(pattern))	

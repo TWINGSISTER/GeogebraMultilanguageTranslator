@@ -33,6 +33,8 @@
 		}
 		return dom;
 	}
+	/*
+	// filterdom do the thing before applying the translation
 	function filterFalsePair(key,returnString){
 		debugger;
 		var tl=RT_glolod("filterlang")
@@ -41,4 +43,5 @@
 		var map=RT_globlod(globName);
 		return (map.has(key)?map.get(key):returnString);
 	}
+	*/
 

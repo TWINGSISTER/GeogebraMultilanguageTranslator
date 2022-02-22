@@ -318,3 +318,16 @@ function dumpLatexTranslate(wd,id,origText,dry,html) {
 				var translated =dumpstrTrans(wd,id,translin,html);
 				if (html==null) { return ""; } else  { return deLatex(objName,origText,translated,false,html);}
 }
+//-----------------------------------------------------------------------
+//  find if the Object uses the latex formula setting 
+//-----------------------------------------------------------------------
+function isLatexOn(Object)  {
+	//debugger;
+	XMLObj=ggbApplet.getXML(Object);
+	// lines here went into a parser error
+	//parser = new DOMParser();
+	//obj = parser.parseFromString('<?xml version="1.0" ?>'+XMLObj,"application/xml") // was text/xml;
+	// hunting <isLaTeX val="true"/>
+	const regex = new RegExp('<isLaTeX *val *= *"true" *\/>');
+	return regex.test(XMLObj);
+	}

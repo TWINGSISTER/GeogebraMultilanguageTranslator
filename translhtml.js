@@ -11,7 +11,9 @@
 //-----------------------------------------------------------------------
 function htmlizeltgt(origText) {
 	if(origText.match(/<br|<div/g))
-		{console.log("cannot fix < or > in "+origText);return origText;}
+		{
+		//console.log("cannot fix < or > in "+origText);
+		return origText;}
 	origText = origText.replaceAll("<","&lt;");
 	origText = origText.replaceAll(">","&gt;");
 	return origText;
@@ -113,9 +115,12 @@ function divPlainText(id,t,fwd,html) {
 					//debugger;
 					var oldDiv=html.getElementById(id);
 					var trans= makedivatext(oldDiv);
-					//var key =oldDiv.attributes["data-title"].nodeValue;
-					//trans= filterFalsePair(key,trans);
+					//commented out on feb 2022 filterdom do the job before fetching the translation
+					// var key =oldDiv.attributes["data-title"].nodeValue;
+					// trans= filterFalsePair(key,trans);// we knew that trans is sometimes wrong
+					// end of what was commented out
 					return trans;
+
 				}
 		}
 }

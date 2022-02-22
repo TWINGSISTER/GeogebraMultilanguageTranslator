@@ -15,7 +15,7 @@ function init() {
 		"\\times","\\times ","A","}=\\frac{","+","-","=","/","\\",
 		"\\left(","\\right)","\\left","\\right","=\\frac{" ]);
 	var dict = new Map( [
-	// this dictionary can contain as keys the Latex commands with the number of parametenumber of parameters 
+	// this dictionary can contain as keys the Latex commands with the number of parameters 
   	["text",1],
   	["bar",1],
 	["frac",2],
@@ -53,7 +53,7 @@ function init() {
 	[",",0]
 			]);
 	LatexHandle(dict);
-	// patterns to recognize Latex commands. You must enter the args above
+	// regexp patterns to recognize Latex commands. You must enter the args above
 	updateLatexPatterns([
 	'\\\\cr','\\\\\\\\',
 	'\\\\;','\\\\,',
@@ -70,8 +70,8 @@ function init() {
 	//]);
 	// if one of  these command is detected  in a string a surrounding  \texts is  not placed 
 	// to protect spaces within
-	RT_globsto("latexcmds","frac|dfrac|phantom|ovalbox");
-	RT_globsto("simplelatexcmds","br|cr|times|right|left");// they do not need curly
+	RT_globsto("latexcmds","frac|dfrac|phantom|ovalbox");// "latexcmds" not used elsewhere probably this line can be deleted
+	RT_globsto("simplelatexcmds","br|cr|times|right|left");// they do not need curly// "simplelatexcmds" not used elsewhere probably this line can be deleted
 	RT_inittrans();
 	}
 function initFalsePair() {

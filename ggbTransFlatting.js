@@ -15,7 +15,13 @@
 function breakifyoucan(objName) {
 	// break and take care of newline hardwired chars
 	var tobreak= RT_lodtrans(objName);
-	var tobreaknonl = tobreak.replace(/(\n)/gm, "\\\\n");
+	var tobreaknonl;
+	if(isLatexOn(objName)){ // the string is a Latex string
+	 tobreaknonl = tobreak.replace(/(\n)/gm, "");
+		} else {
+	 tobreaknonl = tobreak.replace(/(\n)/gm, "\\\\n");
+	}
+	//var tobreaknonl = tobreak.replace(/(\n)/gm, "\\\\n");
 	//tobreaknonl=escapeUnicodes(tobreaknonl,[60,62])
 	//var tobreaknonl = tobreak.replace(/</gm, " UnicodeToLetter(60)");
 	//var tobreaknonl = tobreak.replace(/>/gm, " UnicodeToLetter(62)");
@@ -48,7 +54,7 @@ function flatten() {
 	if (RT_isTranslation(objName)) { continue; } // leave aux objects
 	if (RT_isGlob(objName)) { continue; } // leave aux objects
 	switch (objType) {
-		case "text":
+		case "text" :
 			//breakifyoucan(objName);
 			{
 				if (!RT_simpleText(objName))   {

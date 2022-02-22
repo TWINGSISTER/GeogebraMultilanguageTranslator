@@ -51,7 +51,7 @@ function RT_hideLanguageButtons(){
 }
 //----------------------------------------------------------------------
 function RT_clicklang(){
-	debugger;
+	//debugger;
     if (!RT_globExists("magic"))RT_inittrans();
     if (!RT_globExists("displayLang"))RT_globsto("displayLang",false);
 	var displayLang=!RT_globlod("displayLang");
@@ -84,7 +84,7 @@ function RT_RegButtonHandl(lang) {
 	ggbApplet.registerObjectClickListener(RT_langbutton(lang), "RT_button2handl");
 }
 function RT_button2handl(newlangbutton) {
-    debugger;
+    //debugger;
     var l = RT_buttonToLang(newlangbutton)
     RT_loadtrans(l);
     // this is the language in use
