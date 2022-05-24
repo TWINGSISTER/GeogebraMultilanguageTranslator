@@ -4,7 +4,7 @@ a Translator to build a multilingial version of an existing GGB activita' and a 
 # Geogebra (GGB) Report Support
 This first package in this repo offers an online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
-files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome..
+files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
 The main service provides a  Geogebra javascript package to create a multilanguage version of your ggb activities.
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-687-wreporter.html).
 You can find an example of the resulting GGB activity [here](example.html) 
@@ -14,7 +14,7 @@ A proof of concept video is [here](https://www.youtube.com/watch?v=A8KA8vFJ0YQ)
 # Geogebra (GGB) Multi-language Translator
 This second package in this repo offers a second online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
-files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome..
+files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
 The main service provides a  Geogebra javascript package to create a multilanguage version of your ggb activities.
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html).
 You can find an example of the resulting GGB activity [here](example.html) 
