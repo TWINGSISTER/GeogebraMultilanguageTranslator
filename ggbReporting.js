@@ -5,7 +5,8 @@
  */
 //-----------------------------------------------------------------------
 //-----------------------------------------------------------------------
-
+// write an initailization code for a list of object in the applet non existing 
+// objects are ignored.
 	function init_report_code(Conds,fun){
 		var cmd="";
 		//debugger;
