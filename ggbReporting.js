@@ -58,7 +58,7 @@
 						var rootfname=file.name.slice(0,-4);
 						var fname=rootfname+"-RP.ggb";
 						var handle="innerGgbOnInit";
-						alert("writing");debugger;
+						//alert("writing");debugger;
 						var i=0;
 						while(eval("typeof " + handle+i.toString())=== 'function')i++;
 						var ggbiniton=

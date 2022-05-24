@@ -5,12 +5,15 @@ a Translator to build a multilingial version of an existing GGB activita' and a 
 This first package in this repo offers an online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
 files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
-The main service provides a  Geogebra javascript package to create a multilanguage version of your ggb activities.
+The main service provides a  Geogebra javascript package to create a report aware  version of your ggb activities.
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-687-wreporter.html).
-You can find an example of the resulting GGB activity [here](example.html) 
+You can find an example of the resulting GGB activity [here](examplereport.html) 
 that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html).
+In this exercise you can do something press the button SNAP to snapshot what is on the screen. 
+Before closing you press SAVE to compact these snapshots "within" the .ggb file. 
+You can save the .ggb  reload it and the snapshots will still be there and you can add more. 
+You can obtain a printout of the snapshots as an HTML file containing one PDF for each snapshot at anytime by pressing REPORT.  
 A proof of concept video is [here](https://www.youtube.com/watch?v=A8KA8vFJ0YQ)
-
 # Geogebra (GGB) Multi-language Translator
 This second package in this repo offers a second online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
