@@ -13,7 +13,7 @@ In this exercise you can do something press the button SNAP to snapshot what is 
 Before closing you press SAVE to compact these snapshots "within" the .ggb file. 
 You can save the .ggb  reload it and the snapshots will still be there and you can add more. 
 You can download a printout of the snapshots anytime as an HTML file containing one PDF for each snapshot  by pressing REPORT.  
-A proof of concept video is [here](https://www.youtube.com/watch?v=A8KA8vFJ0YQ).
+A proof of concept video is [here](https://youtu.be/75jz8ql19-U).
 The GGB activities packaged with this service try their best to snapshot heuristically and automatically. This will be effective if user provides some hints about the names of the variables used in the GGB script for this activity. 
 [Docs on heuristics here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexheurdocreport.html).
 You can find an example of the resulting GGB activity [here]
