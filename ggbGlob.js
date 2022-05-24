@@ -25,7 +25,7 @@ function RT_hideObject(name) {
 function RT_base64EncodeUnicode(str) {
     // First we escape the string using encodeURIComponent to get the UTF-8 encoding of the characters, 
     // then we convert the percent encodings into raw bytes, and finally feed it to btoa() function.
-    utf8Bytes = encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+    var utf8Bytes = encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
             return String.fromCharCode('0x' + p1);
     });
 
@@ -34,7 +34,7 @@ function RT_base64EncodeUnicode(str) {
 
 function RT_base64DecodeUnicode(str) {
     // Convert Base64 encoded bytes to percent-encoding, and then get the original string.
-    percentEncodedStr = atob(str).split('').map(function(c) {
+    var percentEncodedStr = atob(str).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join('');
 return decodeURIComponent(percentEncodedStr);
@@ -60,7 +60,20 @@ function RT_unCommandStringify(str) {
 }
 //// sto("a","xxx") create a Geogebra hidden object "a" and store "xxx" 
 function RT_sto(name, value) {
-	if(RT_incore) {RT_incoreMap.set(name,value); return;}
+	if(RT_incore) {
+		switch (typeof value) {
+			case 'string':
+			case 'boolean':
+			case 'number':
+				RT_incoreMap.set(name,value); 
+				break;
+			case 'undefined':
+			default:
+				RT_incoreMap.set(name,value);//+"JSON",value); 
+		}
+		return;
+	}
+		
 	switch (typeof value) {
 		case 'string':
 			ggbApplet.evalCommand(name + "=" + "\"" + value + "\"");
@@ -113,14 +126,14 @@ function RT_lod(name) {
 	}
 }
 
-function loddel(name) {
+function RT_loddel(name) {
 	if(RT_incore) { RT_incoreMap.delete(name);return;}
 	if (ggbApplet.exists(name+"JSON")) {ggbApplet.deleteObject(name+"JSON");return }
 	if (ggbApplet.exists(name)) {ggbApplet.deleteObject(name);return }
 }
 // Global variables
 function RT_globdel(name) {
-	loddel("ZZVAR" + name);
+	RT_loddel("ZZVAR" + name);
 }
 
 function RT_globlod(name) {
@@ -132,24 +145,27 @@ function RT_globsto(name, value) {
 }
 
 function RT_globExists(objName) {
-	if(RT_incore) { return RT_incoreMap.has(objName);}
+	if(RT_incore) { return RT_incoreMap.has("ZZVAR" + objName);}
 	return ggbApplet.exists("ZZVAR" + objName)||ggbApplet.exists("ZZVAR" + objName + "JSON");
 }
 
 function RT_isGlob(objName) {
 	return objName.startsWith("ZZVAR");
 }
-function wipeGlobs() {
+function RT_wipeGlobs() {
+	if(RT_incore) { RT_incoreMap=new Map();return;}
+
 //-----------------------------------------------------------------------
 // delete all text objects for global variables
 //-----------------------------------------------------------------------
 	var all = ggbApplet.getAllObjectNames();
-	for (zzvarname of all) { if (RT_isGlob(zzvarname)) {loddel(zzvarname);} }
+	for (zzvarname of all) { if (RT_isGlob(zzvarname)) {RT_loddel(zzvarname);} }
 }
 function RT_packGlobs() {
 //-----------------------------------------------------------------------
 // returns a map with all global variables. 
 //-----------------------------------------------------------------------
+	if(RT_incore) { return structuredClone(RT_incoreMap);};
 	var all = ggbApplet.getAllObjectNames();
 	var pack = new Map();
 	for (zzvarname of all) {
@@ -161,6 +177,7 @@ function RT_packGlobs() {
 	return pack;
 }
 function RT_unpackGlobs(pack) {
+	if(RT_incore) { RT_incoreMap=pack;return};
 //-----------------------------------------------------------------------
 // add all the TEXT objects for the map in pack
 //-----------------------------------------------------------------------
@@ -172,8 +189,11 @@ function RT_unpackGlobs(pack) {
 // Shifting glob out of GGB ojects
 //-----------------------------------------------------------------------
 
+function RT_initIncoreOff() {
+	RT_incore=false;
+}
 function RT_incoreGlob() {
-	if(!RT_incore){RT_incoreMap=RT_packGlobs();wipeGlobs() ;RT_incore=true;}
+	if(!RT_incore){RT_incoreMap=RT_packGlobs();RT_wipeGlobs() ;RT_incore=true;}
 }
 
 function RT_outcoreGlob() {

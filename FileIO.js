@@ -4,7 +4,7 @@
  * @author TWINGSISTER (twingsister@gmail.com) 
  */
 //export
-function saveFileHtml(fname,htmlContent,...args) {
+function RT_saveFileHtml(fname,htmlContent,...args) {
 	// htmlContent must be an array of strings, each representing the portion of an HTML document
   //var htmlContent = [ "<head><meta charset='utf-8'><title>Test</title></head>", "<style>.container{max-width: 940px;margin: 0 auto;}</style>", "<body><div class=\"container\">'Content Here'</div></body>" ];
   //var htmlContent = ["your-content-here"];
@@ -15,13 +15,20 @@ function saveFileHtml(fname,htmlContent,...args) {
   a.hidden = true;
   document.body.appendChild(a);
   a.innerHTML = "Save file hidden by CSS";
+  //a.click() // added;
   if(args.length>0){a.addEventListener('click',args[0], {once : true});}
   a.click();
 }
 function readFileHtml(file,charencoding,callback) {
   var reader = new FileReader();
+  //function hndl(){
+	// reader.removeEventListener("load",hndl)
+	// callback(reader.result);}
+  //reader.addEventListener("load", hndl ,
   reader.addEventListener("load", function () {
-    callback(reader.result);}, false, {once : true});
+    callback(reader.result);},  
+    {once : true});
+   // callback(reader.result);}, false, {once : true});
 //debugger;
     //reader.readAsDataURL(file);
     reader.readAsText(file,charencoding);
@@ -36,12 +43,20 @@ function readGGBBase64(file,callback) {
 //debugger;
 
   var reader = new FileReader();
-  reader.addEventListener("load", function () {
+  function hndl(){
+	var result=reader.result.replace("data:application/vnd.geogebra.file;base64,","");
+	result=result.replace("data:application/octet-stream;base64,","")
+	reader.removeEventListener("load",hndl);
+    callback(result);};
+  reader.addEventListener("load", hndl,
+  //reader.addEventListener("load", function () {
     // convert file to base64 string using reader.result
-	var result=reader.result.replace("data:application/vnd.geogebra.file;base64,","")
+	//var result=reader.result.replace("data:application/vnd.geogebra.file;base64,","")
 	// no replace before...
 	//debugger;
-    callback(result);}, false, {once : true});
+    //callback(result);},
+      {once : true});
+    // ex callback(result);}, false, {once : true});
     reader.readAsDataURL(file);
 }
 

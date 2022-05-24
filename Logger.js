@@ -27,6 +27,12 @@ function startLogging() {
 	RT_globsto("loglineno",1)
 	return testo;
 }
+function freeLogging(win,message) {
+	var doc = win.document;
+	var theDiv = doc.getElementById("myLog")
+	theDiv.appendChild(doc.createTextNode(message));
+	theDiv.appendChild(doc.createElement('BR'));
+}
 
 function endLogging(win) {
 	//debugger;
@@ -46,7 +52,7 @@ function endLogging(win) {
 	var toblob=doc.getElementsByTagName('html')[0].innerHTML;
 	debugger;
 	//wholefile=ggbApplet.getFileJSON()
-	saveFileHtml(RT_globlod("logname")+(new Date().toISOString())+".html",[toblob]); 
+	RT_saveFileHtml(RT_globlod("logname")+(new Date().toISOString())+".html",[toblob]); 
 }
 
 function logmessage(message) {

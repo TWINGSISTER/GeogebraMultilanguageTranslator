@@ -10,12 +10,12 @@ function RT_initmulti(){
 }
 function multiLanguageButton(){
 	var name=RT_langbutton("XX");
-	createButton(name,"LNG");
+	RT_createButton(name,"LNG");
 	ggbApplet.setVisible(name, true);
 }
 function addLanguageButton(l){
 	var name=RT_langbutton(l);
-	createButton(name,">"+l);
+	RT_createButton(name,">"+l);
 	ggbApplet.setVisible(name, false);
 	ggbApplet.setLayer(name,9);
 	ggbApplet.setVisible(name, false);

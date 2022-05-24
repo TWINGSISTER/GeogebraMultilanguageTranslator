@@ -102,6 +102,7 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 			//ggbApplet.openFile(file.name);
 			readGGBBase64(file,(ggbtoprocess)=>{
 				ggbApplet.setBase64(ggbtoprocess,()=>{
+				 	innerglobstatesave = RT_packGlobs() ;//untested
 					RT_unpackGlobs(globstatesave);
 					//debugger;
 					flatten();
@@ -111,13 +112,14 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 						//ctrlRandomize(ctrlRandom,ggbtoprocess);//()=>
 						var wd=dumptrans(file.name.slice(0,-4),null); // .ggb off
 						// delete all globs, stay as close as possible to original document.
-						wipeGlobs();
+						RT_wipeGlobs();
+						RT_unpackGlobs(innerglobstatesave);// untested
 						// construction ready to be saved to file.name.slice(0,-4)+"-FL.ggb"
 						ggbApplet.getBase64((__payload)=>{
 						ggbApplet.getBase64((payload)=>
 			  				{saveGGB(file.name.slice(0,-4)+"-FL.ggb",payload,
 								()=>{
-			  						saveFileHtml(
+			  						RT_saveFileHtml(
 										file.name.slice(0,-4)+"-FL-"+origlang+".html",
 										[wd.documentElement.outerHTML],()=>{
 										ggbApplet.setBase64(oldscript,()=>{

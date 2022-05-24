@@ -7,6 +7,7 @@
 // initialization with configuration
 //-----------------------------------------------------------------------
 function init() {
+	RT_initIncoreOff();
 	//list here strings that need no translation
 	//They will remain as they are if they are EXACTLY occurring as strings
 	//if you put "XYZ" here also \text{XYZ} ""XYZ", "  XYZ  " will pass untranslated.

@@ -36,8 +36,9 @@ function loadall(scripts,doc,head,ref,cont){
 	}
 }*/
 //function loader(scripts,modules,entry){ 
-function loader(scripts,entry){ 
-    // debugger;
+function loader(scripts,entry){RT_loader(scripts,entry);}
+function RT_loader(scripts,entry){  
+    debugger;
     if(scripts.length>0){
     	var script = document.createElement('script');
     	script.src = scripts[0];
@@ -46,7 +47,10 @@ function loader(scripts,entry){
     	script.async = false;
 	   //	if(scripts.length==1&& modules.length==0){ script.onload = new Function(entry); } else{script.onload = loader(scripts.slice(1),modules,entry);  }
 	   	if(scripts.length==1){
-		script.onload = new Function(entry);
+		if (typeof entry === 'string' || entry instanceof String)
+			script.onload = new Function(entry);
+		else
+			script.onload = entry;
     	//var endScript = document.createElement('script');
 		//script.textContent=entry;
 		//endScript.onload=new Function(entry);
@@ -58,10 +62,10 @@ function loader(scripts,entry){
 	  } else
 		{
     		document.getElementsByTagName('head').item(0).appendChild(script);
-			loader(scripts.slice(1),entry);
+			RT_loader(scripts.slice(1),entry);
 		 }
 		//{script.onload = loader(scripts.slice(1),entry);  }
-	}
+	}else{entry();}
     /*else{
     if(modules.length>0){
     	var script = document.createElement('script');

@@ -352,83 +352,6 @@ function RT_simpleText(objName) {
 }
 
 	
-//-----------------------------------------------------------------------
-function injectNeededCode(handle,ggboninit,prefixPatterns){//(payload,cont)
-//handle could be "innerGgbOnInit()"
-//ggboninit could be "function ggbOnInit(){innerGgbOnInit();RT_initmulti();RT_initrst();}"
-// prefixPatterns could be ["RT_"]
-	//loadtostring([
-	//"./sset.js",
-	//"./Init.js",
-	//"./dictionaryKnownTrans.js",
-	//"./ggbTransFlatting.js",
-	//"./ggbGlob.js",
-	//"./ggbtransl.js",
-	//"./FileIO.js",
-	////"./Logger.js",
-	//"./ggbLatex.js",
-	//"./translhtml.js",
-	//"./ggbtransl.js",
-	//"./LanguageDisplay.js",
-	//"./ggbUtils.js",
-	//"./RT.js"
-	//],
-	//(JScode)=>{
-		//debugger;
-	var varlist=Object.getOwnPropertyNames(window).filter(item =>
-	 (typeof window[item] != 'function' && 
-		prefixPatterns.some(pattern => item.startsWith(pattern))	
-	//item.startsWith(prefix)
-		));
-	var code = "";
-	for ( let i in varlist ) {
-		code=code+"var "+varlist[i]+";"; //NO INIZIALIZATION IS POSSIBLE
-	}
-	var funclist=Object.getOwnPropertyNames(window).filter(item =>
-	 (typeof window[item] === 'function' && 
-		prefixPatterns.some(pattern => item.startsWith(pattern))	
-	//item.startsWith(prefix)
-		));
-
-	for ( let i in funclist ) {
-		code=code+window[funclist[i]].toString();
-	}
-	//var XMLPayload = ggbApplet.getXML();
-	var JSONPayload = ggbApplet.getFileJSON();
-	var mount;
-	for ( let j in JSONPayload.archive ) {
-		if(JSONPayload.archive[j].fileName==="geogebra_javascript.js")
-		{mount=j;break;}
-	}
-	var oldcode=JSONPayload.archive[mount].fileContent;
-	oldcode=oldcode.replace("ggbOnInit()", handle);
-	JSONPayload.archive[mount].fileContent=oldcode+code+ggboninit;
-	//debugger;
-    //var ggbzip =getZippedBase64Sync(JSONPayload);
- 	//var ggb64=JSON.parse(atob(payload));
-	//var j1=JSON.parse(pako.inflate(payload, { to: 'string' }))
-	//var j2=JSON.parse(pako.inflate(atob(payload), { to: 'string' }))
-	//var j3=JSON.parse(pako.inflate(payload, { to: 'string' }))
-	//var j4 =pako.deflate(JSON.stringify(JSONPayload));
-	var foo = ggbApplet.setFileJSON(JSONPayload);
-	//cont(payload);
-	//var newpayload=payload;
-	//cont(newpayload);
-	//};
-}
-//-----------------------------------------------------------------------
-function	secureSection(action){
-	var globstatesave = RT_packGlobs();
-	ggbApplet.getBase64((oldscript)=>{
-	//debugger;
-		action(globstatesave,()=>{
-			//debugger;
-			wipeGlobs();
-			ggbApplet.setBase64(oldscript,
-				()=>{RT_unpackGlobs(globstatesave);});
-		});
-	});
-}
 
 function	applyTranslationToGGB(GGbs,Html){
 	secureSection((globstatesave,cont)=>{
@@ -457,34 +380,37 @@ function	translateAllGGB(globstatesave,GGbs,Html,cont){
 }
 function	translateAGGB(globstatesave,ggb,htmls,langs,rnd,cont){
 readGGBBase64(ggb,(ggbtoprocess)=>{
-	//debugger;
+	debugger;
 	ggbApplet.setBase64(ggbtoprocess,()=>{
 		RT_unpackGlobs(globstatesave);
-		RT_globsto("freeview",freeView());
+		RT_globsto("freeview",RT_freeView());
 		multiLanguageButton();
 		applyTransl(htmls, ()=>{
 			// delete all globs, stay as close as possible to original document.
 			// translation ready to be saved to file.name.slice(0,-4)+"-FL.ggb"
 			//injectTranslationCode();
 			//injectTranslationCode(payload,(newpayload)=>{
-			//ggbApplet.getBase64((_payload)=>{
-			injectNeededCode("innerGgbOnInit()",
-				"function ggbOnInit(){innerGgbOnInit();RT_initmulti();RT_incore=false;}",//RT_initrst(); lost
-				["RT_"]);//_payload,(dummypayload)=>{
+			var handle="innerGgbOnInit";
+			var i=0;
+			while(eval("typeof " + handle+i.toString)=== 'function')i++;
+			ggbApplet.getBase64((payload)=>{
+			injectNeededCode(handle+i.toString+"()",
+				"function ggbOnInit(){RT_incore=false;"+handle+i.toString+"();RT_initmulti();}",//RT_initrst(); lost
+				["RT_"],ggb.name.slice(0,-4)+langs+".ggb",payload,cont)// (payload)=>{
 			// Went in the Moodle plugin ctrlRandomize(rnd,(___payload)=>{
-				ggbApplet.getBase64((__payload)=>{
-					ggbApplet.getBase64((payload)=>{
+				//ggbApplet.getBase64((__payload)=>{
+					//ggbApplet.getBase64((payload)=>{
 				//debugger
 					//ctrlRandomize(rnd,payload);
-					saveGGB(ggb.name.slice(0,-4)+langs+".ggb",payload,cont);
+					//saveGGB(ggb.name.slice(0,-4)+langs+".ggb",payload,cont);
 					});
-				});
-			//});
+				//});
+			});
 			//});
 		});
 	});
-});
-}
+}//);
+//}
 function applyTransl(htmlTransl,cont){
 	if (htmlTransl.length==0) {cont();return;}
 	var html=htmlTransl[0];
