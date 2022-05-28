@@ -14,7 +14,7 @@ function init() {
 	updateDictionary(["\\text{", "}","{","}}","{{","={","}{","}=",
 		">it",">en",">fr", "", " ", " ; ", " / ",
 		"\\times","\\times ","A","}=\\frac{","+","-","=","/","\\",
-		"\\left(","\\right)","\\left","\\right","=\\frac{" ]);
+		"\\left(","\\right)","\\left","\\right","=\\frac{","θ=\\frac{"," θ=\\frac{" ]);
 	var dict = new Map( [
 	// this dictionary can contain as keys the Latex commands with the number of parameters 
   	["text",1],
@@ -22,11 +22,13 @@ function init() {
 	["frac",2],
 	[",",0],
 	[";",0],
+	["!",0],
 	["ovalbox",1],
 	["br",0],
 	["begin",-1],
 	["end",-1],
 	["cr",0],
+	["in",0],
 	["times",0],
 	["dfrac",2],
 	["left",0], ["right",0],
@@ -52,19 +54,23 @@ function init() {
 	["overrightarrow",1],
 	["\\",0],
 	[",",0]
+	,
+	["{array}{l}",0],
+	["{array}",0]
 			]);
 	LatexHandle(dict);
 	// regexp patterns to recognize Latex commands. You must enter the args above
 	updateLatexPatterns([
 	'\\\\cr','\\\\\\\\',
-	'\\\\;','\\\\,',
+	'\\\\;','\\\\,','\\\\!',
 	'\\\\left\\(','\\\\right\\)',
 	'\\\\left\\[','\\\\right\\]',
 	'\\\\left\\{','\\\\right\\}',
 	'\\\\left','\\\\right', // to get correct match prefixes must be after
 	'\\\\[a-zA-Z]{2,}',	
 	'\\\\[^a-zA-Z]',	
-	'\\\\[^\\{|^\\s|^\\\\]*'	
+	'\\\\[^\\{|^\\s|^\\\\]*',
+	'\\{array\\}\\{l\\}','\\{array\\}'	
 	]);
 	//updateNotToTranslatePattern([
 	//'UnicodeToLetter\\([0-9]+\\)'	

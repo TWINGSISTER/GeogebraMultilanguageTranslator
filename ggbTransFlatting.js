@@ -83,7 +83,7 @@ function flatten() {
 		default:
 	}
   }
-if(!toflat) {alert("This document do not use strings in text commands"); }
+if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 }
 //-----------------------------------------------------------------------
 // a code for a Flatten button. The action open a file dialog to select several GGBs
@@ -94,7 +94,7 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 		if(fileList.length==0){ return;}
 		var file=fileList[0];
 		var OtherFiles=fileList.slice(1);
-		var origlang=RT_lod("VARORIGLANGUAGE")
+		var origlang=RT_lod("VARORIGLANGUAGE");
 		//var doTrack=RT_lod("VARTRACK")
 		//var ctrlRandom=RT_lod("VARCTRLRANDOM")
 		ggbApplet.getBase64((oldscript)=>{
@@ -123,7 +123,9 @@ if(!toflat) {alert("This document do not use strings in text commands"); }
 										file.name.slice(0,-4)+"-FL-"+origlang+".html",
 										[wd.documentElement.outerHTML],()=>{
 										ggbApplet.setBase64(oldscript,()=>{
-											RT_unpackGlobs(globstatesave);flattenFile(OtherFiles);
+											RT_unpackGlobs(globstatesave);
+											RT_sto("VARORIGLANGUAGE",origlang);
+											flattenFile(OtherFiles);
 										});
 									});
 								});

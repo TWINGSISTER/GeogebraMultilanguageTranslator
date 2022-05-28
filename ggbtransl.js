@@ -205,7 +205,7 @@ function RT_translName(objName, lang) {
 	return RT_globlod("magic") + lang + objName;
 }
 function dumpObject(wd,objName,html,lang,origlang) {
-	//debugger;
+	debugger;
    if (RT_transIt(objName)) {
 	var objType = ggbApplet.getObjectType(objName) + "";
 	if (RT_isTranslation(objName)) {
@@ -380,8 +380,9 @@ function	translateAllGGB(globstatesave,GGbs,Html,cont){
 }
 function	translateAGGB(globstatesave,ggb,htmls,langs,rnd,cont){
 readGGBBase64(ggb,(ggbtoprocess)=>{
-	debugger;
+	//debugger;
 	ggbApplet.setBase64(ggbtoprocess,()=>{
+		//debugger;
 		RT_unpackGlobs(globstatesave);
 		RT_globsto("freeview",RT_freeView());
 		multiLanguageButton();
@@ -390,12 +391,14 @@ readGGBBase64(ggb,(ggbtoprocess)=>{
 			// translation ready to be saved to file.name.slice(0,-4)+"-FL.ggb"
 			//injectTranslationCode();
 			//injectTranslationCode(payload,(newpayload)=>{
+			//debugger;
 			var handle="innerGgbOnInit";
 			var i=0;
-			while(eval("typeof " + handle+i.toString)=== 'function')i++;
+			while(eval("typeof " + handle+i.toString())=== 'function'){i++;}
 			ggbApplet.getBase64((payload)=>{
-			injectNeededCode(handle+i.toString+"()",
-				"function ggbOnInit(){RT_incore=false;"+handle+i.toString+"();RT_initmulti();}",//RT_initrst(); lost
+				//debugger;
+			injectNeededCode(handle+i.toString()+"()",
+				"function ggbOnInit(){RT_incore=false;"+handle+i.toString()+"();RT_initmulti();}",//RT_initrst(); lost
 				["RT_"],ggb.name.slice(0,-4)+langs+".ggb",payload,cont)// (payload)=>{
 			// Went in the Moodle plugin ctrlRandomize(rnd,(___payload)=>{
 				//ggbApplet.getBase64((__payload)=>{
@@ -432,6 +435,7 @@ function pairTranslationFiles(Selected){
 	//});
  }
 function clickToInstallTranslation(){
+	//debugger;
 	 selectFiles(true,".ggb,.html",
 		//(Selected)=>{selectFiles(true,".js,.xml",(S2)=>{pairTranslationFiles(Selected,S2)})}
 		(Selected)=>{pairTranslationFiles(Selected)}

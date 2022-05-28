@@ -99,7 +99,7 @@ function latexId(cmd) {if(/^[^\s]+$/.test(cmd))
 //-----------------------------------------------------------------------
 function fragmentLatex(origText) {
 	origText=drys(origText);
-	//debugger;
+	debugger;
 	if(origText.startsWith("\"")&&origText.endsWith("\"")){return fragmentLatex(origText.slice(1,-1));};
 	var dict = RT_globlod("Latexmerge");
 	var noLatexcmds =purgeLatex(origText);
@@ -117,7 +117,12 @@ function purgeLatex(origText) {
 	//	for (i = 0; i < patterns.length; i++){
 			origText =origText.replace(RegExp(RT_globlod("patterns"),'g'),
 				function(match){
-					if(dict.has(match.slice(1))) {return "";} else{return match;}}
+					debugger;
+					if(
+						(match.startsWith("\\")&& dict.has(match.slice(1)))||
+						(match.startsWith("\{")&& dict.has(match))
+
+					) {return "";} else{return match;}}
 				);//  delete \something for a known command
 	//	}
 	//debugger;
