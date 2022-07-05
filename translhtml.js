@@ -103,26 +103,41 @@ function dumpstrTrans(wd,id,text,html){
 
 
 function divPlainText(id,t,fwd,html) {
-	console.log("divPlainText "+t);
-		var test=t.trim();
-		if(isNotToTranslate(test)||fragmentLatex(test)||isInDictionary(test)||pureLatex(test))
-			{return  ((fwd)?"":t);}
-		else  {
-					//debugger;
-			  if (fwd)
-				return "<div id=\""+id+"\" data-title=\""+makeatextkey(t)+"\" class=\"noop\">"+makeatextdiv(t)+"</div>";
-				else {
-					//debugger;
-					var oldDiv=html.getElementById(id);
-					var trans= makedivatext(oldDiv);
-					//commented out on feb 2022 filterdom do the job before fetching the translation
-					// var key =oldDiv.attributes["data-title"].nodeValue;
-					// trans= filterFalsePair(key,trans);// we knew that trans is sometimes wrong
-					// end of what was commented out
-					return trans;
+	//debugger;
+	
+	var word=KnowSubs(t);
+	if(word){
+		console.log("divPlainText partial sub for"+word+" in "+t);
+		if (fwd){
+			return "<div id=\""+id+"\" data-title=\""+makeatextkey(word)+"\" class=\"noop\">"+makeatextdiv(word)+"</div>";
+			} 
+		else {
+				var oldDiv=html.getElementById(id);
+				var trans= makedivatext(oldDiv);
+				var res = t.replace(word,trans);
+				console.log("divPlainText partial subs "+res+" in "+t );
+				return res;
+			}
+	}
+	var test=t.trim();
+	if(isNotToTranslate(test)||fragmentLatex(test)||isInDictionary(test)||pureLatex(test))
+		{return  ((fwd)?"":t);}
+	else  {
+				//debugger;
+		  if (fwd)
+			return "<div id=\""+id+"\" data-title=\""+makeatextkey(t)+"\" class=\"noop\">"+makeatextdiv(t)+"</div>";
+			else {
+				//debugger;
+				var oldDiv=html.getElementById(id);
+				var trans= makedivatext(oldDiv);
+				//commented out on feb 2022 filterdom do the job before fetching the translation
+				// var key =oldDiv.attributes["data-title"].nodeValue;
+				// trans= filterFalsePair(key,trans);// we knew that trans is sometimes wrong
+				// end of what was commented out
+				return trans;
 
-				}
-		}
+			}
+	}
 }
 
 function getTextFromDivId(id,html){

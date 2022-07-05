@@ -77,7 +77,7 @@ function protectSpacesInCommands(objName, translation) { // another Geogebra goo
 //-----------------------------------------------------------------------
 function copyFreeObject(objName, tostringName) {
 	var storecmd = tostringName + " = CopyFreeObject(" + objName + ")";
-	ggbApplet.evalCommand(storecmd);
+	RT_EvalCmd(storecmd);
 	ggbApplet.setLayer(tostringName,ggbApplet.getLayer(objName));
 }
 
@@ -129,7 +129,7 @@ function stostring(objName, tostringName, translation,protectspaces) {
 	}
 	storecmd = tostringName + " = " + storecmdprefix + translation + storecmdsuffix;
 	// set the parenthesis to UnicodeToLetter(40)
-	ggbApplet.evalCommand(storecmd);
+	RT_EvalCmd(storecmd);
 	if(!(tostringName===objName)){
 		RT_hideObject(tostringName);
 		ggbApplet.setLayer(tostringName, 0);
@@ -205,7 +205,7 @@ function RT_translName(objName, lang) {
 	return RT_globlod("magic") + lang + objName;
 }
 function dumpObject(wd,objName,html,lang,origlang) {
-	debugger;
+	//debugger;
    if (RT_transIt(objName)) {
 	var objType = ggbApplet.getObjectType(objName) + "";
 	if (RT_isTranslation(objName)) {
@@ -229,9 +229,9 @@ function dumpObject(wd,objName,html,lang,origlang) {
 }
 
 function dumptr(wd,objName, objType,dry,html) {
-	//debugger;
 	var origText;
 	origText = RT_lodtrans(objName);
+	//debugger;
 	//origText = origText.replace(/(\n)/gm, "<br>"); // prev "\\\\n"
 	//origText = origText.replace(/(\\\\n)/gm, "<br>"); // prev "\\\\n" prev /(\n)/gm
 	//origText = origText.replace(/\s+/g, ' '); // sometimes .trim(); // one space is enough in any occasion
@@ -322,7 +322,7 @@ function RT_stotrans(name, transvar) {
 			//or false sometimes work but still stores
 			//the transvar value at time of storing i.e. variables do not change.
 			var storecmd = name + " = " + "FormulaText(" + transvar + ",false)";
-			ggbApplet.evalCommand(storecmd);
+			RT_EvalCmd(storecmd);
 			break;
 		default:
 			ggbApplet.setCaption(name, RT_lod(transvar));

@@ -19,8 +19,12 @@
 // Note that  we can put either "\times"  in updateDictionary 
 // or "times" in Latexmerge to have "\times" untranslated
 //-----------------------------------------------------------------------
-function updateLatexPatterns(UpdArr) {
-	RT_globsto("patterns",UpdArr.join('|'));
+function updateLatexCmdPatterns(UpdArr) {	
+	RT_globsto("patterns",UpdArr.join('|'))
+}
+
+function updateLatexComplexPatterns(UpdArr) {	
+	RT_globsto("cmppatterns",UpdArr.join('|'));
 }
 // regexp for something known not to be translated.
 //function updateNotToTranslatePattern(UpdArr){
@@ -80,4 +84,15 @@ function isNotToTranslate(t) {
 		//console.log(t);
 		//console.log(returnVal);
 		return returnVal;
+}
+//------------------
+
+function KnowSubsInit(dict) {	
+	 RT_globsto("KnownSubs",dict);
+	 console.log("Subs init");
+}
+function KnowSubs(item) {
+	 var dict = RT_globlod("KnownSubs");
+	if(dict.has(item)){return dict.get(item);}
+	else {return null;}
 }

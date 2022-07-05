@@ -53,7 +53,10 @@ function flatten() {
 	var objType = ggbApplet.getObjectType(objName) + "";
 	if (RT_isTranslation(objName)) { continue; } // leave aux objects
 	if (RT_isGlob(objName)) { continue; } // leave aux objects
+	//console.log(objType);console.log(objName);
 	switch (objType) {
+		case "button":
+		case "textfield": {ggbApplet.setFixed(objName, false, true);break;}// all buttons floats or they will not be selectable. 
 		case "text" :
 			//breakifyoucan(objName);
 			{
@@ -104,7 +107,7 @@ if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 				ggbApplet.setBase64(ggbtoprocess,()=>{
 				 	innerglobstatesave = RT_packGlobs() ;//untested
 					RT_unpackGlobs(globstatesave);
-					//debugger;
+					debugger;
 					flatten();
 					//debugger;
 					//ggbApplet.getBase64((storeOrig)=>{

@@ -73,13 +73,13 @@ function RT_createAux(name,storecmd,space){
 	var noviewcmd = "SetVisibleInView(\"" + name + "\","+(vw==1?"2":"1")+",false)";
 	var actvcmd = "SetActiveView(" + vw.toString() + ")"; // View "D" or
 //	var storecmd = name + " = Button(\"" + caption + "\")";
-	ggbApplet.evalCommand(actvcmd);
-	ggbApplet.evalCommand(storecmd);
-	ggbApplet.evalCommand(viewcmd);
-	ggbApplet.evalCommand(noviewcmd);
+	RT_EvalCmd(actvcmd);
+	RT_EvalCmd(storecmd);
+	RT_EvalCmd(viewcmd);
+	RT_EvalCmd(noviewcmd);
 	var setcoordstr = "SetCoords(\""+name+"\","+
 		pos[0].toString()+","+pos[1].toString()+")"
-	ggbApplet.evalCommand(setcoordstr);
+	RT_EvalCmd(setcoordstr);
 	ggbApplet.setCoords(name,pos[0],pos[1] );
     RT_globsto("buttonpos",[pos[0]+space,pos[1]]);
 	//script ggbApplet.SetPerspective("+D")
@@ -101,7 +101,7 @@ function RT_removeProgressBar(name){
 }
 function RT_graphicButton(name,unicode){
 	var storecmd = name + " = Button(UnicodeToText({"+unicode.toString()+"}))";
-	ggbApplet.evalCommand(storecmd);
+	RT_EvalCmd(storecmd);
 }
 //----------------------------------------------------------------------
 /*beware this set the construction but the initialization 

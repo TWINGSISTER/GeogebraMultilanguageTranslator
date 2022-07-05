@@ -17,7 +17,7 @@ function RT_saveFileHtml(fname,htmlContent,...args) {
   a.innerHTML = "Save file hidden by CSS";
   //a.click() // added;
   if(args.length>0){a.addEventListener('click',args[0], {once : true});}
-  a.click();
+  setTimeout(()=>{a.click();}, 2000);//a.click();
 }
 function readFileHtml(file,charencoding,callback) {
   var reader = new FileReader();
@@ -64,7 +64,7 @@ function saveGGB(fname,GGBContent,...args) {
 	// htmlContent must be an array of strings, each representing the portion of an HTML document
   //var htmlContent = [ "<head><meta charset='utf-8'><title>Test</title></head>", "<style>.container{max-width: 940px;margin: 0 auto;}</style>", "<body><div class=\"container\">'Content Here'</div></body>" ];
   //var htmlContent = ["your-content-here"];
-	//debugger;
+	debugger;
   var a = document.createElement("a");
   a.setAttribute('href', 'data:text/plain;base64,' + GGBContent);
   a.download =fname;
@@ -72,7 +72,7 @@ function saveGGB(fname,GGBContent,...args) {
   document.body.appendChild(a);
   a.innerHTML = "Save file hidden by CSS";
   if(args.length>0){a.addEventListener('click',args[0], {once : true});}
-  a.click();
+  setTimeout(()=>{a.click();}, 2000);//a.click();
 }
 function selectFiles(multi,pattern,...args){ 
 	// the last argument is a function to which is passed 

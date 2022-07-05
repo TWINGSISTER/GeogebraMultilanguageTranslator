@@ -99,7 +99,7 @@ function latexId(cmd) {if(/^[^\s]+$/.test(cmd))
 //-----------------------------------------------------------------------
 function fragmentLatex(origText) {
 	origText=drys(origText);
-	debugger;
+	//debugger;
 	if(origText.startsWith("\"")&&origText.endsWith("\"")){return fragmentLatex(origText.slice(1,-1));};
 	var dict = RT_globlod("Latexmerge");
 	var noLatexcmds =purgeLatex(origText);
@@ -108,16 +108,17 @@ function fragmentLatex(origText) {
 	//		if(dict.has(match.slice(1))) {return "";} else{return match;}}
 	//);//  delete \something for a known command
 	// when all the known Latex command are gone the rest must be non alphabetic
-	if(noLatexcmds.match(RegExp('^[^a-zA-Z]*$'))){return true;}else{return false;}
+	if(noLatexcmds.match(RegExp('^[^a-zA-Z]*$')))
+		{console.log("Latex Fragment>"+origText+"<");return true;}else{return false;}
 }
 //-----------------------------------------------------------------------
 function purgeLatex(origText) {
 	//var patterns=;
 	var dict = RT_globlod("Latexmerge");
 	//	for (i = 0; i < patterns.length; i++){
-			origText =origText.replace(RegExp(RT_globlod("patterns"),'g'),
+			origText =origText.replace(RegExp(RT_globlod("cmppatterns"),'g'),
 				function(match){
-					debugger;
+					//debugger;
 					if(
 						(match.startsWith("\\")&& dict.has(match.slice(1)))||
 						(match.startsWith("\{")&& dict.has(match))
@@ -219,7 +220,7 @@ function pureLatex(origText){
 		var argsString=origText.slice(at+cmd.length+1);
 		var param =matchnargs(argsString,"\\{","\\}",Math.abs(args))
 		if(!param){
-			debugger;
+			//debugger;
 			console.log("Cannot find "+args+" parameters for "+cmd+" in >"+origText+"<");
 			return false;
 		}
@@ -233,11 +234,12 @@ function pureLatex(origText){
 
 
 function deLatex(id,origText,tr,dry,html,tl){ 
+	console.log("delatex:"+origText);
 	// if dry  minimize the output.
 	// consider \\ and <br> and \; \( etc...
 	var newlinematch=origText.match("^\s*\\\\\\\\");
 	if(newlinematch) {return ((dry)?"":newlinematch[0])+deLatex(id,origText.slice(newlinematch[0].length),tr,dry,html);}
-	var brmatch=origText.match("^\s*<br>");
+	var brmatch=origText.match("^\s*<br>|^\s*\\{");
 	if(brmatch) {
 		var returnVal= ((dry)?"":brmatch[0].slice(0,-4)+"\n")+deLatex(id,origText.slice(brmatch[0].length),tr,dry,html);
 		//alert(brmatch+returnVal);

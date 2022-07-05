@@ -16,6 +16,10 @@
 //-----------------------------------------------------------------------
 var RT_incore=false; // if true we are using JS global variables.
 var RT_incoreMap;//=new Map(); // incore storage
+function RT_EvalCmd(cmd) {
+	//console.log("command:"+cmd); 
+	ggbApplet.evalCommand(cmd);
+}
 function RT_hideObject(name) {
 	if(RT_incore) return;
 	ggbApplet.setVisible(name, false);
@@ -76,21 +80,21 @@ function RT_sto(name, value) {
 		
 	switch (typeof value) {
 		case 'string':
-			ggbApplet.evalCommand(name + "=" + "\"" + value + "\"");
+			RT_EvalCmd(name + "=" + "\"" + value + "\"");
 			RT_hideObject(name);
 			break;
 		case 'boolean':
 		case 'number':
-			ggbApplet.evalCommand(name + "=" + value.toString());
+			RT_EvalCmd(name + "=" + value.toString());
 			RT_hideObject(name);
 			break;
 		case 'undefined':
 		default:
 			//if(value instanceof Set){
-			// ggbApplet.evalCommand(name+"SJSON" + "=" + "\"" +setStringify(value) + "\"");
+			// RT_EvalCmd(name+"SJSON" + "=" + "\"" +setStringify(value) + "\"");
 		    //RT_hideObject(name+"SJSON");
 			//}else{
-			 ggbApplet.evalCommand(name+"JSON" + "=" + "\"" +RT_noCommandStringify(value) + "\"");
+			 RT_EvalCmd(name+"JSON" + "=" + "\"" +RT_noCommandStringify(value) + "\"");
 		    RT_hideObject(name+"JSON");
 			//}
 	}
