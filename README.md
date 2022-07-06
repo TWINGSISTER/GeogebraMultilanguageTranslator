@@ -7,7 +7,7 @@ code to run these services. You can use it online or copy this locally. If you u
 files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
 The main service provides a  Geogebra javascript package to create a report aware  version of your ggb activities.
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-687-wreporter.html).
-A [more detailed documentation about the translator is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html). You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/examplereport.html) 
+You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/examplereport.html) 
 that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html).
 In this exercise you can do something press the button SNAP to snapshot what is on the screen. 
 Before closing you press SAVE to compact these snapshots "within" the .ggb file. 
@@ -23,6 +23,7 @@ code to run these services. You can use it online or copy this locally. If you u
 files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
 The main service provides a  Geogebra javascript package to create a multilanguage version of your ggb activities.
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html).
+A [more detailed documentation about the translator is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html). 
 You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/example.html) 
 that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html).
 A proof of concept video is [here](https://www.youtube.com/watch?v=A8KA8vFJ0YQ)
