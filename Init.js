@@ -67,8 +67,9 @@ function init() {
 		"⇒AB^2=",
 		"AB=",
 		"xrep+yrep* ί",
-		"phantom{.}z^","\\Delta=","\\Delta}","-\\Delta}","n\\text{",
-		"z&=&\\frac{"
+		"phantom{.}z^","\\Delta=","\\Delta}","-\\Delta}","n\\text{","ax+b=",
+		"z&=&\\frac{","ax^m+bx^p+c","n\\text{,","P(x)=ax^n+bx^m+cx^r","Δ=b^2-4ac=",
+		"xA=","yA=","=\\frac{P","= \\frac{P","|z_\\text{","}-z_\\text{"
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
@@ -80,7 +81,9 @@ function init() {
 		["Calculer:}}","Calculer:"],
 		["v_n\\text{ en fonction de }n.","en fonction de"],
 		["n fonction de }n.","fonction de"],
-		["Saisir:3/4*(1/3)∧n","Saisir:"]
+		["Saisir:3/4*(1/3)∧n","Saisir:"],
+		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
+		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"]
 		]);
 	KnowSubsInit(diffdict); 
 	var dict = new Map( [
