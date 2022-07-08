@@ -69,7 +69,19 @@ function init() {
 		"xrep+yrep* ί",
 		"phantom{.}z^","\\Delta=","\\Delta}","-\\Delta}","n\\text{","ax+b=",
 		"z&=&\\frac{","ax^m+bx^p+c","n\\text{,","P(x)=ax^n+bx^m+cx^r","Δ=b^2-4ac=",
-		"xA=","yA=","=\\frac{P","= \\frac{P","|z_\\text{","}-z_\\text{"
+		"xA=","yA=","=\\frac{P","= \\frac{P","|z_\\text{","}-z_\\text{",
+		"NA1",
+		"NA2",
+		"NB1",
+		"NB2=",
+		"NC1",
+		"NC2",
+		"NA2=",
+		"NA1=",
+		"NB1=",
+		"NB2=",
+		"NC1=",
+		"NC2="
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
