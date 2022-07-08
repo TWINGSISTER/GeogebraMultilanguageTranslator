@@ -178,7 +178,7 @@ function startTransDoc(title) {
 	//w.document.write("<html>\n");
 	document.write(" <head>\n");
 	document.write(" <title>"+title + "</title>\n");
-	// needed? useful? document.write("<meta charset=\"utf-8\"/>");
+	document.write("<meta charset=\"UTF-8\"/>");
 	document.write(" </head>\n");
 	document.write("<body>\n")
 	document.write("</body>\n");
