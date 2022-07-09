@@ -1,22 +1,23 @@
 # Geogebra (GGB) Preprocessor
-This repo offer two online services that modify .ggb GGB files. The two services are 
-a Translator to build a multilingial version of an existing GGB activita' and a Reporter that adds facility to track students work and output student's progress as a HTML file linking a set of PDF snapshots of the student's activity.
+This repo offers  two online services that modify .ggb GGB files. The two services are 
+a Translator to build a multilingial version of an existing GGB activities and a Reporter that adds facility to track students work and output student's progress as an HTML file containing a set of PDF snapshots of the student's activity.
 # Geogebra (GGB) Report Support
 This first package in this repo offers an online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
 files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
 The main service provides a  Geogebra javascript package to create a report aware  version of your ggb activities.
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-687-wreporter.html).
-You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/examplereport.html) 
-that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html).
-In this exercise you can do something press the button SNAP to snapshot what is on the screen. 
+You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/examplereport.html). 
+This activity is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html).
+In this exercise you can do something and then  press the button SNAP to snapshot what is on the screen. 
 Before closing you press SAVE to compact these snapshots "within" the .ggb file. 
+
 You can save the .ggb  reload it and the snapshots will still be there and you can add more. 
-You can download a printout of the snapshots anytime as an HTML file containing one PDF for each snapshot  by pressing REPORT.  
+You can download a printout of the snapshots anytime as an HTML file containing one PDF for each snapshot. You will obtain this  by pressing REPORT.  
 A proof of concept video is [here](https://youtu.be/75jz8ql19-U).
 The GGB activities packaged with this service try their best to snapshot heuristically and automatically. This will be effective if user provides some hints about the names of the variables used in the GGB script for this activity. 
 [Docs on heuristics here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexheurdocreport.html).
-You can find an example of the resulting GGB activity [here]
+You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/examplereport.html).
 # Geogebra (GGB) Multi-language Translator
 This second package in this repo offers a second online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index

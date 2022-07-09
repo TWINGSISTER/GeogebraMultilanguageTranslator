@@ -257,7 +257,8 @@ function deLatex(id,origText,tr,dry,html,tl){
 		return divPlainText(id,origText.slice(0,at+1+matchCmd[0].length),dry,html)+
 			deLatex(id,origText.slice(at+1+matchCmd[0].length+1),tr,dry,html); // in the prefix not a Latex command
 	}else{
-		var args=dict.get(cmd);
+		var argstag=dict.get(cmd);
+		var args =(Array.isArray(argstag)?argstag.length:argstag)
 		var argsString=origText.slice(at+cmd.length+1);
 		var param =matchnargs(argsString,"\\{","\\}",Math.abs(args))
 		if(!param){
@@ -271,6 +272,11 @@ function deLatex(id,origText,tr,dry,html,tl){
 		var i; // for negative args |args| parameters are skipped 
 		if(!dry){args=Math.abs(args);}
 		for (i = 0; i < args; i++){
+			if(Array.isArray(argstag)&&!argstag[i])
+			 if(dry){continue;}else{returnVal=returnVal+param.get("args")[i];continue;} 
+			// 	["textcolor",[false,true]],
+			// ["textcolor",2] this says that there must be 2 arguments and skip none
+			//  ["textcolor",-2] this says that there must be 2 arguments and skip two 
 			var idarg=cid+"Arg"+(i+1).toString();
 		 returnVal=returnVal+
 		//  ((dry)?"":"<div class=\""+cmd+"Arg"+(i+1).toString()+"\">")+

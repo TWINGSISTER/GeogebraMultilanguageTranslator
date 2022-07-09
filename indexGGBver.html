@@ -141,56 +141,67 @@
       make the translator comply with a known style used in textual elements for
       a set of known ggb activities. This configuration parameters are strings
       that are found either in the context of function calls or as assignments
-      to variables in the&nbsp; file <b>init.js</b> . So in the following we
+      to variables in the&nbsp; file <b>Init.js</b> . So in the following we
       list all possible configuration options referring them either as function
       call parameter or as expression in assignment. You can find them with some
-      comments in the file <b>init.js</b></p>
+      comments in the file <b>Init.js</b></p>
     <p style="text-align: justify;">To understand the possible tuning operations
       one has to consider the fact that this process works in two steps. The
       first step locates what must be translated. The second step takes several
       translations and apply them. Troubles in the first step comes mainly from
       the fact that something that must not be translated is fed to the
       translator, the obvious example being LaTeX commands (e.g. \text)&nbsp;
-      that are ubiquitous in GGB activities and should become \texte or
-      whatever. There are a number of ways to get this. Let's step thru the
-      relative code in init.ts </p>
-    <p style="text-align: justify;">list in the call to updateDictionary the
-      strings that need no translation. They will remain as they are if they are
-      EXACTLY occurring as strings. If you put "XYZ" here also \text{XYZ}
-      "'XYZ", "&nbsp; XYZ&nbsp; " will pass untranslated.</p>
+      that are ubiquitous in GGB activities and should NOT become \texte or
+      whatever. There are a number of ways to get this. Let's step thru the code
+      to configure this in <b>Init.js</b></p>
+    <p style="text-align: justify;">The list in the call to updateDictionary
+      contains the strings that need no translation. They will remain as they
+      are if they are EXACTLY occurring as strings in GGB activities. If you put
+      there e.g. "XYZ" then also \text{XYZ} "'XYZ", "&nbsp; XYZ&nbsp; " will
+      pass untranslated. Simply add the string you do not want to be translated
+      in this list...</p>
     <pre style=" text-align: justify;">	updateDictionary(["\\text{", "}","{"...])</pre>
-    <p style="text-align: justify;"> There are a pair of initialization that
-      helps the software to parse LaTeX code. Note that a complete LaTeX parser
-      (if ever available) is not of great help because often GGB activity
-      creators mix textual content and&nbsp; <b>fragments</b> of LaTeX code to
-      be assembled in a complete LaTeX expression as the activity proceeds. The
-      dictionary dict initialized by:</p>
+    <p style="text-align: justify;"> In Init,js There are also a pair of
+      initialization that helps the software to parse LaTeX code. Note that a
+      complete LaTeX parser (if ever available in Javascript) is not going to be
+      of great help because, very often, GGB activity creators mix textual
+      content and&nbsp; <b>fragments</b> of LaTeX code to be assembled in a
+      complete LaTeX expression as the activity proceeds. The dictionary dict
+      initialized by another list like...:</p>
     <pre style=" text-align: justify;">var dict = new Map( [ ["text",1],["bar",1],...])</pre>
-    <p style="text-align: justify;">contain as keys the Latex commands with the
-      number of required parameters. Being a map keys can also be regexp. The
-      system recognize latex command on the ground of the&nbsp; dictionary
-      initialized by:</p>
+    <p style="text-align: justify;">that contains as keys the Latex commands
+      with the number of required parameters. This structure "dict" is a map and
+      keys can also be regexp. The line </p>
+    <pre style=" text-align: justify;">["text",1],["end",-1],["textcolor",[false,true]]
+</pre>states that \text has one parameter, \end has one parameter that do not
+    need translation and \textcolor has two parameters and the first do not need
+    translation. The system recognize latex command on the ground of the&nbsp;
+    dictionary initialized by:
     <pre style=" text-align: justify;">&nbsp;&nbsp;&nbsp; updateLatexPatterns([<br>&nbsp;&nbsp;&nbsp; '\\\\cr','\\\\\\\\',<br>&nbsp;&nbsp;&nbsp; '\\\\;','\\\\,',<br>&nbsp;&nbsp;&nbsp; '\\\\left\\(','\\\\right\\)',<br>	...<br>&nbsp;&nbsp;&nbsp; '\\\\left','\\\\right', <br>&nbsp;&nbsp;&nbsp; '\\\\[a-zA-Z]{2,}',&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; '\\\\[^a-zA-Z]',&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; '\\\\[^\\{|^\\s|^\\\\]*'&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp; ]);</pre>
-    <p style="text-align: justify;">&nbsp;that is pretty complete. Note that
-      prefixes like '\\\\left' comes before the longer match '\\\\left\\['&nbsp;
-      Finally note that pressing F12 in the console of the browser debugger the
-      translator writes some debug messages.<br>
+    <p style="text-align: justify;">that is pretty complete. Note that prefixes
+      like '\\\\left' comes before the longer match '\\\\left\\['. &nbsp;
+      Running the first step and consulting the html output you can add strings
+      you will find in the html file if you know that they do not need
+      translation. You must add them to the call to updateDictionary.&nbsp;
+      Finally note that pressing F12 in the browser console you can see the
+      translator debug messages and draw some ideas on how to adapt the
+      translator to your style..<br>
       <br>
       In the second step problems can only come from the external translator and
       you can solve them simply revising the html file returned by the
       translator before applying it. Very often you will find recurring problems
-      like "Dernier exercice" being continuously missed as "Last fiscal year"
-      and so on. You can decide that every time from FR to EN "plan" is
-      translated into "airplane" you will be glad to see "Last exercise" you
-      have a place to instruct the second step to do so. You must modify the
-      code in the function definition for&nbsp; initFalsePair and add a couple
-      in the second parameter of the call to updateFalsePair(XX,[..]) where XX
-      is the target language. For instance adding a line like:</p>
+      like "Dernier exercice" being translated as "Last fiscal year" and so on.
+      You can enforce that every time from FR to EN "Dernier exercice" is
+      translated into "Last fiscal year" you will have "Last exercise". You can
+      obtain this by modifying the code in the function definition for&nbsp;
+      initFalsePair. More pricesely you must add a couple in the second
+      parameter of the call to updateFalsePair(XX,[..]) where XX is the target
+      language. For instance adding a line like:</p>
     <pre style=" text-align: justify;">function initFalsePair() {<br>&nbsp;&nbsp;&nbsp; updateFalsePair("EN", ....<br>["Dernierexercice","Last exercise"],</pre>
     <p style="text-align: justify;">will ignore the translation&nbsp; in the
       ...-FL-XX_EN.html for the key Derniereexercice and put there "Last
-      exercise".&nbsp; You can find the key Derniereexercice in the file
-      ...-FL-XX_EN.html it will look like this&nbsp; </p>
+      exercise".&nbsp; You can find the actual key Derniereexercice in the file
+      ...-FL-XX_EN.html since there it will be like this&nbsp; </p>
     <pre style=" text-align: justify;">&lt;div id="texte40ovalboxArg1textArg1"
 	data-title="Dernierexercice"
 class="noop"&gt;Last fiscal year&lt;/div&gt;
@@ -201,7 +212,7 @@ class="noop"&gt;Last fiscal year&lt;/div&gt;
       pair is stored in a JS map and therefore in the initialization you can use
       a regexp as a key i.e.&nbsp; /Derniere[s]?exercice[s]?/ instead of
       "Derniereexercice" and match also the four keys Dernieresexercices,
-      Dernieresexercice etc. (actually never tried this).</p>
+      Dernieresexercice etc.</p>
     <h3 style="text-align: justify;">Eclipse Repository</h3>
     <p style="text-align: justify;">This project was developed and maintained
       using Eclipse and Egit. Not all the files have a&nbsp; clear meaning. The

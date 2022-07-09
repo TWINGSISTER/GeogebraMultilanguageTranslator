@@ -81,7 +81,11 @@ function init() {
 		"NB1=",
 		"NB2=",
 		"NC1=",
-		"NC2="
+		"NC2=",
+		"re :","im :",
+		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+		"AAAAAAAAA","AM","5000ff"
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
@@ -95,7 +99,8 @@ function init() {
 		["n fonction de }n.","fonction de"],
 		["Saisir:3/4*(1/3)∧n","Saisir:"],
 		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
-		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"]
+		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"],
+		["n fonction de }n:","fonction de"]
 		]);
 	KnowSubsInit(diffdict); 
 	var dict = new Map( [
@@ -139,7 +144,8 @@ function init() {
 	["infty",0],
 	["sqrt",1],["vec",1],["fgcolor",1],
 	["cr",0],
-	["textcolor",2],
+	["textcolor",[false,true]],
+	// this skip the first argument
 	["cdot",0],
 	["longmapsto",0],
 	["overrightarrow",1],
@@ -154,7 +160,8 @@ function init() {
 	["begin{array}{rcl}",0],
 	["begin{array}{r c l}",0],
 	[".\\text{",0],	["n\\text{",0],
-	["begin{array}{lrcl}",0]
+	["begin{array}{lrcl}",0],
+	//["textcolor{blue}",0],
 	//["{l}",0], // for \begin{array} begin skip one argument with -1 
 	//["{c}",0],
 	//["{lc}",0], 
@@ -178,12 +185,14 @@ function init() {
 	'\\\\begin\\{array\\}\\{r\\s*c\\s*l\\}',
 	'\\\\begin\\{array\\}\\{l\\s*r\\s*c\\s*l\\}',
 	'\\\\begin\\{array\\}',
+	//'\\\\textcolor\\{blue\\}',
 	'\\\\end\\{array\\}',
 	'\\.\\\\text\\{','n\\\\text\\{',
 	'\\\\left','\\\\right', // to get correct match prefixes must be after
 	'\\\\[a-zA-Z]{2,}',	
 	'\\\\[^a-zA-Z]',	
-	'\\\\[^\\{|^\\s|^\\\\]*'
+	'\\\\[^\\{|^\\s|^\\\\]*',
+	//'\\\\textcolor\\{blue\\}'
 	];
 	updateLatexCmdPatterns(cmdpattern);
 	// to recognize fragments made up only of Latex code put them here 
