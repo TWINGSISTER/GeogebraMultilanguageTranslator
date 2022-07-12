@@ -64,7 +64,7 @@ function saveGGB(fname,GGBContent,...args) {
 	// htmlContent must be an array of strings, each representing the portion of an HTML document
   //var htmlContent = [ "<head><meta charset='utf-8'><title>Test</title></head>", "<style>.container{max-width: 940px;margin: 0 auto;}</style>", "<body><div class=\"container\">'Content Here'</div></body>" ];
   //var htmlContent = ["your-content-here"];
-	debugger;
+	//debugger;
   var a = document.createElement("a");
   a.setAttribute('href', 'data:text/plain;base64,' + GGBContent);
   a.download =fname;

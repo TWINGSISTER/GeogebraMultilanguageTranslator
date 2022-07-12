@@ -372,14 +372,26 @@ function	translateAllGGB(globstatesave,GGbs,Html,cont){
 	var OtherGGbs=GGbs.slice(1);
 	var rnd = RT_lod("VARCTRLRANDOM")
 	var htmls=Html.filter(x => x.name.startsWith(ggb.name.slice(0,-4)));
+	//alert("hello");debugger;
+	htmls=htmls.sort(
+		function(a,b)  {
+			debugger;
+			//alert(a.name.slice(-7, -5));
+			//alert(b.name.slice(-7, -5));
+			return (a.name.slice(-7, -5) > b.name.slice(-7, -5));} );
 	var OtherHtmls=Html.filter(x => !(x.name.startsWith(ggb.name.slice(0,-4))));
-	var langs=htmls.map(v => v.name.slice(-7, -5)).join("-");//assume _EN.html
+	var langs=htmls.map(v => v.name.slice(-7, -5)).sort();//assume _EN.html
+	langs=langs.join("-");
 	//unpackGlobs(globstatesave);
 	translateAGGB(globstatesave,ggb,htmls,langs,rnd,
 		()=>translateAllGGB(globstatesave,OtherGGbs,OtherHtmls,cont));
 }
 function	translateAGGB(globstatesave,ggb,htmls,langs,rnd,cont){
-readGGBBase64(ggb,(ggbtoprocess)=>{
+	//alert("hello");
+	//debugger;
+	//debugger;
+	//langs=langs.sort();
+ readGGBBase64(ggb,(ggbtoprocess)=>{
 	//debugger;
 	ggbApplet.setBase64(ggbtoprocess,()=>{
 		//debugger;
@@ -422,6 +434,7 @@ function applyTransl(htmlTransl,cont){
 		var title =html.name.slice(0,-5);
 		dumptrans(title,result);
 		var lang =title.slice(-2);
+		//alert(lang);
 		addLanguageButton(lang);applyTransl(Otherhtml,cont);})
  }
 function pairTranslationFiles(Selected){
@@ -435,7 +448,6 @@ function pairTranslationFiles(Selected){
 	//});
  }
 function clickToInstallTranslation(){
-	//debugger;
 	 selectFiles(true,".ggb,.html",
 		//(Selected)=>{selectFiles(true,".js,.xml",(S2)=>{pairTranslationFiles(Selected,S2)})}
 		(Selected)=>{pairTranslationFiles(Selected)}
