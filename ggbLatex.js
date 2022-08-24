@@ -192,8 +192,13 @@ function splitstr(origText) {
 		for (i = 0; i < Math.abs(args); i++){
 			if(!pureLatex(param.get("args")[i].slice(1,-1))){return origText;}
 		}
+		if(cmd==="\\n"){
+		 return origText.slice(0,at+param.get("end"))+"\"+\""+
+			"\\\\n"+splitstr(origText.slice(at+1+cmd.length+param.get("end")));
+		}else{
 		 return origText.slice(0,at+cmd.length+param.get("end")+1)+"\"+\""+
 			splitstr(origText.slice(at+1+cmd.length+param.get("end")));
+		}
 	}
 }
 
@@ -209,7 +214,7 @@ function pureLatex(origText){
 	if(origText.match(RegExp('^[^a-zA-Z]*$'))){return true;} // not a single letter must not translate
 	var matchCmd =matchLatex(origText);// \something
 	//var matchCmd =origText.match(RegExp('\\\\[^\\{|^\\s]*'));// \something
-	if(!matchCmd) {return false;}
+	if(!matchCmd||matchCmd.index>0) {return false;}
 	var at=matchCmd.index;
 	var cmd = matchCmd[0].slice(1);
 	var dict = RT_globlod("Latexmerge");

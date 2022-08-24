@@ -36,6 +36,13 @@ function breakifyoucan(objName) {
 }
 
 function flatten() {
+	// all the list objects are converted so that their contents are within variables and will
+	// be checked for translation when the variable is taken into account
+	//var alltr = ggbApplet.getAllObjectNames();
+	// for (objName of alltr) {
+	//	var objType = ggbApplet.getObjectType(objName) + "";
+	//	if(objType==="list") flatlist(objName);// there are list made with sequence cmds that cannot flatten
+  	//}	
 	var alltr = ggbApplet.getAllObjectNames();
 	for (objName of alltr) {
 		var objType = ggbApplet.getObjectType(objName) + "";
@@ -43,6 +50,7 @@ function flatten() {
 		if (RT_isGlob(objName)) { continue; } // leave aux objects
 		switch (objType) {
 			case "text":
+			//case "list":
 				breakifyoucan(objName);
   		}
   	}
@@ -53,11 +61,13 @@ function flatten() {
 	var objType = ggbApplet.getObjectType(objName) + "";
 	if (RT_isTranslation(objName)) { continue; } // leave aux objects
 	if (RT_isGlob(objName)) { continue; } // leave aux objects
+	//if(objType==="list") return flatlist(objName);
 	//console.log(objType);console.log(objName);
 	switch (objType) {
 		case "button":
 		case "textfield": {ggbApplet.setFixed(objName, false, true);break;}// all buttons floats or they will not be selectable. 
 		case "text" :
+		//case "list" :
 			//breakifyoucan(objName);
 			{
 				if (!RT_simpleText(objName))   {
@@ -82,18 +92,48 @@ function flatten() {
 					);
 					stostring(objName, objName, flattened,false); 
 				}
+			break;
 			}
-		default:
+		default: 
+			{
+				//var cap=ggbApplet.getCaption(objName);
+				//if(!cap)ggbApplet.setCaption(objName,":"+objName+":");
+				//break; a bad idea if you want to use variables names give them a caption
+			}
 	}
   }
 if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
+}
+
+function flatlist(objName) {
+	var result;
+	var def=ggbApplet.getDefinitionString(objName) //debugger;
+	def=def.replace(/(\n)/gm, "\\\\n");
+	var broken;
+	broken=splitcmd(def); 
+	if (broken.endsWith("+\"\"")) {broken=broken.slice(0,-3);}
+	if (!(broken===def)) { stostring(objName, objName, broken,false); } 
+	return;
+	if(matchpar(def,"{","}")){
+		var length=listlen(objName);
+		result="{";
+		for (let i = 1; i <= length; i++) {
+			var obj=listget(objName,i);
+			var objT = ggbApplet.getObjectType(obj) + "";
+			if(objT==="list")  flatlist(obj);
+			result=result+"FormulaText("+obj+"),";
+		}
+	result=(result.endsWith(",")?result.slice(0,-1):result)+"}";
+	ggbApplet.evalCommand(objName+" = "+result); 
+	}else{}//result="FormulaText("+def+")";}
+	//stostring(objName, objName, result,false); 
 }
 //-----------------------------------------------------------------------
 // a code for a Flatten button. The action open a file dialog to select several GGBs
 // that need flattening. The procedure creates for each XXX.ggb a XXX-FL.ggb
 //-----------------------------------------------------------------------
 	function flattenFile(fileList){
-		//debugger;
+		debugger;
 		if(fileList.length==0){ return;}
 		var file=fileList[0];
 		var OtherFiles=fileList.slice(1);
@@ -101,6 +141,7 @@ if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 		//var doTrack=RT_lod("VARTRACK")
 		//var ctrlRandom=RT_lod("VARCTRLRANDOM")
 		ggbApplet.getBase64((oldscript)=>{
+			debugger;
 			var globstatesave = RT_packGlobs() ;
 			//ggbApplet.openFile(file.name);
 			readGGBBase64(file,(ggbtoprocess)=>{
@@ -109,6 +150,7 @@ if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 					RT_unpackGlobs(globstatesave);
 					debugger;
 					flatten();
+					
 					//debugger;
 					//ggbApplet.getBase64((storeOrig)=>{
 			  			//if(doTrack){addTrack();}
@@ -121,7 +163,7 @@ if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 						ggbApplet.getBase64((__payload)=>{
 						ggbApplet.getBase64((payload)=>
 			  				{saveGGB(file.name.slice(0,-4)+"-FL.ggb",payload,
-								()=>{
+								()=>{//return; //DELETE
 			  						RT_saveFileHtml(
 										file.name.slice(0,-4)+"-FL-"+origlang+".html",
 										[wd.documentElement.outerHTML],()=>{
@@ -144,7 +186,7 @@ if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 function clickToFlatten(){
 	// init globals for flattening
 	// do the job
-	//debugger;
+	debugger;
 	if(ggbApplet.exists("VARORIGLANGUAGE")){language=RT_lod("VARORIGLANGUAGE").replaceAll(" ","");
 		if (language.length==2){
 	  		if(confirm("Do you want to work with files in "+language)){

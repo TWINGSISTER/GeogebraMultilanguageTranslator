@@ -228,7 +228,16 @@ function dumpObject(wd,objName,html,lang,origlang) {
   }
 }
 
+//function dumptrlist(wd,objName, objType,dry,html) {
+//	var length=listlen(objName);
+//	for (let i = 0; i < length; i++) {
+//		var obj=listget(objName,i);
+//		var objT = ggbApplet.getObjectType(obj) + "";
+//  		dumptr(wd,obj, objT,dry,html);
+//	}
+//}
 function dumptr(wd,objName, objType,dry,html) {
+	//if(objType==="list") return dumptrlist(wd,objName, objType,dry,html);
 	var origText;
 	origText = RT_lodtrans(objName);
 	//debugger;
@@ -295,6 +304,7 @@ function RT_transIt(name) {
 		case "textfield":
 		case "point":
 		case "complexnumber":
+		case "boolean":
 			return RT_lodtrans(name) != "";
 		case "number":
 		case "numeric":

@@ -5,13 +5,35 @@
     <title>Start Geogebra Translator</title>
   </head>
   <body>
+    <h3 style="text-align: justify;">The reporter Service</h3>
+    <p>This service transform&nbsp; a set of ggb files adding GGB code to
+      snapshot activity at a certain stage. These snapshots could be added
+      automatically, when some watched variables changes during student's
+      activity, or&nbsp; by user request. The snapshots are stuffed into the GGB
+      file when you save it or can be written onto an HTML file. The snapshot
+      thus added helps to give consistent reporting when grading multi-step
+      activities in Moodle using automatic grading. The Moodle plugin <a href="https://github.com/TWINGSISTER/moodle-mod_geogebra"
+        target="_blank">moodle-mod_geogebra</a> takes care to store these <i>augmented</i>
+      .ggb(s) and the forked version of plugin <a href="https://github.com/TWINGSISTER/moodle-grade-extended"
+        target="_blank">moodle-grade-extended</a> offer a way to produce a
+      detailed<i> electronic</i> report (in PDF) for a class. This report
+      could&nbsp; list all the snapshots for all the steps for all the exercises
+      in a class. This huge documentation is still required sometimes by (rather
+      dull) school management policies in order to provide evidence for your
+      notes. Providing all this printed on paper simply takes a print command
+      onto the PDF file and a good deal of disturbing environmental
+      un-awareness.</p>
+    <p>An example of this service is running <a href="https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-687-wreporter.html"
+        target="_blank">here</a> and an example of a GGB activity with added
+      reporting capability can be found <a href="https://twingsister.github.io/GeogebraMultilanguageTranslator/examplereport.html"
+        target="_blank">here</a>.</p>
     <h3 style="text-align: justify;">How to tailor report snap-shooting&nbsp;
       for your Geogebra Activity.</h3>
     <p style="text-align: justify;">When you start the service that adds
       reporting to your GGB activity you see a minimal GUI&nbsp; to enter some
       parameters before pressing the "Add reporting".</p>
-    <img src="file:///Z:/PortableApps/home/git/GeogebraMultilanguageTranslator/ReportingGUI.jpg"
-      alt="">
+    <div style="text-align: center;"><img src="file:///Z:/PortableApps/home/git/GeogebraMultilanguageTranslator/ReportingGUI.jpg"
+        alt=""></div>
     <p style="text-align: justify;">On the lower part there is a check for
       adding code that compress the deltas between two snap images. Usually
       reporting takes some space and grows the .ggb size. Compressing is
@@ -24,18 +46,18 @@
       the other hand, the relative path used in the figure requires that these
       packages are on the server where the produced GGB is.</p>
     <p style="text-align: justify;">The other four lines "Watch for
-      iteration|error|ok" are a comma separate list of identifier possibly
+      iteration|error|ok" are a comma separate lists of identifiers possibly
       followed by a pipe and a number like in numexo|40,Bouton1|40. This number
       defines a "overrun limit" for this activity.&nbsp; </p>
     <p style="text-align: justify;">The package takes care to insert code that
       watch any change in the given variables.&nbsp; If the given variable do
-      not exist it is simply ignored. Therefore you can keep one list for
+      not exist it is simply ignored. Therefore you can keep together lists for
       several activities.&nbsp;</p>
     <p style="text-align: justify;">In general when one of these object changes
-      a snapshot is taken. If you snap shoot&nbsp; twice the same situation this
-      will not be recorded. However to avoid taking too shots we stop taking pic
-      when objects watching "iterations" goes beyond the sum of OKs and&nbsp;
-      errors of the given overrun limit. </p>
+      a snapshot is taken. If you snapshoot&nbsp; twice the same situation a
+      useless double copy will not be recorded. However to avoid taking too many
+      shots we stop taking pics when the&nbsp; "iterations" goes beyond the sum
+      of "ok"s and&nbsp; "errors" of the given overrun limit. </p>
     <ul style="text-align: justify;">
     </ul>
   </body>

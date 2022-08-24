@@ -26,7 +26,7 @@ The main service provides a  Geogebra javascript package to create a multilangua
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html).
 A [more detailed documentation about the translator is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html). 
 You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/example.html) 
-that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html).
+that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html). and [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample.html) 
 A proof of concept video is [here](https://www.youtube.com/watch?v=A8KA8vFJ0YQ)
 
 In the link you will find different demo systems based on different Geogebra 5.0 versions.

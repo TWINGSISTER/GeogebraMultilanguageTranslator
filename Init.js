@@ -85,7 +85,7 @@ function init() {
 		"re :","im :",
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-		"AAAAAAAAA","AM","5000ff"
+		"AAAAAAAAA","AM","5000ff","kJ/kg.","kJ/kg",
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
@@ -100,7 +100,10 @@ function init() {
 		["Saisir:3/4*(1/3)∧n","Saisir:"],
 		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
 		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"],
-		["n fonction de }n:","fonction de"]
+		["n fonction de }n:","fonction de"],
+		["Q=mL avec m=","avec"],
+		['\\mbox{Ici, comme il faut “ ',"Ici, comme il faut "],
+		['” la chaleur\\\\',"la chaleur"]
 		]);
 	KnowSubsInit(diffdict); 
 	var dict = new Map( [
@@ -143,6 +146,7 @@ function init() {
 	["sin",0],
 	["infty",0],
 	["sqrt",1],["vec",1],["fgcolor",1],
+	["mbox",1],
 	["cr",0],
 	["textcolor",[false,true]],
 	// this skip the first argument
@@ -150,6 +154,7 @@ function init() {
 	["longmapsto",0],
 	["overrightarrow",1],
 	["mathcal",1],
+	["\\n",0],
 	["\\",0],
 	[",",0],
 	["begin{array}",-1], // for \begin{array}
@@ -171,7 +176,10 @@ function init() {
 	LatexHandle(dict);
 	// regexp patterns to recognize Latex commands. You must enter the args above
 	var cmdpattern =[
-	'\\\\cr','\\\\\\\\',
+	'\\\\cr',
+	'\\\\\\\\[n]',//+'n',
+	//'\\\\\\\\[\\s]*n',//+'n',
+	'\\\\\\\\',
 	'\\\\;','\\\\,','\\\\!',
 	'\\\\left\\\x28','\\\\right\\\x28',
 	'\\\\left\\\\[','\\\\right\\\\]',
@@ -220,6 +228,7 @@ function initFalsePair() {
 		["Juste","Correct"],
 		["Lesignedelaconstanteestfaux.","The sign of the constant is wrong."],
 		["Nouvelénoncé","New  exercise"],
+		["Nouvelexercice","New exercise"],
 		["RéalisationJoëlGauvainLycéeRenéJosuéValin17000LaRochelle",
 		 "Design by Joël Gauvain\nLycée René Josué Valin\n17000 La Rochelle"],
 		["Donnerlesdeuxréels","Give the two reals "],
@@ -241,6 +250,7 @@ function initFalsePair() {
 		[",affixedupointMdansleplancomplexe.",", immagine del punto M nel piano complesso"],
 		["Donner","Dare"],
 		["Nouvelénoncé","Nuovo esercizio"],
+		["Nouvelexercice","Nuovo esercizio"],
 		["RéalisationJoëlGauvainLycéeRenéJosuéValin17000LaRochelle",
 		 "Autore: Joël Gauvain\nLycée René Josué Valin\n17000 La Rochelle"],
 		["Donnerlesdeuxréels","Dare due numeri "],
@@ -256,7 +266,11 @@ function initFalsePair() {
 		["Vousaveztracélacourbedelafonctionsinus","Avete tracciato il grafico della funzione seno"],
 		["n'appartientpasàl'intervalledonné"," non appartiene all' intervallo dato"],
 		["Validerlafigure","Convalida la figura"],
-		["RAZ","Reset"],["RAZ(àcacher)","Reset (off)"]
+		["RAZ","Reset"],["RAZ(àcacher)","Reset (off)"],
+		["Accueil","Inizio"],
+		["Ici,commeilfaut","Qui"],
+		["latenteàutiliservaut","latente vale"],["grammed'eau."," grammi d'acqua"]
+		
 	]);
 }
 function RT_inittrans() {

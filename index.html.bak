@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Geogebra Translator</title>
+  </head>
+  <body>
+    <p>This site offer several services to foster the reusability of Geogebra
+      activities. The main offered services are:</p>
+    <ul>
+      <li>a <a href="indexGGBver.html" target="_blank">translator</a> service
+        that creates <i>augmented</i> ggb activities that adds multi-lingual
+        support to existing mono-lingual GGB activities;</li>
+      <li>a <a href="indexheurdocreport.html" target="_blank">reporter</a>
+        service that adds reporting to existing GGB activities;</li>
+      <li>a collection of augmented ggb activities with multilingual and
+        reporting support (see examples <a href="example.html">here</a> and <a
+          href="examplereport.html" target="_blank">here</a>).</li>
+    </ul>
+    The augmented ggbs are transparent w.r.t. the <a href="https://github.com/TWINGSISTER/moodle-mod_geogebra">Moodle
+      plugins that supports GGB activities with auto-grading in Moodle</a> and <a
+      href="https://github.com/TWINGSISTER/moodle-grade-extended">extended
+      report in Moodle</a>. Thus we can package multilingual ggb activity with
+    report for self assessed grading into Moodle backups to provide cartridge to
+    load quickly into Moodle collections of&nbsp; ready to use GGB activities.<br>
+    <ul>
+    </ul>
+  </body>
+</html>

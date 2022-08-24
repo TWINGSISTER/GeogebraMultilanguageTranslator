@@ -77,7 +77,7 @@ function saveGGB(fname,GGBContent,...args) {
 function selectFiles(multi,pattern,...args){ 
 	// the last argument is a function to which is passed 
 	// the fileList 
-	//debugger;
+	debugger;
 	var fileList;
 	var fileSelector = document.createElement('input');
 	fileSelector.setAttribute('type', 'file');
@@ -85,7 +85,8 @@ function selectFiles(multi,pattern,...args){
     fileSelector.setAttribute('multiple',multi)
     fileSelector.setAttribute('accept',pattern);
 			function fileL(){
-				//debugger;
+				debugger;
+				fileList=fileSelector.files;
 				fileList=fileSelector.files;
 				var strhandles =[];
 					var dir=fileList[0].webkitRelativePath;

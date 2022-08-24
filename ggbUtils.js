@@ -19,6 +19,27 @@ function	secureSection(action){
 		});
 	});
 }
+//a returns the number of elements in a list 
+function listlen(ls){ 
+	ggbApplet.evalCommand("n235711=Length["+ls+"]");
+	var ret=ggbApplet.getValue("n235711");
+	ggbApplet.deleteObject("n235711");
+	return ret;
+}
+// returns the i-th element (first at 1) of a list
+function listget(ls,i){ 
+	var ret=ls+"_"+i.toString();
+	ggbApplet.evalCommand(ret+"=Element["+ls+","+i.toString()+"]");
+	//var ret=ggbApplet.getValue("n235711");
+	//ggbApplet.deleteObject("n235711");
+	return ret;
+}
+
+// set the i-th element (first at 1) of a list
+function listset(ls,i,objName){ 
+	ggbApplet.evalCommand("setValue("+ls+","+i.toString()+","+objName+")");
+}
+
 function strlist(ls){ 
 var ret= "";
 	    for (let i = 0, l = ls.length; i < l; ++i) 
