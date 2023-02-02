@@ -87,11 +87,11 @@ function init() {
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
 		"AAAAAAAAA","AM","5000ff","kJ/kg.","kJ/kg",
 		"=x_B\\Leftrightarrow",
-		"_A+x_I=2x_B\Leftrightarrow",
-		"_I=2x_B-x_A \Leftrightarrow",
-		"=y_B\Leftrightarrow",
-		"_A+y_I=2y_B\Leftrightarrow",
-		"_I=2y_B-y_A \Leftrightarrow"
+		"_A+x_I=2x_B\\Leftrightarrow",
+		"_I=2x_B-x_A \\Leftrightarrow",
+		"=y_B\\Leftrightarrow",
+		"_A+y_I=2y_B\\Leftrightarrow",
+		"_I=2y_B-y_A \\Leftrightarrow"
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
@@ -254,6 +254,7 @@ function initFalsePair() {
 		 "Il piano è dotato di un riferimento (O;I;J). In ogni\nesercizio, un punto A deve essere collocato conoscendo\nle sue coordinate."],
 		["Lesignedelaconstanteestfaux.","Il segno della costante è sbagliato."],
 		["Juste","Giusto"],
+		["JUSTE","Giusto"],
 		[",affixedupointMdansleplancomplexe.",", immagine del punto M nel piano complesso"],
 		["Donner","Dare"],
 		["Nouvelénoncé","Nuovo esercizio"],
