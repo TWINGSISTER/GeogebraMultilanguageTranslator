@@ -134,7 +134,7 @@ function init() {
 	[";",0],
 	["alpha",0],
 	["beta",0],
-	["beta'",0],["Longleftrightarrow",0],
+	["beta'",0],["Longleftrightarrow",0],["Leftrightarrow",0],
 	["cup",0],
 	["leqslant",0],
 	['mathbb',1],
@@ -239,6 +239,7 @@ function initFalsePair() {
 		
 	]);
 	updateFalsePair("IT",[
+		["AI","AI"],
 		["Réponsenonvalable",
 		 "Risposta\nsbagliata"],
 		[",affixedupointMdansleplancomplexe.",
