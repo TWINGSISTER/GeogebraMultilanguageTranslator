@@ -86,6 +86,7 @@ function init() {
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
 		"AAAAAAAAA","AM","5000ff","kJ/kg.","kJ/kg",
+		"=x_B\Leftrightarrow"
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
