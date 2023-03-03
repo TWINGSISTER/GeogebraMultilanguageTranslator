@@ -48,7 +48,7 @@ This OSA is convenient when integrated with reporting provided by the plugin ver
 A [more detailed documentation about the OSA is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBOSAver.html). 
 You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/example-osa.html) 
 that is taken from
-[here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html). In particular the orignal activity was 
+[here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html). In particular the original activity was 
 [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample-osa.html) 
 
 All the materials in this site, unless specifically noted, are (c) by  TWINGSISTER.
