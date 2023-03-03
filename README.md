@@ -47,7 +47,7 @@ This OSA service provides a  Geogebra javascript package to create a single step
 This OSA is convenient when integrated with reporting provided by the plugin version of question type for geogebra [here](https://github.com/TWINGSISTER/moodle-qtype_geogebra). The OSA service can be run on the spot  [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-latest-OSA.html).
 A [more detailed documentation about the OSA is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBOSAver.html). 
 You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/example-osa.html) 
-that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html). and [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample.html) 
+that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html) and [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample-osa.html) 
 
 All the materials in this site, unless specifically noted, are (c) by  TWINGSISTER.
  and are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 
