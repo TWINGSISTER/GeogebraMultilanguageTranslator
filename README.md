@@ -26,7 +26,7 @@ files into a browser that has relaxed security constrants. See the attached .bat
 The main service provides a  Geogebra javascript package to create a multilanguage version of your ggb activities.
 [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html).
 A [more detailed documentation about the translator is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html). 
-You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/example.html) 
+You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/Tests/Valin/example.html) 
 that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html). and [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample.html) 
 A proof of concept video is [here](https://www.youtube.com/watch?v=A8KA8vFJ0YQ)
 
@@ -44,10 +44,8 @@ This third package in this repo offers a third online services to modify Geogebr
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
 files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
 This OSA service provides a  Geogebra javascript package to create a single step version of your ggb activities. This works on a batch of .ggb files and turns a set of  GGB activities that  propose a repetition of several randomized tests into a set of GGB activities that just propose one quiz and stop. 
-This OSA is convenient when integrated with reporting provided by the plugin version of question type for geogebra [here](https://github.com/TWINGSISTER/moodle-qtype_geogebra). The OSA service can be run on the spot  [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-latest-valinonestep.html).
-
-
-A [more detailed documentation about the translator is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html). 
+This OSA is convenient when integrated with reporting provided by the plugin version of question type for geogebra [here](https://github.com/TWINGSISTER/moodle-qtype_geogebra). The OSA service can be run on the spot  [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-latest-OSA.html).
+A [more detailed documentation about the OSA is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBOSAver.html). 
 You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/example.html) 
 that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html). and [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample.html) 
 
