@@ -22,7 +22,6 @@
       Then a file picker comes up and you can select one or more files
       SomeName.ggb. </p>
     <p style="text-align: center;"><img src="OSAmask.jpg" alt="" style="width: 657px; height: 283px;"></p>
-    <br>
     <p>The service do his work and then&nbsp; prompts to download&nbsp; the
       OSAed&nbsp; ggbs that are the adapted versions of the input ggbs. The user
       can specify with "<span style="color: red;">Output Filename Suffix</span>"&nbsp;
