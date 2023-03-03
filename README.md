@@ -1,6 +1,7 @@
 # Geogebra (GGB) Preprocessor
-This repo offers  two online services that modify .ggb GGB files. The two services are 
-a Translator to build a multilingial version of an existing GGB activities and a Reporter that adds facility to track students work and output student's progress as an HTML file containing a set of PDF snapshots of the student's activity.
+This repo offers  three online services that modify .ggb GGB files. The three services are 
+a Translator to build a multilingial version of an existing GGB activities and a Reporter that adds facility to track students work and output student's progress as an HTML file containing a set of PDF snapshots of the student's activity. The third service is an extension of the second that supports batch 
+operations for editing a bunch of ggb files that needs some bookkeping to fit in a certain scheme. 
 # Geogebra (GGB) Report Support
 This first package in this repo offers an online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
 code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
@@ -38,6 +39,17 @@ Download a bundle and then unzip into the Geogebra folder so that you have the f
 Geogebra\geogebra-math-apps-bundle-5-0-nnn-x\GeoGebra\deployggb.js. 
 Then do some editing to  point your index.html to it. 
 If you run into problems and you really need a personal copy of these services just fork this repo!
+# Geogebra (GGB) One Step Adapter (OSA)
+This third package in this repo offers a third online services to modify Geogebra (GGB) .ggb files. The repository contains all the 
+code to run these services. You can use it online or copy this locally. If you use the local version you  must load the index
+files into a browser that has relaxed security constrants. See the attached .bat files for the right options for Chrome.
+This OSA service provides a  Geogebra javascript package to create a single step version of your ggb activities. This works on a batch of .ggb files and turns a set of  GGB activities that  propose a repetition of several randomized tests into a set of GGB activities that just propose one quiz and stop. 
+This OSA is convenient when integrated with reporting provided by the plugin version of question type for geogebra [here](https://github.com/TWINGSISTER/moodle-qtype_geogebra). The OSA service can be run on the spot  [Try this package here](https://twingsister.github.io/GeogebraMultilanguageTranslator/index-private-latest-valinonestep.html).
+
+
+A [more detailed documentation about the translator is here](https://twingsister.github.io/GeogebraMultilanguageTranslator/indexGGBver.html). 
+You can find an example of the resulting GGB activity [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/example.html) 
+that is taken from [here](href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html). and [here](https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample.html) 
 
 All the materials in this site, unless specifically noted, are (c) by  TWINGSISTER.
  and are licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. 

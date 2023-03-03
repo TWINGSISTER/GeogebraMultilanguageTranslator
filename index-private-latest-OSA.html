@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Geogebra Applet</title>
+    <!--link rel="stylesheet" href="style.css"-->
+	<meta name=viewport content="width=device-width,initial-scale=1">  
+	<meta charset="utf-8"/>
+	<!--base href="./Geogebra/geogebra-math-apps-bundle-5-0-687-0/GeoGebra/HTML5/5.0/"-->
+	<base href=".">
+  </head>
+  <body>
+     <script src="./Geogebra/geogebra-math-apps-bundle-5-0-latest/GeoGebra/deployggb.js"></script>
+     <!--script src="../../deployggb.js"><---!script>
+    <!-- page content -->
+	<div id="ggb-element"></div> 
+	<script>  
+			var ggbApp = new GGBApplet({"appName": "classic","useBrowserForJS": false,  "width": 1366,  "height": 768, //
+				"randomSeed":33,"showToolBar": true, "showAlgebraInput": true, "showMenuBar": true, "borderColor": "#FF0000","filename":"./valinonestep.ggb"  }, true);
+			ggbApp.setHTML5Codebase("./Geogebra/geogebra-math-apps-bundle-5-0-latest/GeoGebra/HTML5/5.0/web3d/");
+    		window.addEventListener("load", function() { 
+        	ggbApp.inject('ggb-element');
+    });
+	</script>
+  </body>
+</html>

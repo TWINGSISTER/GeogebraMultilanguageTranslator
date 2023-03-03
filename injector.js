@@ -1,6 +1,44 @@
 /**
  * http://usejsdoc.org/
  */
+function getAllFunctions(prefix){ 
+        var allfunctions=[];
+          for ( var i in window) {
+        if((typeof window[i]).toString()=="function"){
+		if(prefix.some(pattern => window[i].name.startsWith(pattern))){
+         //if(window[i].name.startsWith(prefix)){
+            allfunctions.push(window[i].name);
+           }
+         }
+       }
+       return allfunctions;
+    }
+var filelister;
+
+function getIfCalled(funs,code){ 
+filelister=[];recgetIfCalled(funs,code);
+return[].concat(filelister);
+}
+function recgetIfCalled(funs,code){ 
+ let onefun= funs.find(element =>  {return code.includes(element);});
+ if(onefun!==undefined) {
+  	funs.splice(funs.indexOf(onefun), 1);
+  	filelister.push(onefun);
+  	recgetIfCalled(funs,code+' '+window[onefun].toString());
+   }
+// 	else return new Array();
+}
+function getAllNeededFunctions(prefix,code){ 
+    return getIfCalled(getAllFunctions(prefix),code);
+}
+function getAllNeededCode(prefix,incode){ 
+	var code="";
+	var funs=getAllNeededFunctions(prefix,incode); 
+	for ( let i in funs ) {
+		code=code+" "+window[funs[i]].toString();
+	}
+	return code;
+}
 //-----------------------------------------------------------------------
 function injectNeededCode(handle,ggboninit,prefixPatterns,fname,payload,cont){//(payload,cont)
 //handle could be "innerGgbOnInit()"

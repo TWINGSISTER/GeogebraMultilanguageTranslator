@@ -25,6 +25,7 @@ function init() {
 		"×\\textcolor{red}{",'\\textcolor{red}{','}}{\\textcolor{blue}{','=\\frac{\\textcolor{red}{',
 		'}×\\textcolor{blue}{','=\\textcolor{red}{',
 		'\\frac{\\textcolor{red}{a',
+		'}{2}=\\frac{',
 		"}}{\\textcolor{blue}{a",
 		'\\frac{\\textcolor{red}{a',
 		'}}=\\textcolor{red}{',

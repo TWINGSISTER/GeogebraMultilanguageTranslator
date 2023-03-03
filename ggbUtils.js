@@ -55,6 +55,12 @@ function intgetparlist(s,sep){
 		 retpars.push(intgetparlist(pars[i].trim(),sep.slice(1)));
 	return retpars;
 }
+/*
+function getparmap(s,sep1,sep2){
+	if (ggbApplet.exists(s)) var candretval=RT_lod(s); else return [];
+	return intgetparlist(candretval,[sep1,sep2]);
+}
+*/
 function getparlist(s){
 	if (ggbApplet.exists(s)) var candretval=RT_lod(s); else return [];
 	return intgetparlist(candretval,[',','|']);

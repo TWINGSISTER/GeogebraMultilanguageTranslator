@@ -23,6 +23,21 @@ function RT_R_LinkBtn(){
 	}
 function RT_R_exportsnap (cont) {ggbApplet.exportPDF(1,cont);}
 
+function RT_R_oneHndl(){
+	ggbApplet.evalCommand('Text("Risposta Registrata")');
+	RT_R_log();
+	alert("Snapshot taken");
+	RT_R_saveHistory(()=>{RT_outcoreGlob();});
+}
+function RT_R_oneHndl2(){
+	ggbApplet.evalCommand('Text("Risposta Registrata")');
+	ggbApplet.evalCommand('SetActiveView("G")');
+	RT_R_log();
+	ggbApplet.evalCommand('SetActiveView("D")');
+	RT_R_log();
+	alert("Snapshot taken");
+	RT_R_saveHistory(()=>{RT_outcoreGlob();});
+}
 function RT_R_SnpHndl(){
 	debugger;
 	RT_R_log();
