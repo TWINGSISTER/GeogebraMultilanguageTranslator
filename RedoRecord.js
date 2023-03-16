@@ -49,7 +49,7 @@ function RT_R_Snapshot2Add(){
 	ggbApplet.evalCommand('snap1 = ExportImage("view", 1, "corner",C_1,"corner2",C_2,"height",h_1,"width",w_1)');
 	ggbApplet.evalCommand('SetActiveView("D")');
 	ggbApplet.evalCommand('C_3=Corner(2,1)');
-	ggbApplet.evalCommand('C_4=Corner(2,2)');
+	ggbApplet.evalCommand('C_4=Corner(2,3)');
 	ggbApplet.evalCommand('C_2wh=Corner(2,5)');
 	ggbApplet.evalCommand('w_2=x(C_2wh)');
 	ggbApplet.evalCommand('h_2=y(C_2wh)');
