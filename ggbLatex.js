@@ -332,7 +332,7 @@ function deLatex(id,origText,tr,dry,html,tl){
 function dumpLatexTranslate(wd,id,origText,dry,html) {
 	// we assume that in Latex code the only thing to translate is within \text
 	//debugger;
-				var translin = deLatex(id,origText,tr,true,html);
+				var translin = deLatex(id,origText,null,true,html); //null former tr
 				var translated =dumpstrTrans(wd,id,translin,html);
 				if (html==null) { return ""; } else  { return deLatex(objName,origText,translated,false,html);}
 }

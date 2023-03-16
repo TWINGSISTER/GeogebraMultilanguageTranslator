@@ -110,6 +110,7 @@ function init() {
 		["n fonction de }n:","fonction de"],
 		["Q=mL avec m=","avec"],
 		['\\mbox{Ici, comme il faut “ ',"Ici, comme il faut "],
+		['\\mbox{Le coefficient directeur vaut :\\\\ ',"Le coefficient directeur vaut :"],
 		['” la chaleur\\\\',"la chaleur"]
 		]);
 	KnowSubsInit(diffdict); 
@@ -152,6 +153,7 @@ function init() {
 	["cos",0],
 	["sin",0],
 	["infty",0],
+	["textit",1],
 	["sqrt",1],["vec",1],["fgcolor",1],
 	["mbox",1],
 	["cr",0],
