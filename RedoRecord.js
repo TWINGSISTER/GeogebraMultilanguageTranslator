@@ -42,7 +42,7 @@ function RT_R_Snapshot2Add(){
 	ggbApplet.evalCommand('Text("Risposta Registrata")');
 	ggbApplet.evalCommand('SetActiveView("G")');
 	ggbApplet.evalCommand('C_1=Corner(1,1)');
-	ggbApplet.evalCommand('C_2=Corner(1,2)');
+	ggbApplet.evalCommand('C_2=Corner(1,3)');
 	ggbApplet.evalCommand('C_1wh=Corner(1,5)');
 	ggbApplet.evalCommand('w_1=x(C_1wh)');
 	ggbApplet.evalCommand('h_1=y(C_1wh)');
