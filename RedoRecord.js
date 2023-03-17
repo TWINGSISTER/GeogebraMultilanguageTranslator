@@ -42,20 +42,20 @@ function RT_R_Snapshot2Add(){
 	ggbApplet.evalCommand('Text("Risposta Registrata")');
 	ggbApplet.evalCommand('SetActiveView("G")');
 	ggbApplet.evalCommand('C_1=Corner(1,1)');
-	ggbApplet.evalCommand('C_2=Corner(1,3)');
+	ggbApplet.evalCommand('C_2=Corner(1,2)');
 	ggbApplet.evalCommand('C_1wh=Corner(1,5)');
 	ggbApplet.evalCommand('w_1=x(C_1wh)');
 	ggbApplet.evalCommand('h_1=y(C_1wh)');
 	ggbApplet.evalCommand('snap1 = ExportImage("view", 1, "corner",C_1,"corner2",C_2,"height",h_1,"width",w_1)');
 	ggbApplet.evalCommand('SetActiveView("D")');
 	ggbApplet.evalCommand('C_3=Corner(2,1)');
-	ggbApplet.evalCommand('C_4=Corner(2,3)');
+	ggbApplet.evalCommand('C_4=Corner(2,2)');
 	ggbApplet.evalCommand('C_2wh=Corner(2,5)');
 	ggbApplet.evalCommand('w_2=x(C_2wh)');
 	ggbApplet.evalCommand('h_2=y(C_2wh)');
 	ggbApplet.evalCommand('snap2 = ExportImage("view", 2, "corner",C_3,"corner2",C_4,"height",h_2,"width",w_2)');
-	//ggbApplet.undo();
-	//ggbApplet.redo();
+	ggbApplet.undo();
+	ggbApplet.redo();
 	alert("Snapshot taken");
 }
 function RT_R_SnpHndl(){
