@@ -54,9 +54,9 @@ function RT_R_Snapshot2Add(){
 	ggbApplet.evalCommand('w_2=x(C_2wh)');
 	ggbApplet.evalCommand('h_2=y(C_2wh)');
 	ggbApplet.evalCommand('snap2 = ExportImage("view", 2, "corner",C_3,"corner2",C_4,"height",h_2,"width",w_2)');
-	alert("Snapshot taken");
 	ggbApplet.undo();
 	ggbApplet.redo();
+	alert("Snapshot taken");
 }
 function RT_R_SnpHndl(){
 	debugger;
