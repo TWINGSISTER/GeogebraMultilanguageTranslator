@@ -39,7 +39,7 @@ function RT_R_oneHndl2(){
 	RT_R_saveHistory(()=>{RT_outcoreGlob();});
 }
 function RT_R_Snapshot2Add(){
-debugger;
+	debugger;
 	ggbApplet.evalCommand('Text("Risposta Registrata")');
 	ggbApplet.evalCommand('SetActiveView("G")');
 	ggbApplet.evalCommand('C_1=Corner(1,1)');
