@@ -61,9 +61,12 @@
       <li><span style="color: red;">Init code</span>: a string with a JS
         fragment that will be added to the initialization code run by the OASed
         .ggb when starting.</li>
-      <li><span style="color: red;">Initialization Functions</span>: a list of
-        strings that are the names of the functions that are needed in the
-        initialization code. The code for these functions is scanned to find
+      <li><span style="color: red;">Initialization Functions</span> <span style="color: red;">and
+          JS global variables</span>: a list of strings that are the prefixes of
+        the names of the global variables and functions that are needed in the
+        initialization code. Please note that initialization to global variables
+        are not propagated. You should add it yorself in the the initialization
+        code. On the other hand the code for the functions is scanned to find
         other functions names that are needed. If some functions are needed in
         other places put them in this list. To limit the number of functions to
         be searched the filter in the field "<span style="color: red;">Filter</span>"
@@ -73,6 +76,16 @@
       <li><span style="color: red;">Buttons to add</span>: a list of triples
         e.g. name|caption|code,n1|c1|sw1. creates button named n1 with caption
         c1 and with handler given as the function named sw1</li>
+      <li><span style="color: red;">Global variables outcore in GGB text</span>:
+        if set the global variables one might set and retrieve with functions in
+        the package ggbGlob.js are kept in GGB text variables and are
+        persistent. If not set the functions in ggbGlob.js use JS variables.
+        that are more compact and fast but are not persistent.</li>
+      <li>&nbsp;<span style="color: red;">Filename on: </span>if set some code
+        is added to have a GGB text variable holding the name of the original
+        .ggb file. This variable is a global variable that must be accessed by
+        the functions in the package ggbGlob.js and is named THISFILENAME (what
+        else?).</li>
     </ul>
     <p style="text-align: justify; background-color: white;"><i>In particular
         the choice in the example will give files SomeName-one.ggb decorated

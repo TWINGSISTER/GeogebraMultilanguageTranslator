@@ -62,8 +62,10 @@
         fragment that will be added to the initialization code run by the OASed
         .ggb when starting.</li>
       <li><span style="color: red;">Initialization Functions</span>: a list of
-        strings that are the names of the functions that are needed in the
-        initialization code. The code for these functions is scanned to find
+        strings that are the  prefixes of the names of the global variables and 
+        functions that are needed in the
+        initialization code. Please note that initializations to global variables are not propagateda. 
+        You should add it yorself in the the initialization code. On the other hand the code for the functions is scanned to find
         other functions names that are needed. If some functions are needed in
         other places put them in this list. To limit the number of functions to
         be searched the filter in the field "<span style="color: red;">Filter</span>"
@@ -85,7 +87,7 @@
         snapshot both Graphics and Graphics2 views while there is provision in
         the code for the function RT_R_oneHndl that just snapshots Graphics.</i></p>
     You can find an example of the resulting GGB activity <a href="example-osa.html"
-      target="_blank">here</a> that is obtained by processing <a href="https://twingsister.github.io/GeogebraMultilanguageTranslator/origexample-osa.html"
+      target="_blank">here</a> that is obtained by processing <a href="origexample-osa.html"
       target="_blank">this example</a> taken from <a href="http://www.lycee-valin.fr/maths/exercices_en_ligne/moodle.html"
       target="_blank">this site</a>. <br>
     <h3 style="text-align: justify;">Browser problems</h3>

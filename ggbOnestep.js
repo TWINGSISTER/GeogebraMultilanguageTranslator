@@ -55,7 +55,7 @@
 	}
 //-----------------------------------------------------------------------
 //-----------------------------------------------------------------------
-	function oneReporterFile(fileList,suffix,initcode,inifun,delObjs,appendObjs,substituteObjs,buttons,libs,filter,globs,cont){
+	function oneReporterFile(fileList,suffix,initcode,inifun,delObjs,appendObjs,substituteObjs,buttons,libs,filter,outcore,filenameon,globs,cont){
 		debugger;
 		if(fileList.length==0){cont(); return;}
 		var file=fileList[0];
@@ -149,10 +149,12 @@
 						var i=0;
 						while(eval("typeof " + handle+i.toString())=== 'function')i++;
 						var ggbiniton=
-							"function ggbOnInit(){"+handle+i.toString()+"();"+
+							"function ggbOnInit(){"+
+							(outcore?"RT_incore=false;":"RT_incore=true;")+ //if true we are using JS global variables.
+							// this is supposed to be faster but it is not persistent. If false we store in text variables in GGB
+							handle+i.toString()+"();"+
 							"RT_loader(["+libslist+"],()=>{"+  
-							"RT_incore=false;"+
-							//"RT_incore=false;RT_incoreGlob();"+
+							//"RT_incoreGlob();"+ // this turns on incore
 							//"RT_R_XMLDump=[]; RT_R_initHistory(()=>{ });"+
 							initcode+
 							//Automated reporting to be added "RT_R_start();"+
@@ -160,26 +162,27 @@
 							//Automated reporting to be added init_report_code(delButtons,"RT_R_init_err")+
 							//Automated reporting to be added init_report_code(snapButtons,"RT_R_init_ok")+
 							//Automated reporting to be added init_report_code(substituteObjs,"RT_R_init_iterat")+
-							'RT_globsto("THISFILENAME","'+rootfname+'");'+
+							(filenameon?'RT_globsto("THISFILENAME","'+rootfname+'");':'')+
 							// Moodle Geogebra STAC TO BE ADDED 'try   {RT_initHook(); }catch(e){};'+
 							//'if(arguments.length>0){RT_bootdo(arguments[0])}'+
 							//'RT_globsto("FILEMANE",'+fname+'
 							"})}";
 							//var funclist=["RT_loader","RT_incoreGlob"].concat(buttonCLBFiles.concat(inifunclosure));//,filter,//["RT_R_","RT_"],
-							var funclist=["RT_loader"].concat(buttonCLBFiles.concat(inifunclosure));//,filter,//["RT_R_","RT_"],
+							var funclist=(outcore?["RT_incore","RT_loader"]:["RT_incore","RT_loader","RT_incoreGlob"]);
+							var funclist=funclist.concat(buttonCLBFiles.concat(inifunclosure));//,filter,//["RT_R_","RT_"],
 							funclist=[...new Set(funclist)];
 						
 						injectNeededCode(handle+i.toString()+"()",
 						ggbiniton,
 						funclist,
-							//"RT_saveFileHtml","RT_GGBExitHook","RT_outcoreGlob",
+							//"RT_saveFileHtml","XXXRT_GGBExitHook","RT_outcoreGlob",
 							//	"RT_globsto","RT_globlod","RT_globExists","RT_incoreGlob",
 							//	"RT_packGlobs","RT_wipeGlobs","RT_isGlob","RT_lod",
-							//"RT_initGGBMoodle","RT_incore","RT_loader","RT_unCommandStringify",RT_base64DecodeUnicode	
+							//"XXXRT_initGGBMoodle","RT_incore","RT_loader","RT_unCommandStringify",RT_base64DecodeUnicode	
 							//	],
 							fname,payload,
 							()=>{
-								oneReporterFile(OtherFiles,suffix,initcode,inifun,delObjs,appendObjs,substituteObjs,buttons,libs,filter,globs,cont);
+								oneReporterFile(OtherFiles,suffix,initcode,inifun,delObjs,appendObjs,substituteObjs,buttons,libs,filter,outcore,filenameon,globs,cont);
 							});
 					});
 				//wipeGlobs();
@@ -212,6 +215,8 @@ function clickToOnestep(){
 	var inifun="";
 	var buttons="";
 	var filter="";
+	var outcore=false;
+	var filenameon=false;
 	if(ggbApplet.exists("VARDEL")){delObjs=getparlist("VARDEL").flat();}
 	if(ggbApplet.exists("VARAPPEND")){appendObjs=getparlist("VARAPPEND");}
 	if(ggbApplet.exists("VARSUBSTITUTE")){substituteObjs=getparlist("VARSUBSTITUTE");}
@@ -221,12 +226,14 @@ function clickToOnestep(){
 	if(ggbApplet.exists("VARLIBS")){libs=getparlist("VARLIBS").flat();}
 	if(ggbApplet.exists("VARBUTTONS")){buttons=getparlist("VARBUTTONS");
 	if(ggbApplet.exists("VARFILTER")){filter=getparlist("VARFILTER").flat();}	
+	if(ggbApplet.exists("VAROUTCORE")){outcore=RT_lod("VAROUTCORE");}
+	if(ggbApplet.exists("VARFILENAME")){filenameon=RT_lod("VARFILENAME");}
 	}
 	foundConditions=(delObjs.length+appendObjs.length+substituteObjs.length);
 		//if (foundConditions>0){
 	  		if(confirm("Do you want to add reporting with the given "+foundConditions.toString()+" buttons")){
 	 			selectFiles(true,".ggb",(list)=>{
-					secureSection((globs,cont)=>{oneReporterFile(list,suffix,initcode,inifun,delObjs,appendObjs,substituteObjs,buttons,libs,filter,globs,cont)})
+					secureSection((globs,cont)=>{oneReporterFile(list,suffix,initcode,inifun,delObjs,appendObjs,substituteObjs,buttons,libs,filter,outcore,filenameon,globs,cont)})
 				});
  	  		}
 		//}

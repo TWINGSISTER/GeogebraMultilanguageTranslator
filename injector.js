@@ -62,7 +62,7 @@ function injectNeededCode(handle,ggboninit,prefixPatterns,fname,payload,cont){//
 	//"./RT.js"
 	//],
 	//(JScode)=>{
-		//debugger;
+		debugger;
 	var code = "";
 	// CODE FOR GLOBAL VARIABLES
 	var varlist=Object.getOwnPropertyNames(window).filter(item =>
