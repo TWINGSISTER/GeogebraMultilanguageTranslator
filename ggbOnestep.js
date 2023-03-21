@@ -166,6 +166,7 @@
 							// Moodle Geogebra STAC TO BE ADDED 'try   {RT_initHook(); }catch(e){};'+
 							//'if(arguments.length>0){RT_bootdo(arguments[0])}'+
 							//'RT_globsto("FILEMANE",'+fname+'
+							// STAC NEEDS FUNCTIONS RT_GGBExitHook""RT_initGGBMoodle" 
 							"})}";
 							//var funclist=["RT_loader","RT_incoreGlob"].concat(buttonCLBFiles.concat(inifunclosure));//,filter,//["RT_R_","RT_"],
 							var funclist=(outcore?["RT_incore","RT_loader"]:["RT_incore","RT_loader","RT_incoreGlob"]);
@@ -175,10 +176,10 @@
 						injectNeededCode(handle+i.toString()+"()",
 						ggbiniton,
 						funclist,
-							//"RT_saveFileHtml","XXXRT_GGBExitHook","RT_outcoreGlob",
+							//"RT_saveFileHtml",""RT_outcoreGlob",
 							//	"RT_globsto","RT_globlod","RT_globExists","RT_incoreGlob",
 							//	"RT_packGlobs","RT_wipeGlobs","RT_isGlob","RT_lod",
-							//"XXXRT_initGGBMoodle","RT_incore","RT_loader","RT_unCommandStringify",RT_base64DecodeUnicode	
+							//,"RT_incore","RT_loader","RT_unCommandStringify",RT_base64DecodeUnicode	
 							//	],
 							fname,payload,
 							()=>{

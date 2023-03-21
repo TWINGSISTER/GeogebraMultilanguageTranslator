@@ -38,6 +38,11 @@ function RT_R_oneHndl2(){
 	alert("Snapshot taken");
 	RT_R_saveHistory(()=>{RT_outcoreGlob();});
 }
+function RT_unlockPoint(P){
+	var Px=ggbApplet.getXcoord(P);
+	var Py=ggbApplet.getYcoord(P);
+	ggbApplet.evalCommand(P+'=('+Px.toString()+','+Py.toString()+')');
+}
 function RT_R_Snapshot2Add(){
 	debugger;
 	ggbApplet.evalCommand('Text("Risposta Registrata")');
@@ -47,14 +52,22 @@ function RT_R_Snapshot2Add(){
 	ggbApplet.evalCommand('C_1wh=Corner(1,5)');
 	ggbApplet.evalCommand('w_1=x(C_1wh)');
 	ggbApplet.evalCommand('h_1=y(C_1wh)');
-	ggbApplet.evalCommand('snap1 = ExportImage("view", 1, "corner",C_1,"corner2",C_2,"height",h_1,"width",w_1)');
+	ggbApplet.evalCommand('C_12=(C_1+C_2)/2+(2,2)');RT_unlockPoint('C_12');
+	ggbApplet.evalCommand('C_2b=C_2+(-2,2)');RT_unlockPoint('C_2b');
+	ggbApplet.evalCommand('SetBackgroundColor("Light green")');
+	ggbApplet.evalCommand('snap1 = ExportImage("view", 1, "corner",C_12,"corner2",C_2b,"height",h_1,"width",w_1)');
+	ggbApplet.evalCommand('SetBackgroundColor("White")');
 	ggbApplet.evalCommand('SetActiveView("D")');
 	ggbApplet.evalCommand('C_3=Corner(2,1)');
 	ggbApplet.evalCommand('C_4=Corner(2,2)');
+	ggbApplet.evalCommand('C_34=(C_3+C_4)/2+(2,2)');RT_unlockPoint('C_34');
+	ggbApplet.evalCommand('C_4b=C_4+(-2,2)');RT_unlockPoint('C_4b');
 	ggbApplet.evalCommand('C_2wh=Corner(2,5)');
 	ggbApplet.evalCommand('w_2=x(C_2wh)');
 	ggbApplet.evalCommand('h_2=y(C_2wh)');
-	ggbApplet.evalCommand('snap2 = ExportImage("view", 2, "corner",C_3,"corner2",C_4,"height",h_2,"width",w_2)');
+	ggbApplet.evalCommand('SetBackgroundColor("Light green")');
+	ggbApplet.evalCommand('snap2 = ExportImage("view", 2, "corner",C_34,"corner2",C_4b,"height",h_2,"width",w_2)');
+	ggbApplet.evalCommand('SetBackgroundColor("White")');
 	//ggbApplet.undo();
 	//ggbApplet.redo();
 	alert("Snapshot taken");
