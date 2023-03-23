@@ -63,7 +63,7 @@ function getparmap(s,sep1,sep2){
 */
 function getparlist(s){
 	if (ggbApplet.exists(s)) var candretval=RT_lod(s); else return [];
-	return intgetparlist(candretval,[',','|']);
+	return intgetparlist(candretval,['#','%']);
 }
 //----------------------------------------------------------------------
 function RT_deleteButton(name){
