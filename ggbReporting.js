@@ -41,7 +41,7 @@
 		//ggbApplet.getBase64((oldscript)=>{
 		//debugger;
 			//var globstatesave = RT_packGlobs() ;
-			readGGBBase64(file,(ggbtoprocess)=>{
+			RT_readGGBBase64(file,(ggbtoprocess)=>{
 			//debugger;
 				ggbApplet.setBase64(ggbtoprocess,()=>{
 				//debugger;

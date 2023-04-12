@@ -37,7 +37,7 @@ function readFileHtml(file,charencoding,callback) {
 //---------------------------------------------------
 // callback(s) where s is  the .ggb  for file handle as a string
 //---------------------------------------------------
-function readGGBBase64(file,callback) {
+function RT_readGGBBase64(file,callback) {
 //function previewFile() 
 //  const file = document.querySelector('input[type=file]').files[0];
 //debugger;

@@ -144,7 +144,7 @@ function flatlist(objName) {
 			debugger;
 			var globstatesave = RT_packGlobs() ;
 			//ggbApplet.openFile(file.name);
-			readGGBBase64(file,(ggbtoprocess)=>{
+			RT_readGGBBase64(file,(ggbtoprocess)=>{
 				ggbApplet.setBase64(ggbtoprocess,()=>{
 				 	innerglobstatesave = RT_packGlobs() ;//untested
 					RT_unpackGlobs(globstatesave);

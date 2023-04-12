@@ -148,3 +148,46 @@ function setXMLasy(XMLStr){
 	ggbApplet.setFileJSON(JSONPayload);
 }
 */
+//----------------------------------------------------------------------
+// These two functions provide support for the updated distribution of ggbs
+// timestampGGB sets a timestamp for the creation of the GGB and records 
+// NOT USEFUL
+// the URL where to find updated versions. 
+function timestampGGB(URL){
+		RT_globsto("timestampGGB",Date.now());
+		RT_globsto("timestampURL",URL);
+}
+
+function RT_updateGGB(cont){
+		var ggbtimestamp=RT_globlod("timestampGGB");
+		var URL=RT_globlod("timestampURL",URL);
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", URL, true);
+		xhr.onreadystatechange = function() {
+ 	   			// readystate 2, headers recieved
+ 	   			var nettimestamp=0;
+ 	   			if (this.readyState == 2){
+             		nettimestamp=this.getResponseHeader("Last-Modified");
+        			if (netttimestamp){
+					if(ggbtimestamp<nettimestamp){
+		 				RT_globsto("timestampGGB",nettimestamp);
+						RT_readGGBBase64(URL, (ggbtoprocess)=>{ggbApplet.setBase64(ggbtoprocess,cont)})
+					}
+        			} else { }
+    			}
+			}
+		/* 
+		xhr.onload = (e) => {
+  			if (xhr.readyState === 4) {
+    			if (xhr.status === 200) {
+      			console.log(xhr.responseText);
+    			} else {
+      			console.error(xhr.statusText);
+    			}
+  			}
+		};
+		*/
+		xhr.onerror = (e) => {
+		};
+	xhr.send(null);
+}

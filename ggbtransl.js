@@ -401,7 +401,7 @@ function	translateAGGB(globstatesave,ggb,htmls,langs,rnd,cont){
 	//debugger;
 	//debugger;
 	//langs=langs.sort();
- readGGBBase64(ggb,(ggbtoprocess)=>{
+ RT_readGGBBase64(ggb,(ggbtoprocess)=>{
 	//debugger;
 	ggbApplet.setBase64(ggbtoprocess,()=>{
 		//debugger;
