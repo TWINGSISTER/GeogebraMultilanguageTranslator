@@ -20,14 +20,14 @@ function loadall(scripts,doc,head,ref,cont){
     	script.async = false;
 	   	if(scripts.length==1) {
 			script.onload = ()=> {
-				debugger;
+				//debugger;
 				var code ="";
 				for (i = 0; i < ref+1; i++){;
 					code = code+doc.getElementById("scr"+i.toString()).innerHTML;
 		 		} 
 				cont(code);
 		 } 
-				debugger;
+				//debugger;
     		head.appendChild(script);
 		} else {
     		head.appendChild(script);
@@ -38,7 +38,7 @@ function loadall(scripts,doc,head,ref,cont){
 //function loader(scripts,modules,entry){ 
 function loader(scripts,entry){RT_loader(scripts,entry);}
 function RT_loader(scripts,entry){  
-    debugger;
+    //debugger;
     if(scripts.length>0){
     	var script = document.createElement('script');
     	script.src = scripts[0];

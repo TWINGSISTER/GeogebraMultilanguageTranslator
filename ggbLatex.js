@@ -334,7 +334,7 @@ function dumpLatexTranslate(wd,id,origText,dry,html) {
 	//debugger;
 				var translin = deLatex(id,origText,null,true,html); //null former tr
 				var translated =dumpstrTrans(wd,id,translin,html);
-				if (html==null) { return ""; } else  { return deLatex(objName,origText,translated,false,html);}
+				if (html==null) { return ""; } else  { return deLatex(id,origText,translated,false,html);}
 }
 //-----------------------------------------------------------------------
 //  find if the Object uses the latex formula setting 

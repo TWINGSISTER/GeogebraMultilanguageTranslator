@@ -127,7 +127,7 @@ function divPlainText(id,t,fwd,html) {
 		  if (fwd)
 			return "<div id=\""+id+"\" data-title=\""+makeatextkey(t)+"\" class=\"noop\">"+makeatextdiv(t)+"</div>";
 			else {
-				//debugger;
+				debugger;
 				var oldDiv=html.getElementById(id);
 				var trans= makedivatext(oldDiv);
 				//commented out on feb 2022 filterdom do the job before fetching the translation

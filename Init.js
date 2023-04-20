@@ -32,6 +32,7 @@ function init() {
 		'\\textcolor{red}{a',
 		'}×\\textcolor{blue}{a',
 		'\\textcolor{red}{a^{',
+		"m_{2}=\\textcolor{#009B00}{",
 		'a^n\\text{',
 		"     }{   \\textcolor{red}{ (","}{ \\textcolor{red}{ (",
 		'\\frac{a ^{',"a^ma^p","ab^3","ab^2",
@@ -109,6 +110,7 @@ function init() {
 		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"],
 		["n fonction de }n:","fonction de"],
 		["Q=mL avec m=","avec"],
+		["Q=mL avec m=","avec"],
 		['\\mbox{Ici, comme il faut “ ',"Ici, comme il faut "],
 		['\\mbox{Le coefficient directeur vaut :\\\\ ',"Le coefficient directeur vaut :"],
 		['” la chaleur\\\\',"la chaleur"]
@@ -129,6 +131,8 @@ function init() {
 	["end",-1],
 	["cr",0],
 	["in",0],
+	["it",0],
+	["small",0],
 	["times",0],
 	["dfrac",2],
 	["left",0], ["right",0],
@@ -166,8 +170,10 @@ function init() {
 	["\\n",0],
 	["\\",0],
 	[",",0],
+	["begin{align}",0],
 	["begin{array}",-1], // for \begin{array}
 	["end{array}",0], 
+	["end{align}",0], 
 	["begin{array}{l}",0], // for \begin{array} 
 	["begin{array}{c}",0],
 	["begin{array}{lc}",0], 
@@ -201,9 +207,11 @@ function init() {
 	'\\\\begin\\{array\\}\\{lc\\}',
 	'\\\\begin\\{array\\}\\{r\\s*c\\s*l\\}',
 	'\\\\begin\\{array\\}\\{l\\s*r\\s*c\\s*l\\}',
+	'\\\\begin\\{align\\}',
 	'\\\\begin\\{array\\}',
 	//'\\\\textcolor\\{blue\\}',
 	'\\\\end\\{array\\}',
+	'\\\\end\\{align\\}',
 	'\\.\\\\text\\{','n\\\\text\\{',
 	'\\\\left','\\\\right', // to get correct match prefixes must be after
 	'\\\\[a-zA-Z]{2,}',	
@@ -215,7 +223,7 @@ function init() {
 	// to recognize fragments made up only of Latex code put them here 
 	updateLatexComplexPatterns(
 	['\\{l\\s*r\\s*c\\s*l\\}','\\{r\\s*c\\s*l\\}','\\{lc\\}','\\{c\\}','\\{l\\}',	
-	'\\{array\\}\\{l\\s*r\\s*c\\s*l\\}','\\{array\\}\\{r\\s*c\\s*l\\}','\\{array\\}\\{lc\\}','\\{array\\}\\{c\\}','\\{array\\}\\{l\\}','\\{array\\}'	
+	'\\{array\\}\\{l\\s*r\\s*c\\s*l\\}','\\{array\\}\\{r\\s*c\\s*l\\}','\\{array\\}\\{lc\\}','\\{array\\}\\{c\\}','\\{array\\}\\{l\\}','\\{array\\}','\\{align\\}'	
 	].concat(cmdpattern));
 	//updateNotToTranslatePattern([
 	//'UnicodeToLetter\\([0-9]+\\)'	
