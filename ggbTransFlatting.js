@@ -45,6 +45,7 @@ function flatten() {
   	//}	
 	var alltr = ggbApplet.getAllObjectNames();
 	for (objName of alltr) {
+	console.log(objName);
 		var objType = ggbApplet.getObjectType(objName) + "";
 		if (RT_isTranslation(objName)) { continue; } // leave aux objects
 		if (RT_isGlob(objName)) { continue; } // leave aux objects
@@ -62,7 +63,7 @@ function flatten() {
 	if (RT_isTranslation(objName)) { continue; } // leave aux objects
 	if (RT_isGlob(objName)) { continue; } // leave aux objects
 	//if(objType==="list") return flatlist(objName);
-	//console.log(objType);console.log(objName);
+	console.log(objType);console.log(objName);
 	switch (objType) {
 		case "button":
 		case "textfield": {ggbApplet.setFixed(objName, false, true);break;}// all buttons floats or they will not be selectable. 

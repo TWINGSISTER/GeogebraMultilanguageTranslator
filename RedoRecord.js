@@ -43,9 +43,39 @@ function RT_unlockPoint(P){
 	var Py=ggbApplet.getYcoord(P);
 	ggbApplet.evalCommand(P+'=('+Px.toString()+','+Py.toString()+')');
 }
+function RT_R_Visible(Str){
+	var alltr = ggbApplet.getAllObjectNames();
+	for (objName of alltr) {
+		console.log(objName);
+		var objType = ggbApplet.getObjectType(objName) + "";
+		if (RT_isTranslation(objName)) { continue; } // leave aux objects
+		if (RT_isGlob(objName)) { continue; } // leave aux objects
+		switch (objType) {
+			case "text":
+			default: continue;
+  		}
+  	}
+  	return false;
+}
+
+function RT_R_SuccessValidate(BtnStr){
+// the boolean variable MoodleSuccess is fed to grade  
+if(ggbApplet.exists('MoodleSuccess')){
+ var grade=ggbApplet.getValue('MoodleSuccess');
+ var message='grade='+grade.toString();
+ ggbApplet.evalCommand(message);
+ //ggbApplet.evalCommand('grade',ggbApplet.getValue('MoodleSuccess'));
+}
+//ggbApplet.evalCommand('grade=1');
+ggbApplet.evalCommand('MoodleValidated=true');
+RT_R_Snapshot2Add();
+ggbApplet.evalCommand('Delete('+BtnStr+')');
+}
 function RT_R_Snapshot2Add(){
 	debugger;
-	ggbApplet.evalCommand('Text("Risposta Registrata")');
+ 	var grade=ggbApplet.getValue('grade');
+ 	var message='Text("Risposta Registrata:'+grade.toString()+'")';
+	ggbApplet.evalCommand(message);
 	ggbApplet.evalCommand('SetActiveView("G")');
 	ggbApplet.evalCommand('C_1=Corner(1,1)');
 	ggbApplet.evalCommand('C_2=Corner(1,2)');
