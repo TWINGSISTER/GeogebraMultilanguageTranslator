@@ -74,8 +74,8 @@ ggbApplet.evalCommand('Delete('+BtnStr+')');
 function RT_R_Snapshot2Add(){
 	debugger;
  	var grade=ggbApplet.getValue('grade');
- 	var message='Text("Risposta Registrata:'+grade.toString()+'")';
-	ggbApplet.evalCommand(message);
+ 	var message='"Re Pnt:'+grade.toString()+'"';
+	ggbApplet.evalCommand("Re="+message);
 	ggbApplet.evalCommand('SetActiveView("G")');
 	ggbApplet.evalCommand('C_1=Corner(1,1)');
 	ggbApplet.evalCommand('C_2=Corner(1,2)');
