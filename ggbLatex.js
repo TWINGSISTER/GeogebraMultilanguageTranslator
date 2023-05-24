@@ -101,6 +101,7 @@ function fragmentLatex(origText) {
 	origText=drys(origText);
 	//debugger;
 	if(origText.startsWith("\"")&&origText.endsWith("\"")){return fragmentLatex(origText.slice(1,-1));};
+	if(origText.startsWith("\{")&&origText.endsWith("\}")){return fragmentLatex(origText.slice(1,-1));};
 	var dict = RT_globlod("Latexmerge");
 	var noLatexcmds =purgeLatex(origText);
 	//origText.replace(RegExp('\\\\[^\\{|^\\s]*','g'),
@@ -250,6 +251,22 @@ function deLatex(id,origText,tr,dry,html,tl){
 		//alert(brmatch+returnVal);
 		return returnVal;
 	}
+	if(ggbApplet.exists("VARTRNNAME"))trver=RT_lod("VARTRNNAME");
+	if(trver=="TRN002"){
+	// from version TRN002 {foo} is treated putting \mbox{foo} by hand here
+	 var parenth=origText.trim();
+	 if(parenth.startsWith("\{")){
+		var param =matchnargs(argsString,"\\{","\\}",1);
+		if(param)
+		console.log("balanced latex in:"+parenth);
+		  return deLatex(id,"\\mbox"+origText.trim(),tr,dry,html,tl);
+			//var parenthin =param.get("args")[0].slice(1,-1);
+			//returnVal=
+		  	//	((dry)?"":"{")+
+		    //		deLatex(idarg,parenthin,tr,dry,html)+ // tear off curly
+		  	//	((dry)?"":"}");
+		}
+	}
 	var matchCmd =matchLatex(origText);// \something
 	//var matchCmd =origText.match(RegExp('\\\\[^\\\\|^\\{|^\\s]*'));// \something
 	if(!matchCmd) {return divPlainText(id,origText,dry,html);}
@@ -292,7 +309,7 @@ function deLatex(id,origText,tr,dry,html,tl){
 		}
 		returnVal=returnVal+
 			((dry)?"":"")+
-				deLatex(id+"_",origText.slice(at+1+cmd.length+param.get("end")),tr,dry,html);
+				deLatex(id+"_",origText.slice(at+1+cmd.length+param.get("end")),tr,dry,html,tl);
 		if(at>0){
 		  returnVal=divPlainText(id,origText.slice(0,at),dry,html)+returnVal;
 		}

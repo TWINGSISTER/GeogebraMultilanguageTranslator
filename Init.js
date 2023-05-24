@@ -93,12 +93,23 @@ function init() {
 		"_I=2x_B-x_A \\Leftrightarrow",
 		"=y_B\\Leftrightarrow",
 		"_A+y_I=2y_B\\Leftrightarrow",
+		"\\mbox{min=",
+		"\\mbox{max=",
+		".{\\tt",
+		"e_D = max_D - min_D =",
+		"e_B= max_B - min_B=",
+		//"\\tiny{",
 		"_I=2y_B-y_A \\Leftrightarrow"
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
 	// the first string "www word" cannot  be a REGEXP
 	var diffdict = new Map([["^∧2 plutôt que ","plutôt que "],
+		["Aide : pour répondre “8,35€”, saisir}\\tt{ 8.35}","Aide : pour répondre \\“8,35€\\”, saisir"],
+		[". Puis{\\tt",". Puis"],
+		[" Statistique à une variable}"," Statistique à une variable"],
+		["(3). Puis{","(3). Puis"],
+		[" Afficher statistiques}."," Afficher statistiques"],
 		["^∧2 pour saisir ","pour saisir "],
 		["a^3 b^2 plutôt que a^3*b^2","plutôt que"],
 		["text{^∧3 et non pas }ab","et non pas"],
@@ -109,6 +120,8 @@ function init() {
 		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
 		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"],
 		["n fonction de }n:","fonction de"],
+		[". Pour calculer l'étendue de D :}",". Pour calculer l'étendue de D :"],
+		[". Pour calculer l'étendue de B :}",". Pour calculer l'étendue de B :"],
 		["Q=mL avec m=","avec"],
 		["Q=mL avec m=","avec"],
 		['\\mbox{Ici, comme il faut “ ',"Ici, comme il faut "],
@@ -121,11 +134,13 @@ function init() {
   	["text",1],
   	["bar",1],
 	["frac",2],
+	["rule",2],
 	[",",0],
 	[";",0],
 	["!",0],
 	["ovalbox",1],
 	["br",0],
+	["tiny",1],
 	// for negative args |args| parameters are skipped 
 	["begin",-1],
 	["end",-1],
@@ -160,6 +175,9 @@ function init() {
 	["textit",1],
 	["sqrt",1],["vec",1],["fgcolor",1],
 	["mbox",1],
+	["tt",0],
+	["bf",0],
+	["Large",0],
 	["cr",0],
 	["textcolor",[false,true]],
 	// this skip the first argument
@@ -169,6 +187,7 @@ function init() {
 	["mathcal",1],
 	["\\n",0],
 	["\\",0],
+	["\\\\",0],
 	[",",0],
 	["begin{align}",0],
 	["begin{array}",-1], // for \begin{array}
@@ -180,6 +199,7 @@ function init() {
 	["begin{array}{rcl}",0],
 	["begin{array}{r c l}",0],
 	[".\\text{",0],	["n\\text{",0],
+	[".\\tt{",0],
 	["begin{array}{lrcl}",0],
 	//["textcolor{blue}",0],
 	//["{l}",0], // for \begin{array} begin skip one argument with -1 
@@ -192,6 +212,8 @@ function init() {
 	// regexp patterns to recognize Latex commands. You must enter the args above
 	var cmdpattern =[
 	'\\\\cr',
+	'\\\\bf',
+	'\\\\Large',
 	'\\\\\\\\[n]',//+'n',
 	//'\\\\\\\\[\\s]*n',//+'n',
 	'\\\\\\\\',
@@ -213,6 +235,7 @@ function init() {
 	'\\\\end\\{array\\}',
 	'\\\\end\\{align\\}',
 	'\\.\\\\text\\{','n\\\\text\\{',
+	'\\.\\\\tt\\{',
 	'\\\\left','\\\\right', // to get correct match prefixes must be after
 	'\\\\[a-zA-Z]{2,}',	
 	'\\\\[^a-zA-Z]',	
