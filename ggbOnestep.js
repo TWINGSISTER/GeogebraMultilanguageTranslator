@@ -47,7 +47,7 @@
 		var xmlDoc = parser.parseFromString(xmlold,"text/xml");
 		var code= xmlDoc.getElementsByTagName("ggbscript")[0];
 		var oldscript = code.attributes['val'].nodeValue;
-		var newscript = oldscript+"\r\n"+appcode;//'\r\nDelete['+objName+']';
+		var newscript = oldscript+"\n"+appcode;//'\r\nDelete['+objName+']';
 		xmlDoc.getElementsByTagName("ggbscript")[0].attributes['val'].nodeValue=newscript;
 		var  serializer = new XMLSerializer();
 		var  xmlStr = serializer.serializeToString(xmlDoc);
