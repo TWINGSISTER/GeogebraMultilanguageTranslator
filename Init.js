@@ -302,7 +302,7 @@ function initFalsePair() {
 		 "Autore: Joël Gauvain\nLycée René Josué Valin\n17000 La Rochelle"],
 		["Donnerlesdeuxréels","Dare due numeri "],
 		["Score:","Punteggio:"],
-		["Score","Punteggio"],
+		["Score","Punteggio "],
 		["Inéquationn°","Disequazione n°"],
 		["Commencerlaséried'exercices","Iniziare"],
 		["Dernierexercice","Ultimo esercizio"],
