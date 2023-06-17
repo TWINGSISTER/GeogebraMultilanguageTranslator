@@ -318,7 +318,14 @@ function initFalsePair() {
 		["RAZ","Reset"],["RAZ(àcacher)","Reset (off)"],
 		["Accueil","Inizio"],
 		["Ici,commeilfaut","Qui"],
-		["latenteàutiliservaut","latente vale"],["grammed'eau."," grammi d'acqua"]
+		["PlacerlepointAdecoordonnées","Portare A alle coordinate"],
+		["Faux,cepointa","Falso, questo punto ha "],	
+		["pourcoordonnées", "come coordinate"],
+		["latenteàutiliservaut","latente vale"],["grammed'eau."," grammi d'acqua"],
+		["onécritque:","osservo che:"],
+		["saisir:sqrt(135)."," scrivere:sqrt(135) "],
+		["Calculdedistancedansleplanmunid'unrepèreorthonormé","Calcola la distanza tra due punti"],
+		["Leplanestmunid'unrepèreorthonormé", "Il piano ha un riferimento cartesiano"]
 		
 	]);
 }
