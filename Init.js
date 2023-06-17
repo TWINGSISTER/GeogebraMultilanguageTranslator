@@ -287,7 +287,7 @@ function initFalsePair() {
 		["Leplanestmunid'unrepère(O;I;J).Danschaqueexercice,ilfautplacerunpointAconnaissantsescoordonnées.",
 		 "Il piano è dotato di un riferimento (O;I;J). In ogni\nesercizio, un punto A deve essere collocato conoscendo\nle sue coordinate."],
 		["Leplanestmunid'unrepère(O;I;J).Danschaqueexercice,ilfautlirelescoordonnéesd'unpointAdanslerepère(O;I;J).",
-		 "Il piano è dotato di un riferimento (O;I;J). In ogni\nesercizio, un punto A deve essere collocato conoscendo\nle sue coordinate."],
+		 "Il piano è dotato di un riferimento (O;I;J). In ogni\nesercizio, le coordinate del punto A devono essere trovate"], 
 		["AbscissedeA:","Ascissa di A:"],
 		["OrdonnéedeA:","Ordinata di A:"],	
 		["LepointAapourcoordonnées:","Il punto A ha coordinate:"],
