@@ -325,9 +325,14 @@ function initFalsePair() {
 		["onécritque:","osservo che:"],
 		["saisir:sqrt(135)."," scrivere:sqrt(135) "],
 		["Calculdedistancedansleplanmunid'unrepèreorthonormé","Calcola la distanza tra due punti"],
-		["Leplanestmunid'unrepèreorthonormé", "Il piano ha un riferimento cartesiano"]
-		
-	]);
+		["Leplanestmunid'unrepèreorthonormé", "Il piano ha un riferimento cartesiano"],
+		["Leplanestmunid'unrepèredontlesaxesgraduéssontvisiblessur","Il piano e' dotato di un riferimento cartesiano come mostra "	],
+		["simplelecturegraphique,lescoordonnéesduvecteur", "semplice lettura grafica, le componenti del vettore "],
+		["alors:"," avremo:"],
+		["représenté"," rappresentato"],
+		["apourcoordonnées"," ha per coordinate "],
+		["Démarrerlaséried'exercices","Inizia"]
+]);
 }
 function RT_inittrans() {
 	RT_globsto("magic", "ZZ000");
