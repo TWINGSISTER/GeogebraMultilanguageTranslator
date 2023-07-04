@@ -71,22 +71,90 @@ ggbApplet.evalCommand('MoodleValidated=true');
 RT_R_Snapshot2Add();
 ggbApplet.evalCommand('Delete('+BtnStr+')');
 }
-function RT_R_Snapshot2Add(){
+
+
+// REDO
+/* RT_unlock not used anymore
+function RT_unlockPoint(P){
+	var Px=ggbApplet.getXcoord(P);
+	var Py=ggbApplet.getYcoord(P);
+	ggbApplet.evalCommand(P+'=('+Px.toString()+','+Py.toString()+')');
+}
+*/
+var RT_R_snapper; // holds the string for the object name whose deletiion will trigger snapping.
+function RT_R_Snapshot2Add(button){
 	debugger;
- 	var grade=ggbApplet.getValue('grade');
- 	var message='"Re Pnt:'+grade.toString()+'"';
-	ggbApplet.evalCommand("Re="+message);
-	ggbApplet.evalCommand('SetActiveView("G")');
-	ggbApplet.evalCommand('C_1=Corner(1,1)');
-	ggbApplet.evalCommand('C_2=Corner(1,2)');
-	ggbApplet.evalCommand('C_1wh=Corner(1,5)');
-	ggbApplet.evalCommand('w_1=x(C_1wh)');
-	ggbApplet.evalCommand('h_1=y(C_1wh)');
-	ggbApplet.evalCommand('C_12=(C_1+C_2)/2+(2,2)');RT_unlockPoint('C_12');
-	ggbApplet.evalCommand('C_2b=C_2+(-2,2)');RT_unlockPoint('C_2b');
-	ggbApplet.evalCommand('SetBackgroundColor("Light green")');
-	ggbApplet.evalCommand('snap1 = ExportImage("view", 1, "corner",C_12,"corner2",C_2b,"height",h_1,"width",w_1)');
-	ggbApplet.evalCommand('SetBackgroundColor("White")');
+	if(!(button===RT_R_snapper))return;
+	ggbApplet.unregisterRemoveListener();
+	ggbApplet.setRepaintingActive(false);
+    var mark=ggbApplet.getValue('grade');
+    var markColor;
+    if(mark>=0.9){ markColor="Light green";}
+    else if(mark<=0.1){ markColor="Light Purple";}
+    else{ markColor="Light Yellow";}
+	ggbApplet.evalCommand('Text("MARK RECORDED:'+mark.toString()+'/1")\nSetActiveView("G")\nC_1=Corner(1,1)\nC_2=Corner(1,2)\nC_1wh=Corner(1,5)');
+	var w1=ggbApplet.getXcoord('C_1wh');
+	if (!isNaN(w1)) {
+		var h1=ggbApplet.getYcoord('C_1wh');
+		//ggbApplet.deleteObject('C_1wh');
+		var C1x=ggbApplet.getXcoord('C_1');
+		var C1y=ggbApplet.getYcoord('C_1');
+		//ggbApplet.deleteObject('C_1');
+		var C2x=ggbApplet.getXcoord('C_2');
+		var C2y=ggbApplet.getYcoord('C_2');
+		//ggbApplet.deleteObject('C_2');
+		var c12imgx=C1x+1.0;
+		var c12imgy=C1y+1.0;
+		//var c12imgx=(C1x+C2x)/2.0+2.0;
+		//var c12imgy=(C1y+C2y)/2.0+2.0;
+		var c12img='('+c12imgx.toString()+','+c12imgy.toString()+')';
+		var c2bx=C2x-1.0;
+		var c2by=C2y+1.0;
+		//var c2bx=C2x-2.0;
+		//var c2by=C2y+2.0;
+		var c2b='('+c2bx.toString()+','+c2by.toString()+')';
+		ggbApplet.evalCommand('C_12='+c12img+'\nC_2b='+c2b+
+		'\nSetVisibleInView(C_12,1,false)'+
+		'\nSetVisibleInView(C_2b,1,false)'+
+		'\nSetBackgroundColor("'+markColor+'")'+
+		'\nsnap1 = ExportImage("view", 1, "corner",C_12,"corner2",C_2b,"height",'+
+		h1.toString()+',"width",'+w1.toString()+',"transparent",false)'+
+		'\nSetVisibleInView(C_12,1,true)'+
+		'\nSetVisibleInView(C_2b,1,true)'+
+		'\nSetBackgroundColor("White")');
+	}
+	ggbApplet.evalCommand('SetActiveView("D")\nC_3=Corner(2,1)\nC_4=Corner(2,2)\nC_2wh=Corner(2,5)');
+	var w2=ggbApplet.getXcoord('C_2wh');
+	var h2=ggbApplet.getYcoord('C_2wh');
+	if (!isNaN(w2)) {
+		//ggbApplet.deleteObject('C_2wh');
+		var C3x=ggbApplet.getXcoord('C_3');
+		var C3y=ggbApplet.getYcoord('C_3');
+		//ggbApplet.deleteObject('C_3');
+		var C4x=ggbApplet.getXcoord('C_4');
+		var C4y=ggbApplet.getYcoord('C_4');
+		//ggbApplet.deleteObject('C_4');
+		var c34imgx=(C3x+C4x)/2.0+2.0;
+		var c34imgy=(C3y+C4y)/2.0+2.0;
+		var c34img='('+c34imgx.toString()+','+c34imgy.toString()+')';
+		var c4bx=C4x-2.0;
+		var c4by=C4y+2.0;
+		var c4b='('+c4bx.toString()+','+c4by.toString()+')';
+		ggbApplet.evalCommand('C_34='+c34img+'\nC_4b='+c4b+
+		'\nSetVisibleInView(C_34,2,false)'+
+		'\nSetVisibleInView(C_4b,2,false)'+
+		'\nSetBackgroundColor("'+markColor+'")'+
+		'\nsnap2 = ExportImage("view", 2, "corner",C_34,"corner2",C_4b,"height",'+
+		h2.toString()+',"width",'+w2.toString()+
+		',"transparent",false)'+
+		'\nSetBackgroundColor("White")');
+	}
+ggbApplet.setRepaintingActive(true);
+RT_R_snapper="";// if not multiple events are created. 
+alert("Snapshot taken");
+}
+	/* old code 
+//ggbApplet.deleteObject(button);
 	ggbApplet.evalCommand('SetActiveView("D")');
 	ggbApplet.evalCommand('C_3=Corner(2,1)');
 	ggbApplet.evalCommand('C_4=Corner(2,2)');
@@ -98,10 +166,174 @@ function RT_R_Snapshot2Add(){
 	ggbApplet.evalCommand('SetBackgroundColor("Light green")');
 	ggbApplet.evalCommand('snap2 = ExportImage("view", 2, "corner",C_34,"corner2",C_4b,"height",h_2,"width",w_2)');
 	ggbApplet.evalCommand('SetBackgroundColor("White")');
+	ggbApplet.deleteObject("Valider");
+	*/
+
+
+/* RT_R_sample not used
+function RT_R_sample(button){
+	debugger;
+	ggbApplet.evalCommand('SetActiveView("G")');
+	ggbApplet.setRepaintingActive(false);
+	ggbApplet.evalCommand('C_1=Corner(1,1)\nC_2=Corner(1,2)\nC_1wh=Corner(1,5)');
+	RT_unlockPoint('C1');RT_unlockPoint('C2');
+	var w1=ggbApplet.getXcoord('C_1wh');
+	var h1=ggbApplet.getYcoord('C_1wh');
+	ggbApplet.deleteObject('C_1wh');
+	var C1x=ggbApplet.getXcoord('C_1');
+	var C1y=ggbApplet.getYcoord('C_1');
+	//ggbApplet.deleteObject('C_1');
+	var C2x=ggbApplet.getXcoord('C_2');
+	var C2y=ggbApplet.getYcoord('C_2');
+	//ggbApplet.deleteObject('C_2');
+	//var imgx=C1x+1.0;
+	//var imgy=C1y+1.0;
+	//var img='('+imgx.toString()+','+imgy.toString()+')';
+	//var c2bx=C2x-1.0;
+	//var c2by=C2y+1.0;
+	//var c2b='('+c2bx.toString()+','+c2by.toString()+')';
+	var c12imgx=(C1x+C2x)/2.0+2.0;
+	var c12imgy=(C1y+C2y)/2.0+2.0;
+	var c12img='('+c12imgx.toString()+','+c12imgy.toString()+')';
+	var c2bx=C2x-2.0;
+	var c2by=C2y+2.0;
+	var c2b='('+c2bx.toString()+','+c2by.toString()+')';
+	ggbApplet.evalCommand('IMG='+c12img+'\nIMGEND='+c2b+'\nSetBackgroundColor("Light green")\nsnap1 = ExportImage("view", 1, "corner",IMG,"corner2",IMGEND,"height",'+h1.toString()+',"width",'+w1.toString()+')\nSetBackgroundColor("White")');
+	//ggbApplet.evalCommand('SetBackgroundColor("Light green")\nsnap1 = ExportImage("view", 1, "corner",C_1,"corner2",C_2,"height",'+h1.toString()+',"width",'+w1.toString()+')\nSetBackgroundColor("White")');
+	//ggbApplet.evalCommand('IMG='+img+'\nIMGEND='+c2b+'\nSetBackgroundColor("Light green")\nsnap1 = ExportImage("view", 1, "corner",IMG,"corner2",IMGEND,"height",'+h1.toString()+',"width",'+w1.toString()+')\nSetBackgroundColor("White")');
+	ggbApplet.setRepaintingActive(true);
+	ggbApplet.evalCommand('SetActiveView("D")');
+	ggbApplet.setRepaintingActive(false);
+	ggbApplet.evalCommand('C_3=Corner(2,1)\nC_4=Corner(2,2)\nC_2wh=Corner(2,5)');
+	var w2=ggbApplet.getXcoord('C_2wh');
+	var h2=ggbApplet.getYcoord('C_2wh');
+	if (!isNaN(w2)) {
+		ggbApplet.deleteObject('C_2wh');
+		var C3x=ggbApplet.getXcoord('C_3');
+		var C3y=ggbApplet.getYcoord('C_3');
+		//ggbApplet.deleteObject('C_3');
+		var C4x=ggbApplet.getXcoord('C_4');
+		var C4y=ggbApplet.getYcoord('C_4');
+		//ggbApplet.deleteObject('C_4');
+		var c34imgx=(C3x+C4x)/2.0+2.0;
+		var c34imgy=(C3y+C4y)/2.0+2.0;
+		var c34img='('+c34imgx.toString()+','+c34imgy.toString()+')';
+		var c4bx=C4x-2.0;
+		var c4by=C4y+2.0;
+		var c4b='('+c4bx.toString()+','+c4by.toString()+')';
+		ggbApplet.evalCommand('SetBackgroundColor("Light green")\nsnap2 = ExportImage("view", 2, "corner",'+c34img+',"corner2",'+c4b+',"height",'+h2.toString()+',"width",'+w2.toString()+')\nSetBackgroundColor("White")');
+		ggbApplet.setRepaintingActive(true);
+	}
+	//ggbApplet.undo();
+	//ggbApplet.redo();
+	alert("Snapshot taken");
+	ggbApplet.deleteObject(button);
+}
+*/
+function RT_R_snapInit(ObjName){
+RT_R_snapper=ObjName;
+//ggbApplet.evalCommand("PRN=Button()");
+//ggbApplet.setVisible("PRN",false);
+//ggbApplet.registerObjectClickListener("PRN",'RT_R_Snapshot2Add');
+ggbApplet.registerRemoveListener('RT_R_Snapshot2Add');
+}
+
+//REDO END
+/*
+ RT_R_sample old version can delete 
+function RT_R_sample(button){
+	debugger;
+	ggbApplet.evalCommand('SetActiveView("G")');
+	ggbApplet.setRepaintingActive(false);
+	ggbApplet.evalCommand('C_1=Corner(1,1)\nC_2=Corner(1,2)\nC_1wh=Corner(1,5)');
+	RT_unlockPoint('C1');RT_unlockPoint('C2');
+	var w1=ggbApplet.getXcoord('C_1wh');
+	var h1=ggbApplet.getYcoord('C_1wh');
+	ggbApplet.deleteObject('C_1wh');
+	var C1x=ggbApplet.getXcoord('C_1');
+	var C1y=ggbApplet.getYcoord('C_1');
+	//ggbApplet.deleteObject('C_1');
+	var C2x=ggbApplet.getXcoord('C_2');
+	var C2y=ggbApplet.getYcoord('C_2');
+	//ggbApplet.deleteObject('C_2');
+	//var imgx=C1x+1.0;
+	//var imgy=C1y+1.0;
+	//var img='('+imgx.toString()+','+imgy.toString()+')';
+	//var c2bx=C2x-1.0;
+	//var c2by=C2y+1.0;
+	//var c2b='('+c2bx.toString()+','+c2by.toString()+')';
+	var c12imgx=(C1x+C2x)/2.0+2.0;
+	var c12imgy=(C1y+C2y)/2.0+2.0;
+	var c12img='('+c12imgx.toString()+','+c12imgy.toString()+')';
+	var c2bx=C2x-2.0;
+	var c2by=C2y+2.0;
+	var c2b='('+c2bx.toString()+','+c2by.toString()+')';
+	ggbApplet.evalCommand('IMG='+c12img+'\nIMGEND='+c2b+'\nSetBackgroundColor("Light green")\nsnap1 = ExportImage("view", 1, "corner",IMG,"corner2",IMGEND,"height",'+h1.toString()+',"width",'+w1.toString()+')\nSetBackgroundColor("White")');
+	//ggbApplet.evalCommand('SetBackgroundColor("Light green")\nsnap1 = ExportImage("view", 1, "corner",C_1,"corner2",C_2,"height",'+h1.toString()+',"width",'+w1.toString()+')\nSetBackgroundColor("White")');
+	//ggbApplet.evalCommand('IMG='+img+'\nIMGEND='+c2b+'\nSetBackgroundColor("Light green")\nsnap1 = ExportImage("view", 1, "corner",IMG,"corner2",IMGEND,"height",'+h1.toString()+',"width",'+w1.toString()+')\nSetBackgroundColor("White")');
+	ggbApplet.setRepaintingActive(true);
+	ggbApplet.evalCommand('SetActiveView("D")');
+	ggbApplet.setRepaintingActive(false);
+	ggbApplet.evalCommand('C_3=Corner(2,1)\nC_4=Corner(2,2)\nC_2wh=Corner(2,5)');
+	var w2=ggbApplet.getXcoord('C_2wh');
+	var h2=ggbApplet.getYcoord('C_2wh');
+	if (!isNaN(w2)) {
+		ggbApplet.deleteObject('C_2wh');
+		var C3x=ggbApplet.getXcoord('C_3');
+		var C3y=ggbApplet.getYcoord('C_3');
+		//ggbApplet.deleteObject('C_3');
+		var C4x=ggbApplet.getXcoord('C_4');
+		var C4y=ggbApplet.getYcoord('C_4');
+		//ggbApplet.deleteObject('C_4');
+		var c34imgx=(C3x+C4x)/2.0+2.0;
+		var c34imgy=(C3y+C4y)/2.0+2.0;
+		var c34img='('+c34imgx.toString()+','+c34imgy.toString()+')';
+		var c4bx=C4x-2.0;
+		var c4by=C4y+2.0;
+		var c4b='('+c4bx.toString()+','+c4by.toString()+')';
+		ggbApplet.evalCommand('SetBackgroundColor("Light green")\nsnap2 = ExportImage("view", 2, "corner",'+c34img+',"corner2",'+c4b+',"height",'+h2.toString()+',"width",'+w2.toString()+')\nSetBackgroundColor("White")');
+		ggbApplet.setRepaintingActive(true);
+	}
+	//ggbApplet.undo();
+	//ggbApplet.redo();
+	alert("Snapshot taken");
+	ggbApplet.deleteObject(button);
+}
+
+
+function RT_R_Snapshot2Add(){
+	debugger;
+ 	var grade=ggbApplet.getValue('grade');
+ 	var message='"Re Pnt:'+grade.toString()+'"';
+	ggbApplet.evalCommand("Re="+message);
+	ggbApplet.evalCommand('SetActiveView("G")');
+	ggbApplet.evalCommand('C_1=Corner(1,1)');
+	ggbApplet.evalCommand('C_2=Corner(1,2)');
+	ggbApplet.evalCommand('C_1wh=Corner(1,5)');
+	ggbApplet.evalCommand('w_1=x(C_1wh)');
+	ggbApplet.evalCommand('h_1=y(C_1wh)');
+	ggbApplet.evalCommand('C_12=(C_1+C_2)/2+(2,2)');//RT_unlockPoint('C_12');
+	ggbApplet.evalCommand('C_2b=C_2+(-2,2)');//RT_unlockPoint('C_2b');
+	ggbApplet.evalCommand('SetBackgroundColor("Light green")');
+	ggbApplet.evalCommand('snap1 = ExportImage("view", 1, "corner",C_12,"corner2",C_2b,"height",h_1,"width",w_1)');
+	ggbApplet.evalCommand('SetBackgroundColor("White")');
+	ggbApplet.evalCommand('SetActiveView("D")');
+	ggbApplet.evalCommand('C_3=Corner(2,1)');
+	ggbApplet.evalCommand('C_4=Corner(2,2)');
+	ggbApplet.evalCommand('C_34=(C_3+C_4)/2+(2,2)');//RT_unlockPoint('C_34');
+	ggbApplet.evalCommand('C_4b=C_4+(-2,2)');//RT_unlockPoint('C_4b');
+	ggbApplet.evalCommand('C_2wh=Corner(2,5)');
+	ggbApplet.evalCommand('w_2=x(C_2wh)');
+	ggbApplet.evalCommand('h_2=y(C_2wh)');
+	ggbApplet.evalCommand('SetBackgroundColor("Light green")');
+	ggbApplet.evalCommand('snap2 = ExportImage("view", 2, "corner",C_34,"corner2",C_4b,"height",h_2,"width",w_2)');
+	ggbApplet.evalCommand('SetBackgroundColor("White")');
 	//ggbApplet.undo();
 	//ggbApplet.redo();
 	alert("Snapshot taken");
 }
+END of deletable code no longer used
+*/
 function RT_R_SnpHndl(){
 	debugger;
 	RT_R_log();
