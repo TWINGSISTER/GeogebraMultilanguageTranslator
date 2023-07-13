@@ -134,11 +134,13 @@ function RT_R_Snapshot2Add(button){
 		var C4x=ggbApplet.getXcoord('C_4');
 		var C4y=ggbApplet.getYcoord('C_4');
 		//ggbApplet.deleteObject('C_4');
-		var c34imgx=(C3x+C4x)/2.0+2.0;
-		var c34imgy=(C3y+C4y)/2.0+2.0;
+		//var c34imgx=(C3x+C4x)/2.0+2.0;
+		//var c34imgy=(C3y+C4y)/2.0+2.0;
+		var c34imgx=C3x+1.0;
+		var c34imgy=C3y+1.0;
 		var c34img='('+c34imgx.toString()+','+c34imgy.toString()+')';
-		var c4bx=C4x-2.0;
-		var c4by=C4y+2.0;
+		var c4bx=C4x-1.0;
+		var c4by=C4y+1.0;
 		var c4b='('+c4bx.toString()+','+c4by.toString()+')';
 		ggbApplet.evalCommand('C_34='+c34img+'\nC_4b='+c4b+
 		'\nSetVisibleInView(C_34,2,false)'+
@@ -147,6 +149,8 @@ function RT_R_Snapshot2Add(button){
 		'\nsnap2 = ExportImage("view", 2, "corner",C_34,"corner2",C_4b,"height",'+
 		h2.toString()+',"width",'+w2.toString()+
 		',"transparent",false)'+
+		'\nSetVisibleInView(C_34,2,true)'+
+		'\nSetVisibleInView(C_4b,2,true)'+
 		'\nSetBackgroundColor("White")');
 	}
 ggbApplet.setRepaintingActive(true);
