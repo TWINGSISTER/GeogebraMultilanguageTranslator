@@ -121,6 +121,10 @@ function RT_R_Snapshot2Add(button){
 		h1.toString()+',"width",'+w1.toString()+',"transparent",false)'+
 		'\nSetVisibleInView(C_12,1,true)'+
 		'\nSetVisibleInView(C_2b,1,true)'+
+		'\nSetCaption(C_12,">")'+
+		'\nSetLabelMode(C_12,3)'+
+		'\nSetCaption(C_2b,"<")'+
+		'\nSetLabelMode(C_2b,3)'+
 		'\nSetBackgroundColor("White")');
 	}
 	ggbApplet.evalCommand('SetActiveView("D")\nC_3=Corner(2,1)\nC_4=Corner(2,2)\nC_2wh=Corner(2,5)');
@@ -151,6 +155,10 @@ function RT_R_Snapshot2Add(button){
 		',"transparent",false)'+
 		'\nSetVisibleInView(C_34,2,true)'+
 		'\nSetVisibleInView(C_4b,2,true)'+
+		'\nSetCaption(C_34,">")'+
+		'\nSetLabelMode(C_34,3)'+
+		'\nSetCaption(C_4b,"<")'+
+		'\nSetLabelMode(C_4b,3)'+
 		'\nSetBackgroundColor("White")');
 	}
 ggbApplet.setRepaintingActive(true);

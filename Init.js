@@ -118,6 +118,7 @@ function init() {
 		["n fonction de }n.","fonction de"],
 		["Saisir:3/4*(1/3)∧n","Saisir:"],
 		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
+		["\\text{Grade:","Grade:"],
 		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"],
 		["n fonction de }n:","fonction de"],
 		[". Pour calculer l'étendue de D :}",". Pour calculer l'étendue de D :"],
@@ -331,7 +332,15 @@ function initFalsePair() {
 		["alors:"," avremo:"],
 		["représenté"," rappresentato"],
 		["apourcoordonnées"," ha per coordinate "],
-		["Démarrerlaséried'exercices","Inizia"]
+		["Démarrerlaséried'exercices","Inizia"],
+		["dupointCde(AB)quia"," di C=(x,y) quando A,B,C sono allineati e "],
+		["la"," "],
+		["LepointAapourcoordonnées", " Il punto A ha per coordinate "],
+		["etlepointBapourcoordonnées"," e il punto B ha per coordinate "],
+		["apourcoordonnées", " ha per coordinate "],
+		["Validercettedroite"," Convalidare questa retta "],
+		["Marks","Punti"],
+		["Run=","Escursione="]
 ]);
 }
 function RT_inittrans() {
