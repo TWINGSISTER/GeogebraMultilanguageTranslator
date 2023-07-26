@@ -61,7 +61,9 @@ function init() {
 		"f'(x)=\\frac{",
 		"=\\frac{w\'",
 		"=\\frac{w",
-		"(ax+b)(cx+d)", "(ax+b)^2","(a+b)^2=a^2+2ab+b^2" , "(a-b)^2=a^2-2ab+b^2" ,
+		"(ax+b)(cx+d)",
+		"(ax+b)(ax-b)",
+		"(ax+b)^2","(a+b)^2=a^2+2ab+b^2" , "(a-b)^2=a^2-2ab+b^2" ,
 		"(a+b)^2\\not=" , "(a-b)^2\\not=","[AB]","OI=OJ=1)",
 		"AB=","AC=","BC=","ABC",
 		"AB^2=AC^2+BC^2⇒AB^2=",
@@ -340,7 +342,18 @@ function initFalsePair() {
 		["apourcoordonnées", " ha per coordinate "],
 		["Validercettedroite"," Convalidare questa retta "],
 		["Marks","Punti"],
-		["Run=","Escursione="]
+		["Run=","Escursione="],
+		["Juste"," Giusto "],
+		["exercicesréussissanserreursur"," esercizio riuscito su "],
+		["Déterminerl'équationdeladroited"," Determinare l' equazione della retta d "],
+		["Déterminerlapentedeladroited",' Determinare la pendenza della retta d '],
+		["Déterminerl'ordonnéeàl'originedeladroited"," Determinare l' ordinata dell' intersezione della retta d con l' asse y " ],
+		["Lapentedeladroiteestdonca="," La pendenza della retta d e' quindi "],
+		["Lorsquelavaleurd'abscissevariede1"," Quando il valore dell' ascissa varia di 1 "],
+		["lavaleurd'ordonnéevariede"," il valore dell' ordinata varia di "],
+		["L'ordonnéeàl'originecorrespondàl'ordonnéedupoint"," L' ordinata all' origine corrisponde all' ordinata del punto "],
+		["d'intersectiondeladroiteavecl'axedesordonnée", " di intersezione della retta con l' asse delle y "],
+		["Déterminerl'équationdeladroited", " Determinare l' equazione della retta d "]
 ]);
 }
 function RT_inittrans() {
