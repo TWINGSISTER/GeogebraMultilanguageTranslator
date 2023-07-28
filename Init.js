@@ -353,7 +353,10 @@ function initFalsePair() {
 		["lavaleurd'ordonnéevariede"," il valore dell' ordinata varia di "],
 		["L'ordonnéeàl'originecorrespondàl'ordonnéedupoint"," L' ordinata all' origine corrisponde all' ordinata del punto "],
 		["d'intersectiondeladroiteavecl'axedesordonnée", " di intersezione della retta con l' asse delle y "],
-		["Déterminerl'équationdeladroited", " Determinare l' equazione della retta d "]
+		["Déterminerl'équationdeladroited", " Determinare l' equazione della retta d "],
+		["Ladroiteapouréquation:"," La retta ha equazione:"],
+		["Votreéquationn'estpasuneéquationdedroite"," La vostra equazione non e' valida "],
+		["Attention,saisieoutyped'équationnonvalide."," Attenzione, equazione non valida."]
 ]);
 }
 function RT_inittrans() {
