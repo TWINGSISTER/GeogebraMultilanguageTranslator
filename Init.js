@@ -356,7 +356,12 @@ function initFalsePair() {
 		["Déterminerl'équationdeladroited", " Determinare l' equazione della retta d "],
 		["Ladroiteapouréquation:"," La retta ha equazione:"],
 		["Votreéquationn'estpasuneéquationdedroite"," La vostra equazione non e' valida "],
-		["Attention,saisieoutyped'équationnonvalide."," Attenzione, equazione non valida."]
+		["Attention,saisieoutyped'équationnonvalide."," Attenzione, equazione non valida."],
+		["coefficientdirecteur="," coefficiente direttore (pendenza)="],
+		["etl'ordonnéeàl'origineestégaleà:"," e l' ordinata all' origine e':"],
+		["Lecoefficientdirecteurvaut:"," Il coefficiente direttore (pendenza) vale:"],
+		["ordonnéeàl'origine=divclass="," ordinata all' origine "],
+		["Constructiondelasommededeuxvecteursaucompas","Costruzione della somma di due vettori con il compasso"]
 ]);
 }
 function RT_inittrans() {
