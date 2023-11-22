@@ -30,6 +30,7 @@ function init() {
 		'\\frac{\\textcolor{red}{a',
 		'}}=\\textcolor{red}{',
 		'\\textcolor{red}{a',
+		'f(x)=\\frac{',
 		'}×\\textcolor{blue}{a',
 		'\\textcolor{red}{a^{',
 		"m_{2}=\\textcolor{#009B00}{",
@@ -81,11 +82,22 @@ function init() {
 		"NC1",
 		"NC2",
 		"NA2=",
+		"#DA2570",
+		"#3A6ED6",
+		"#5991FF",
+		"#8575FF",
+		"#BD6C43",
+		"#eeeeee",
+		"#2EB00020",
 		"NA1=",
 		"NB1=",
 		"NB2=",
 		"NC1=",
 		"NC2=",
+		"\\text{CHECK (",
+		"\\text{Number correct:",
+		"\\text{\\color{",
+		"1.75cm",
 		"re :","im :",
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -101,7 +113,11 @@ function init() {
 		"e_D = max_D - min_D =",
 		"e_B= max_B - min_B=",
 		//"\\tiny{",
-		"_I=2y_B-y_A \\Leftrightarrow"
+		"Num","Den",
+		"_I=2y_B-y_A \\Leftrightarrow",
+		"m=\\frac{",
+		"\\text{,B=","y=mx+q",
+		"q=\\frac{"
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
 	// is substituted getting "www mot" see code in divPlainText
@@ -119,7 +135,11 @@ function init() {
 		["v_n\\text{ en fonction de }n.","en fonction de"],
 		["n fonction de }n.","fonction de"],
 		["Saisir:3/4*(1/3)∧n","Saisir:"],
+		["q \\text{ as rational numbers","as rational numbers"],
 		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
+		["\\text{Evaluate the following power.","Evaluate the following power."],
+		["\\text{\\bold{Solution:","Solution:"],
+		["\\textsf{\\bold{Solution:","Solution:"],
 		["\\text{Grade:","Grade:"],
 		["\\text{Donnez la valeur exacte de la distance ","Donnez la valeur exacte de la distance"],
 		["n fonction de }n:","fonction de"],
@@ -128,6 +148,8 @@ function init() {
 		["Q=mL avec m=","avec"],
 		["Q=mL avec m=","avec"],
 		['\\mbox{Ici, comme il faut “ ',"Ici, comme il faut "],
+		['Hint}','Hint'],
+		['Possible Solution}','Possible Solution'],
 		['\\mbox{Le coefficient directeur vaut :\\\\ ',"Le coefficient directeur vaut :"],
 		['” la chaleur\\\\',"la chaleur"]
 		]);
@@ -142,11 +164,14 @@ function init() {
 	[";",0],
 	["!",0],
 	["ovalbox",1],
+	["fbox",1],
+	["normalsize",1],
 	["br",0],
 	["tiny",1],
 	// for negative args |args| parameters are skipped 
 	["begin",-1],
 	["end",-1],
+	["cellcolor",1],
 	["cr",0],
 	["in",0],
 	["it",0],
@@ -191,6 +216,8 @@ function init() {
 	["\\n",0],
 	["\\",0],
 	["\\\\",0],
+	["textsf",1],
+	["hspace",1],
 	[",",0],
 	["begin{align}",0],
 	["begin{array}",-1], // for \begin{array}
@@ -361,7 +388,20 @@ function initFalsePair() {
 		["etl'ordonnéeàl'origineestégaleà:"," e l' ordinata all' origine e':"],
 		["Lecoefficientdirecteurvaut:"," Il coefficiente direttore (pendenza) vale:"],
 		["ordonnéeàl'origine=divclass="," ordinata all' origine "],
-		["Constructiondelasommededeuxvecteursaucompas","Costruzione della somma di due vettori con il compasso"]
+		["Constructiondelasommededeuxvecteursaucompas","Costruzione della somma di due vettori con il compasso"],
+		["Aapourcoordonnées"," A ha per coordinate "],
+		["apouréquation"," ha come equazione "],
+		["etAapourcoordonnées"," e A ha per coordinate "],
+		["estl'uniquecouplesolution"," e' l' unica coppia soluzione "],
+		["Or"," o "],
+		["Juste"," Giusto "],
+		["Dernierexercice"," Ultimo esercizio "],
+		["Lesdeuxdroites", " Le due rette "],
+		["passentpardespointsàcoordonnéesentièresetsontsécantesenA",
+			" passano per dei punti di coordinate intere e sono secanti "],
+		["CalculerlescoordonnéesexactesdupointAdecoordonnées:"," Calcolare la posizione esatta del punto A di coordinate "],
+		["d'intersectiondedeuxdroitessécantesquipassentpardespointsàcoordonnéesentières.",
+			" di intersezione di due rette secanti che passano per dei punti a coordinate intere. " ]
 ]);
 }
 function RT_inittrans() {
