@@ -12,7 +12,7 @@ function init() {
 	//They will remain as they are if they are EXACTLY occurring as strings
 	//if you put "XYZ" here also \text{XYZ} ""XYZ", "  XYZ  " will pass untranslated.
 	//they also are not asked to the translator as a group in output
-	updateDictionary(["\\text{", "}","{","}}","{{","={","}{","}=",
+	updateDictionary(["\\mbox{","\\text{", "}","{","}}","{{","={","}{","}=",
 		">it",">en",">fr",">de",">zh",">es",":", "", " ", " ; ", " / ",
 		"\\times","\\times ","A","}=\\frac{","+","-","=","/","\\",
 		"\\left(","\\right)","\\left","\\right","=\\frac{","θ=\\frac{"," θ=\\frac{" ,
@@ -21,7 +21,10 @@ function init() {
 		"begin{array}{r c l} a&=&","AB=\\sqrt{",
 		".⇔\\left\{",
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","AAAAA","AAAAAA","AAA","sin", "cos","#ff0000","#0000ff","#6600cc",
-		"ff0000","ff00000","ff00ff","FFFFFF",".\\text{","n\\p\\text{","nAlias",
+		"ff0000","ff00000","ff00ff","FFFFFF",
+		".\\text{","n\\p\\text{",
+		".\\mbox{","n\\p\\mbox{",
+		"nAlias",
 		"×\\textcolor{red}{",'\\textcolor{red}{','}}{\\textcolor{blue}{','=\\frac{\\textcolor{red}{',
 		'}×\\textcolor{blue}{','=\\textcolor{red}{',
 		'\\frac{\\textcolor{red}{a',
@@ -35,6 +38,7 @@ function init() {
 		'\\textcolor{red}{a^{',
 		"m_{2}=\\textcolor{#009B00}{",
 		'a^n\\text{',
+		'a^n\\mbox{',
 		"     }{   \\textcolor{red}{ (","}{ \\textcolor{red}{ (",
 		'\\frac{a ^{',"a^ma^p","ab^3","ab^2",
 		"Z=\\frac{","Re","ax+b","cx+d",
@@ -151,7 +155,9 @@ function init() {
 		['Hint}','Hint'],
 		['Possible Solution}','Possible Solution'],
 		['\\mbox{Le coefficient directeur vaut :\\\\ ',"Le coefficient directeur vaut :"],
-		['” la chaleur\\\\',"la chaleur"]
+		['” la chaleur\\\\',"la chaleur"],
+		["\\text{Ma réponse est :","Ma réponse est :"],
+		["\\text{Voici le relevé mesurant la","Voici le relevé mesurant la"]
 		]);
 	KnowSubsInit(diffdict); 
 	var dict = new Map( [
@@ -229,6 +235,7 @@ function init() {
 	["begin{array}{rcl}",0],
 	["begin{array}{r c l}",0],
 	[".\\text{",0],	["n\\text{",0],
+	[".\\mbox{",0],	["n\\mbox{",0],
 	[".\\tt{",0],
 	["begin{array}{lrcl}",0],
 	//["textcolor{blue}",0],
@@ -265,6 +272,7 @@ function init() {
 	'\\\\end\\{array\\}',
 	'\\\\end\\{align\\}',
 	'\\.\\\\text\\{','n\\\\text\\{',
+	'\\.\\\\mbox\\{','n\\\\mbox\\{',
 	'\\.\\\\tt\\{',
 	'\\\\left','\\\\right', // to get correct match prefixes must be after
 	'\\\\[a-zA-Z]{2,}',	
