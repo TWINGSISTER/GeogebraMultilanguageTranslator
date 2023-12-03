@@ -120,6 +120,7 @@ function init() {
 		"Num","Den",
 		"_I=2y_B-y_A \\Leftrightarrow",
 		"m=\\frac{",
+		"\\bar{x","\\math{s =l",
 		"\\text{,B=","y=mx+q",
 		"q=\\frac{"
 	]);
@@ -219,6 +220,7 @@ function init() {
 	["longmapsto",0],
 	["overrightarrow",1],
 	["mathcal",1],
+	["math",1],
 	["\\n",0],
 	["\\",0],
 	["\\\\",0],
