@@ -20,10 +20,11 @@ function	secureSection(action){
 	});
 }
 //a returns the number of elements in a list 
+// uses  a throwaway variable
 function listlen(ls){ 
 	ggbApplet.evalCommand("n235711=Length["+ls+"]");
 	var ret=ggbApplet.getValue("n235711");
-	ggbApplet.deleteObject("n235711");
+	//ggbApplet.deleteObject("n235711"); ///interact with delete object
 	return ret;
 }
 // returns the i-th element (first at 1) of a list

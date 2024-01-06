@@ -82,6 +82,10 @@ function RT_unlockPoint(P){
 }
 */
 var RT_R_snapper; // holds the string for the object name whose deletiion will trigger snapping.
+function RT_R_Snapshot2AddInt(button){
+	setTimeout(RT_R_Snapshot2Add,5000,button);
+}
+
 function RT_R_Snapshot2Add(button){
 	debugger;
 	if(!(button===RT_R_snapper))return;
@@ -247,7 +251,7 @@ RT_R_snapper=ObjName;
 //ggbApplet.evalCommand("PRN=Button()");
 //ggbApplet.setVisible("PRN",false);
 //ggbApplet.registerObjectClickListener("PRN",'RT_R_Snapshot2Add');
-ggbApplet.registerRemoveListener('RT_R_Snapshot2Add');
+ggbApplet.registerRemoveListener('RT_R_Snapshot2AddInt');
 }
 
 //REDO END

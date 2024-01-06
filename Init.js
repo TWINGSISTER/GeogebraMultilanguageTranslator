@@ -120,7 +120,7 @@ function init() {
 		"Num","Den",
 		"_I=2y_B-y_A \\Leftrightarrow",
 		"m=\\frac{",
-		"\\bar{x","\\math{s =l",
+		"\\bar{x","\\math{s =l","\\math{s =",
 		"\\text{,B=","y=mx+q",
 		"q=\\frac{"
 	]);
@@ -141,6 +141,9 @@ function init() {
 		["n fonction de }n.","fonction de"],
 		["Saisir:3/4*(1/3)∧n","Saisir:"],
 		["q \\text{ as rational numbers","as rational numbers"],
+		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
+		["\\text{2. Puis divisons par l'effectif total","2. Puis divisons par l'effectif total"],
+		["\\text{3. Puis divisons par l'effectif total","3. Puis divisons par l'effectif total"],
 		["\\text{Mathématiques à Valin","Mathématiques à Valin"],
 		["\\text{Evaluate the following power.","Evaluate the following power."],
 		["\\text{\\bold{Solution:","Solution:"],

@@ -38,11 +38,13 @@ function breakifyoucan(objName) {
 function flatten() {
 	// all the list objects are converted so that their contents are within variables and will
 	// be checked for translation when the variable is taken into account
-	//var alltr = ggbApplet.getAllObjectNames();
-	// for (objName of alltr) {
-	//	var objType = ggbApplet.getObjectType(objName) + "";
-	//	if(objType==="list") flatlist(objName);// there are list made with sequence cmds that cannot flatten
-  	//}	
+	if(trver=="TRN003"){ // this translator add some list flattening
+		var alltr = ggbApplet.getAllObjectNames();
+		for (objName of alltr) {
+			var objType = ggbApplet.getObjectType(objName) + "";
+			if(objType==="list") flatlist(objName);// there are list made with sequence cmds that cannot flatten
+  		}	
+  	}
 	var alltr = ggbApplet.getAllObjectNames();
 	for (objName of alltr) {
 	console.log(objName);
@@ -107,6 +109,7 @@ if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 }
 
 function flatlist(objName) {
+	debugger; //here objName is a list
 	var result;
 	var def=ggbApplet.getDefinitionString(objName) //debugger;
 	def=def.replace(/(\n)/gm, "\\\\n");
@@ -126,6 +129,7 @@ function flatlist(objName) {
 		}
 	result=(result.endsWith(",")?result.slice(0,-1):result)+"}";
 	ggbApplet.evalCommand(objName+" = "+result); 
+	debugger;
 	}else{}//result="FormulaText("+def+")";}
 	//stostring(objName, objName, result,false); 
 }
