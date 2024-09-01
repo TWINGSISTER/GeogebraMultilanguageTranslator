@@ -82,6 +82,7 @@ function RT_unlockPoint(P){
 }
 */
 var RT_R_snapper; // holds the string for the object name whose deletiion will trigger snapping.
+var RT_R_Loaded=false; // true at the end of the question if false or non existent this code has not been loaded 
 function RT_R_Snapshot2AddInt(button){
 	setTimeout(RT_R_Snapshot2Add,5000,button);
 }
@@ -96,7 +97,7 @@ function RT_R_Snapshot2Add(button){
     if(mark>=0.9){ markColor="Light green";}
     else if(mark<=0.1){ markColor="Light Purple";}
     else{ markColor="Light Yellow";}
-	ggbApplet.evalCommand('Text("MARK RECORDED:'+mark.toString()+'/1")\nSetActiveView("G")\nC_1=Corner(1,1)\nC_2=Corner(1,2)\nC_1wh=Corner(1,5)');
+	ggbApplet.evalCommand('markreco=Text("MARK RECORDED:'+mark.toString()+'/1")\nSetActiveView("G")\nC_1=Corner(1,1)\nC_2=Corner(1,2)\nC_1wh=Corner(1,5)');
 	var w1=ggbApplet.getXcoord('C_1wh');
 	if (!isNaN(w1)) {
 		var h1=ggbApplet.getYcoord('C_1wh');
@@ -118,13 +119,16 @@ function RT_R_Snapshot2Add(button){
 		//var c2by=C2y+2.0;
 		var c2b='('+c2bx.toString()+','+c2by.toString()+')';
 		ggbApplet.evalCommand('C_12='+c12img+'\nC_2b='+c2b+
+		'\nSetFixed(markreco,true,false)'+
 		'\nSetVisibleInView(C_12,1,false)'+
 		'\nSetVisibleInView(C_2b,1,false)'+
 		'\nSetBackgroundColor("'+markColor+'")'+
 		'\nsnap1 = ExportImage("view", 1, "corner",C_12,"corner2",C_2b,"height",'+
 		h1.toString()+',"width",'+w1.toString()+',"transparent",false)'+
+		'\nSetFixed(snap1,true,false)'+
 		'\nSetVisibleInView(C_12,1,true)'+
 		'\nSetVisibleInView(C_2b,1,true)'+
+		'\nSetFixed(C_2b,true,false)'+
 		'\nSetCaption(C_12,">")'+
 		'\nSetLabelMode(C_12,3)'+
 		'\nSetCaption(C_2b,"<")'+
@@ -157,6 +161,8 @@ function RT_R_Snapshot2Add(button){
 		'\nsnap2 = ExportImage("view", 2, "corner",C_34,"corner2",C_4b,"height",'+
 		h2.toString()+',"width",'+w2.toString()+
 		',"transparent",false)'+
+		'\nSetFixed(snap2,true,false)'+
+		'\nSetFixed(C_4b,true,false)'+
 		'\nSetVisibleInView(C_34,2,true)'+
 		'\nSetVisibleInView(C_4b,2,true)'+
 		'\nSetCaption(C_34,">")'+
@@ -167,6 +173,7 @@ function RT_R_Snapshot2Add(button){
 	}
 ggbApplet.setRepaintingActive(true);
 RT_R_snapper="";// if not multiple events are created. 
+RT_R_Loaded=true;
 alert("Snapshot taken");
 }
 	/* old code 

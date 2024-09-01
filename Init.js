@@ -19,12 +19,15 @@ function init() {
 		"a+\\frac{b}{",'=a+\\frac{b}{',"}=\\frac{a"," a&=&\\frac{","a&=&\\frac{","f\(x\)=","ax",
 		"\\left\\{","begin{array}{r c l}",".⇔\\left\\{","begin{array}{r c l} a&=&\\frac{",
 		"begin{array}{r c l} a&=&","AB=\\sqrt{",
-		".⇔\\left\{",
+		".⇔\\left\{","\\sqrt{Den}",
 		"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA","AAAAA","AAAAAA","AAA","sin", "cos","#ff0000","#0000ff","#6600cc",
 		"ff0000","ff00000","ff00ff","FFFFFF",
 		".\\text{","n\\p\\text{",
 		".\\mbox{","n\\p\\mbox{",
 		"nAlias",
+		"\\color{blue}",
+		"\\color{blue}\\mbox{x = }",
+		"$\\color{blue}\\mbox{x = }$",
 		"×\\textcolor{red}{",'\\textcolor{red}{','}}{\\textcolor{blue}{','=\\frac{\\textcolor{red}{',
 		'}×\\textcolor{blue}{','=\\textcolor{red}{',
 		'\\frac{\\textcolor{red}{a',
@@ -75,6 +78,7 @@ function init() {
 		"^2⇒AB^2=",
 		"⇒AB^2=",
 		"AB=",
+		"\\mbox{Δ = b² - 4×a×c\\\\ici : a = {",": a =",
 		"xrep+yrep* ί",
 		"phantom{.}z^","\\Delta=","\\Delta}","-\\Delta}","n\\text{","ax+b=",
 		"z&=&\\frac{","ax^m+bx^p+c","n\\text{,","P(x)=ax^n+bx^m+cx^r","Δ=b^2-4ac=",
@@ -122,6 +126,7 @@ function init() {
 		"m=\\frac{",
 		"\\bar{x","\\math{s =l","\\math{s =",
 		"\\text{,B=","y=mx+q",
+		"60pt",
 		"q=\\frac{"
 	]);
 	// if //["www word","word"] is in the list below word is sent to the translator and what is back e.g. mot
@@ -156,6 +161,11 @@ function init() {
 		["Q=mL avec m=","avec"],
 		["Q=mL avec m=","avec"],
 		['\\mbox{Ici, comme il faut “ ',"Ici, comme il faut "],
+		["\\mbox{attention aux valeurs et aux signes \\\\ ici : a = {","attention aux valeurs et aux signes \\\\ ici : a = {"],
+		["\\mbox{Identifier les coefficients a, b et c de l'équation \\\\ de type ax² + bx + c = 0 ci-dessous :\\\ \\{",
+		 "Identifier les coefficients a, b et c de l'équation \\\\ de type ax² + bx + c = 0 ci-dessous :\\\\ {"],
+		["\\mbox{Résoudre l'équation du second degré ci-dessous \\\\en suivant les étapes proposées\\\\  {",
+			"Résoudre l'équation du second degré ci-dessous \\\\en suivant les étapes proposées\\\\  {"],
 		['Hint}','Hint'],
 		['Possible Solution}','Possible Solution'],
 		['\\mbox{Le coefficient directeur vaut :\\\\ ',"Le coefficient directeur vaut :"],
@@ -182,6 +192,8 @@ function init() {
 	["begin",-1],
 	["end",-1],
 	["cellcolor",1],
+	["color",-1],
+	["color",[false,true]],
 	["cr",0],
 	["in",0],
 	["it",0],
@@ -194,6 +206,7 @@ function init() {
 	['left{',0],['right}',0],['sqrt{',0],['bold{',0],
 	["left\\[",0], ["right\\]",0],
 	["left\\(",0], ["right\\)",0],
+	["sqrt",1],
 	['left\\{',0],['right\\}',0],['sqrt\\{',0],['bold\\{',0],['ovalbox{',0],
 	["phantom",1],["textbf",1],["varnothing",0],["longleftarrow",0],
 	[";",0],
@@ -211,7 +224,7 @@ function init() {
 	["sin",0],
 	["infty",0],
 	["textit",1],
-	["sqrt",1],["vec",1],["fgcolor",1],
+	["vec",1],["fgcolor",1],
 	["mbox",1],
 	["tt",0],
 	["bf",0],
@@ -219,6 +232,11 @@ function init() {
 	["cr",0],
 	["textcolor",[false,true]],
 	// this skip the first argument
+			// 	["textcolor",[false,true]], there must be TWO arguments skip "false"
+			// if you use negative number form you must tell how many arguments there are and will all be skipped
+			// ["textcolor",2] this says that there must be 2 arguments and skip none
+			//  ["textcolor",-2] this says that there must be 2 arguments and skip two 
+
 	["cdot",0],
 	["longmapsto",0],
 	["overrightarrow",1],
@@ -229,6 +247,7 @@ function init() {
 	["\\\\",0],
 	["textsf",1],
 	["hspace",1],
+	["vspace",1],
 	[",",0],
 	["begin{align}",0],
 	["begin{array}",-1], // for \begin{array}

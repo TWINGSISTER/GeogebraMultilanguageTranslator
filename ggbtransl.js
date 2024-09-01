@@ -150,10 +150,11 @@ function RT_getformula(objName) {
 }
 
 
-function dumptrans(title,html) {
+function dumptrans(title,lang,html) {
+	// lang is the original language in the first run the target language in the second run
 	//if (html!=null) { alert("applying "+title); return ; }
 	//debugger;
-	var lang =title.slice(-2); // _EN.hmtl is what transaltor returns
+	//var lang =title.slice(-2); // _EN.hmtl is what transaltor returns
 	if (html!=null) { 
 		//html=atob(html.replace("data:text/html;base64,",""));
 		var parser = new DOMParser();
@@ -163,7 +164,8 @@ function dumptrans(title,html) {
 	var alltr = ggbApplet.getAllObjectNames();
 	var wd =startTransDoc(title)
 	//RT_globsto("filterlang",lang);
-	var origlang=(title.slice(-3,-2)==="-"); // the original file is -FR.html
+	//var origlang=(title.slice(-3,-2)==="-"); // the original file is -FR.html
+	var origlang=lang; // the original file is -FR.html
 	for (name of alltr) {
 		dumpObject(wd,name,dom,lang,origlang);
 	}
@@ -442,8 +444,8 @@ function applyTransl(htmlTransl,cont){
 	var Otherhtml=htmlTransl.slice(1);
 	readFileHtml(html,"utf-8",(result)=>{
 		var title =html.name.slice(0,-5);
-		dumptrans(title,result);
 		var lang =title.slice(-2);
+		dumptrans(title,lang,result);
 		//alert(lang);
 		addLanguageButton(lang);applyTransl(Otherhtml,cont);})
  }

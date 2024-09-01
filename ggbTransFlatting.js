@@ -163,7 +163,7 @@ var trver="TRN001";
 					//ggbApplet.getBase64((storeOrig)=>{
 			  			//if(doTrack){addTrack();}
 						//ctrlRandomize(ctrlRandom,ggbtoprocess);//()=>
-						var wd=dumptrans(file.name.slice(0,-4),null); // .ggb off
+						var wd=dumptrans(file.name.slice(0,-4),origlang,null); // .ggb off
 						// delete all globs, stay as close as possible to original document.
 						RT_wipeGlobs();
 						RT_unpackGlobs(innerglobstatesave);// untested
