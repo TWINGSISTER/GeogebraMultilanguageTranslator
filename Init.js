@@ -13,6 +13,7 @@ function init() {
 	//if you put "XYZ" here also \text{XYZ} ""XYZ", "  XYZ  " will pass untranslated.
 	//they also are not asked to the translator as a group in output
 	updateDictionary(["\\mbox{","\\text{", "}","{","}}","{{","={","}{","}=",
+	"}×\\textcolor{red}{10^{","=\\textcolor{blue}{",
 		">it",">en",">fr",">de",">zh",">es",":", "", " ", " ; ", " / ",
 		"\\times","\\times ","A","}=\\frac{","+","-","=","/","\\",
 		"\\left(","\\right)","\\left","\\right","=\\frac{","θ=\\frac{"," θ=\\frac{" ,
@@ -24,7 +25,7 @@ function init() {
 		"ff0000","ff00000","ff00ff","FFFFFF",
 		".\\text{","n\\p\\text{",
 		".\\mbox{","n\\p\\mbox{",
-		"nAlias",
+		"nAlias","n\\text{,",
 		"\\color{blue}",
 		"\\color{blue}\\mbox{x = }",
 		"$\\color{blue}\\mbox{x = }$",
@@ -192,6 +193,7 @@ function init() {
 	["begin",-1],
 	["end",-1],
 	["cellcolor",1],
+	["scalebox",2],
 	["color",-1],
 	["color",[false,true]],
 	["cr",0],
