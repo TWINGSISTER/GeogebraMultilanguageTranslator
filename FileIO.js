@@ -4,20 +4,45 @@
  * @author TWINGSISTER (twingsister@gmail.com) 
  */
 //export
-function RT_saveFileHtml(fname,htmlContent,...args) {
+
+function RT_saveFileHtml(fname,htmlContent,...args){
 	// htmlContent must be an array of strings, each representing the portion of an HTML document
   //var htmlContent = [ "<head><meta charset='utf-8'><title>Test</title></head>", "<style>.container{max-width: 940px;margin: 0 auto;}</style>", "<body><div class=\"container\">'Content Here'</div></body>" ];
   //var htmlContent = ["your-content-here"];
-  var bl = new Blob(htmlContent, {type: "text/html"});
+  // ABOVE CHANGED NO ARRAY JUST THE HTML
+  //var trlist=[];
+  var bl = new Blob([htmlContent], {type: "text/html"});
   var a = document.createElement("a");
   a.href = URL.createObjectURL(bl);
-  a.download =fname;
+  //debugger;
+  //alert("hello");
+  //var google=(Array.isArray(fname));
+  //if(google && htmlcontent.length>0){
+ 	//var origlang=fname[1];
+   	//var trstr=fname[2];
+   	//if(trstr.length===0){trlist=[];}else{trlist=trstr.replaceAll(" ","").split(",");}
+   	//fname=fname[0];
+   	//}
+  a.download =fname+".html";
   a.hidden = true;
   document.body.appendChild(a);
   a.innerHTML = "Save file hidden by CSS";
   //a.click() // added;
-  if(args.length>0){a.addEventListener('click',args[0], {once : true});}
+  if(args.length>0){//if(!google){
+  		a.addEventListener('click',args[0], {once : true});
+  		} //else {
+  // now try the translation
+  			//a.addEventListener('click',()=>{
+  				//translateHTML(fname,origlang,trlist,htmlContent[0],htmlContent[0],"",
+  				//	()=>{translateHTMLcont(fname,origlang,trlist,htmlContent.slice(1),args[0])});
+  				//;}, {once : true});
+  		//}
   setTimeout(()=>{a.click();}, 2000);//a.click();
+		//for (let lang of trlist) {
+		//var lfname=fname+"_"+lang+".html";
+		//alert(lfname);
+		//}
+		//}
 }
 function readFileHtml(file,charencoding,callback) {
   var reader = new FileReader();
@@ -77,7 +102,7 @@ function saveGGB(fname,GGBContent,...args) {
 function selectFiles(multi,pattern,...args){ 
 	// the last argument is a function to which is passed 
 	// the fileList 
-	debugger;
+	//debugger;
 	var fileList;
 	var fileSelector = document.createElement('input');
 	fileSelector.setAttribute('type', 'file');
@@ -85,7 +110,7 @@ function selectFiles(multi,pattern,...args){
     fileSelector.setAttribute('multiple',multi)
     fileSelector.setAttribute('accept',pattern);
 			function fileL(){
-				debugger;
+				//debugger;
 				fileList=fileSelector.files;
 				fileList=fileSelector.files;
 				var strhandles =[];

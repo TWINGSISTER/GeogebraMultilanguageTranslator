@@ -52,7 +52,7 @@ function endLogging(win) {
 	var toblob=doc.getElementsByTagName('html')[0].innerHTML;
 	debugger;
 	//wholefile=ggbApplet.getFileJSON()
-	RT_saveFileHtml(RT_globlod("logname")+(new Date().toISOString())+".html",[toblob]); 
+	RT_saveFileHtml(RT_globlod("logname")+(new Date().toISOString()),[toblob]); 
 }
 
 function logmessage(message) {

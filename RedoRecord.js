@@ -88,7 +88,7 @@ function RT_R_Snapshot2AddInt(button){
 }
 
 function RT_R_Snapshot2Add(button){
-	debugger;
+	//debugger;
 	if(!(button===RT_R_snapper))return;
 	ggbApplet.unregisterRemoveListener();
 	ggbApplet.setRepaintingActive(false);
@@ -379,7 +379,7 @@ function RT_dumpsteps(title){
 	//debugger;
 	let doc = document.implementation.createHTMLDocument(title);
 	RT_R_dump(doc);//(x)=>{return x},"",(x) => {return x}); 
-	RT_saveFileHtml(title+".html",
+	RT_saveFileHtml(title,
 			[doc.documentElement.outerHTML],()=>{
 	});
 }

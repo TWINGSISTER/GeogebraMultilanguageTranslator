@@ -73,7 +73,7 @@ function flatten() {
 		//case "list" :
 			//breakifyoucan(objName);
 			{
-				if (!RT_simpleText(objName))   {
+				if (!RT_simpleText(objName)&&!(trver=="TRN004"))   { // TRN004 for not flatten commands
 					var	command = RT_getformula(objName);
 					//debugger;
 					command = command.replace(/(\n)/gm, "\\\\n");
@@ -97,7 +97,7 @@ function flatten() {
 				}
 			break;
 			}
-		default: 
+		default:
 			{
 				//var cap=ggbApplet.getCaption(objName);
 				//if(!cap)ggbApplet.setCaption(objName,":"+objName+":");
@@ -109,7 +109,7 @@ if(!toflat) {/*alert("This document do not use strings in text commands");*/ }
 }
 
 function flatlist(objName) {
-	debugger; //here objName is a list
+	//debugger; //here objName is a list
 	var result;
 	var def=ggbApplet.getDefinitionString(objName) //debugger;
 	def=def.replace(/(\n)/gm, "\\\\n");
@@ -129,7 +129,7 @@ function flatlist(objName) {
 		}
 	result=(result.endsWith(",")?result.slice(0,-1):result)+"}";
 	ggbApplet.evalCommand(objName+" = "+result); 
-	debugger;
+	//debugger;
 	}else{}//result="FormulaText("+def+")";}
 	//stostring(objName, objName, result,false); 
 }
@@ -139,24 +139,27 @@ function flatlist(objName) {
 //-----------------------------------------------------------------------
 var trver="TRN001";
 	function flattenFile(fileList){
-		debugger;
+		//debugger;
 		if(fileList.length==0){ return;}
 		var file=fileList[0];
 		var OtherFiles=fileList.slice(1);
 		var origlang=RT_lod("VARORIGLANGUAGE");
+		var trlist=[];
 		trver="TRN001";
 		if(ggbApplet.exists("VARTRNNAME"))trver=RT_lod("VARTRNNAME");
+		if(ggbApplet.exists("VARTARGETLANGUAGE"))trlist=RT_lod("VARTARGETLANGUAGE").replaceAll(" ","").split(",");
+		if(trlist.length===1 && trlist[0]===""){trlist=[];}
 		//var doTrack=RT_lod("VARTRACK")
 		//var ctrlRandom=RT_lod("VARCTRLRANDOM")
 		ggbApplet.getBase64((oldscript)=>{
-			debugger;
+			//debugger;
 			var globstatesave = RT_packGlobs() ;
 			//ggbApplet.openFile(file.name);
 			RT_readGGBBase64(file,(ggbtoprocess)=>{
 				ggbApplet.setBase64(ggbtoprocess,()=>{
 				 	innerglobstatesave = RT_packGlobs() ;//untested
 					RT_unpackGlobs(globstatesave);
-					debugger;
+					//debugger;
 					flatten();
 					
 					//debugger;
@@ -172,13 +175,17 @@ var trver="TRN001";
 						ggbApplet.getBase64((payload)=>
 			  				{saveGGB(file.name.slice(0,-4)+"-FL-"+trver+".ggb",payload,
 								()=>{//return; //DELETE
+									var html=wd.documentElement.outerHTML;
+									var fname=file.name.slice(0,-4)+"-FL-"+trver+"-"+origlang;
 			  						RT_saveFileHtml(
-										file.name.slice(0,-4)+"-FL-"+trver+"-"+origlang+".html",
-										[wd.documentElement.outerHTML],()=>{
+										fname,html,
+										()=>{
+										translateHtml(fname,origlang,trlist,html,()=>{
 										ggbApplet.setBase64(oldscript,()=>{
 											RT_unpackGlobs(globstatesave);
 											RT_sto("VARORIGLANGUAGE",origlang);
 											RT_sto("VARTRNNAME",trver);
+											RT_sto("VARTARGETLANGUAGE",trlist);
 											flattenFile(OtherFiles);
 										});
 									});
@@ -191,11 +198,28 @@ var trver="TRN001";
 					//});
 			});
 		});
-	}
+	})
+}
+function clickToFlattenGoogle(){
+	////debugger;
+	if(ggbApplet.exists("VARORIGLANGUAGE")){language=RT_lod("VARORIGLANGUAGE").replaceAll(" ","");
+		if (language.length==2){
+			if(ggbApplet.exists("VARTARGETLANGUAGE")){
+				var languagestarget=RT_lod("VARTARGETLANGUAGE").replaceAll(" ","");
+	  			if(confirm("Do you want to work with files in "+language+" to be translated into: "+languagestarget)){
+	 				selectFiles(true,".ggb",flattenFile);
+ 	  			}
+			}
+		}
+ 	} else {altert("Please set the two letter code for the origianal language");}
+
+}
 function clickToFlatten(){
+// old version, outputs an HTML file to be fed to some external translator
 	// init globals for flattening
 	// do the job
-	debugger;
+	//debugger;
+	RT_sto("VARTARGETLANGUAGE","");
 	if(ggbApplet.exists("VARORIGLANGUAGE")){language=RT_lod("VARORIGLANGUAGE").replaceAll(" ","");
 		if (language.length==2){
 	  		if(confirm("Do you want to work with files in "+language)){
